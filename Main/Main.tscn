@@ -1,0 +1,273 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpc82qm4v717x"]
+
+[ext_resource type="Script" uid="uid://d0j17u57glsw6" path="res://Main/main.gd" id="1_lxy7q"]
+
+[node name="Control" type="Node"]
+script = ExtResource("1_lxy7q")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Root" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Left" type="VBoxContainer" parent="CanvasLayer/Control/Root"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Root/Left"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Root/Left/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "NAME 1"
+
+[node name="BoxContainer2" type="BoxContainer" parent="CanvasLayer/Control/Root/Left/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+mouse_filter = 2
+
+[node name="BoxContainer3" type="BoxContainer" parent="CanvasLayer/Control/Root/Left/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Deck" type="BoxContainer" parent="CanvasLayer/Control/Root/Left"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+size_flags_stretch_ratio = 1.5
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Left/Deck"]
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control/Root/Left"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Root/Left/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "NAME 2"
+
+[node name="BoxContainer2" type="BoxContainer" parent="CanvasLayer/Control/Root/Left/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+mouse_filter = 2
+
+[node name="BoxContainer3" type="BoxContainer" parent="CanvasLayer/Control/Root/Left/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Middle" type="VBoxContainer" parent="CanvasLayer/Control/Root"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+mouse_filter = 2
+
+[node name="Player2Hand" type="HBoxContainer" parent="CanvasLayer/Control/Root/Middle"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Player2Card1" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Hand"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card1"]
+
+[node name="Player2Card2" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Hand"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card2"]
+
+[node name="Player2Card3" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Hand"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card3"]
+
+[node name="Player2Card4" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Hand"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card4"]
+
+[node name="Player2Card5" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Hand"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card5"]
+
+[node name="Player2Card6" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Hand"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card6"]
+
+[node name="Player2Table" type="HBoxContainer" parent="CanvasLayer/Control/Root/Middle"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Player2Card1" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Table"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card1"]
+
+[node name="Player2Card2" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Table"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card2"]
+
+[node name="Player2Card3" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Table"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card3"]
+
+[node name="Player2Card4" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Table"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card4"]
+
+[node name="Player1Table" type="HBoxContainer" parent="CanvasLayer/Control/Root/Middle"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Player1Card1" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player1Table"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card1"]
+
+[node name="Player1Card2" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player1Table"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card2"]
+
+[node name="Player1Card3" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player1Table"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card3"]
+
+[node name="Player1Card4" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player1Table"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card4"]
+
+[node name="Player1Hand" type="HBoxContainer" parent="CanvasLayer/Control/Root/Middle"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Player1Card1" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player1Hand"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Card1"]
+
+[node name="Player1Card2" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player1Hand"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Card2"]
+
+[node name="Player1Card3" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player1Hand"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Card3"]
+
+[node name="Player1Card4" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player1Hand"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Card4"]
+
+[node name="Player1Card5" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player1Hand"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Card5"]
+
+[node name="Player1Card6" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player1Hand"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Card6"]
+
+[node name="Right" type="VBoxContainer" parent="CanvasLayer/Control/Root"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2

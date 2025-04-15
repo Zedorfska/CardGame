@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ce00ju24ilwak"
-path="res://.godot/imported/Zedorfska.jpg-335b12daea875469b0b5f9814ce4a2c2.ctex"
+path="res://.godot/imported/Zedorfska.jpg-ba5cc9c216b8342aea884b9eef6957b4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Zedorfska.jpg"
-dest_files=["res://.godot/imported/Zedorfska.jpg-335b12daea875469b0b5f9814ce4a2c2.ctex"]
+source_file="res://Cards/TestCard/Zedorfska.jpg"
+dest_files=["res://.godot/imported/Zedorfska.jpg-ba5cc9c216b8342aea884b9eef6957b4.ctex"]
 
 [params]
 
