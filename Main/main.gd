@@ -67,7 +67,7 @@ func deal_cards():
 		var Player1HandToBeDealtTo = Player1Hand.get_child(HandToBeDealtTo).get_child(0)
 		if Player1HandToBeDealtTo.get_child_count() < 1:
 			TopCardInDeck.reparent(Player1HandToBeDealtTo, false)
-		
+
 		TopCardInDeck = Deck.get_child(1)
 		var Player2HandToBeDealtTo = Player2Hand.get_child(HandToBeDealtTo).get_child(0)
 		if Player2HandToBeDealtTo.get_child_count() < 1:

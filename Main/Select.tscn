@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkafakxwpnlwr"]
-
-[ext_resource type="Texture2D" uid="uid://bhxdjut18d871" path="res://Sprites/SketchSelect.png" id="1_ydroi"]
-
-[node name="Select" type="Node2D"]
-
-[node name="SelectorSprite" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_ydroi")
