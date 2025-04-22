@@ -6,5 +6,5 @@
 [node name="TestCard" type="Node2D"]
 script = ExtResource("1_1pfuv")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="TestCardSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_tmm0l")
