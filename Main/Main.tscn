@@ -285,6 +285,7 @@ mouse_filter = 2
 [node name="Player1Hand1" type="Button" parent="CanvasLayer/Control/Root/Middle/Player1Hand"]
 layout_mode = 2
 size_flags_horizontal = 3
+flat = true
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand1"]
 position = Vector2(69, 89)
@@ -292,6 +293,7 @@ position = Vector2(69, 89)
 [node name="Player1Hand2" type="Button" parent="CanvasLayer/Control/Root/Middle/Player1Hand"]
 layout_mode = 2
 size_flags_horizontal = 3
+flat = true
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand2"]
 position = Vector2(71, 89)
@@ -299,6 +301,7 @@ position = Vector2(71, 89)
 [node name="Player1Hand3" type="Button" parent="CanvasLayer/Control/Root/Middle/Player1Hand"]
 layout_mode = 2
 size_flags_horizontal = 3
+flat = true
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand3"]
 position = Vector2(69, 89)
@@ -306,6 +309,7 @@ position = Vector2(69, 89)
 [node name="Player1Hand4" type="Button" parent="CanvasLayer/Control/Root/Middle/Player1Hand"]
 layout_mode = 2
 size_flags_horizontal = 3
+flat = true
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand4"]
 position = Vector2(69, 89)
@@ -313,6 +317,7 @@ position = Vector2(69, 89)
 [node name="Player1Hand5" type="Button" parent="CanvasLayer/Control/Root/Middle/Player1Hand"]
 layout_mode = 2
 size_flags_horizontal = 3
+flat = true
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand5"]
 position = Vector2(67, 89)
@@ -320,6 +325,7 @@ position = Vector2(67, 89)
 [node name="Player1Hand6" type="Button" parent="CanvasLayer/Control/Root/Middle/Player1Hand"]
 layout_mode = 2
 size_flags_horizontal = 3
+flat = true
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand6"]
 position = Vector2(69, 89)
@@ -328,6 +334,27 @@ position = Vector2(69, 89)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Root/Right"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.5
+
+[node name="BoxContainer2" type="BoxContainer" parent="CanvasLayer/Control/Root/Right"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+alignment = 1
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Right/BoxContainer2"]
+
+[node name="Button" type="Button" parent="CanvasLayer/Control/Root/Right/BoxContainer2/Marker2D"]
+offset_left = 44.0
+offset_top = 45.0
+offset_right = 192.0
+offset_bottom = 186.0
+size_flags_horizontal = 3
+text = "END TURN"
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_6aewd")

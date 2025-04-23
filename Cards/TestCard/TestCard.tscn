@@ -8,3 +8,16 @@ script = ExtResource("1_1pfuv")
 
 [node name="TestCardSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_tmm0l")
+
+[node name="DamageDisplay" type="Label" parent="."]
+offset_left = -92.0
+offset_top = 44.0
+offset_bottom = 92.0
+text = "Placeholder"
+
+[node name="HealthDisplay" type="Label" parent="."]
+offset_top = 44.0
+offset_right = 92.0
+offset_bottom = 92.0
+text = "Placeholder"
+horizontal_alignment = 2

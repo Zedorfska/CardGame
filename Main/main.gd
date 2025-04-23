@@ -39,7 +39,6 @@ var ListOfCards = [
 func _ready():
 	Deck = $CanvasLayer/Control/Root/Left/Deck
 	turn = 0
-	# 2x4 TABLE DECLARE
 	Player1Table = $CanvasLayer/Control/Root/Middle/Player1Table
 	Player2Table = $CanvasLayer/Control/Root/Middle/Player2Table
 	
@@ -96,6 +95,10 @@ func card_selected(CardNumber):
 	var CurrentCardSelected = Player1Hand.get_child(CardNumber).get_child(0)
 	if CurrentCardSelected.get_child_count() > 0 and SelectedTile.get_child_count() < 1:
 		CurrentCardSelected.get_child(0).reparent(SelectedTile, false)
+
+func end_turn(x):
+	for i in 4:
+		pass
 
 #func _process(_delta):
 	#print(SelectedCard)
