@@ -119,51 +119,51 @@ mouse_filter = 2
 
 [node name="Player2Card1" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Hand"]
 layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-mouse_filter = 2
+size_flags_horizontal = 3
+mouse_filter = 0
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card1"]
+position = Vector2(69, 88)
 
 [node name="Player2Card2" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Hand"]
 layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-mouse_filter = 2
+size_flags_horizontal = 3
+mouse_filter = 0
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card2"]
+position = Vector2(71, 88)
 
 [node name="Player2Card3" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Hand"]
 layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-mouse_filter = 2
+size_flags_horizontal = 3
+mouse_filter = 0
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card3"]
+position = Vector2(69, 88)
 
 [node name="Player2Card4" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Hand"]
 layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-mouse_filter = 2
+size_flags_horizontal = 3
+mouse_filter = 0
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card4"]
+position = Vector2(69, 88)
 
 [node name="Player2Card5" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Hand"]
 layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-mouse_filter = 2
+size_flags_horizontal = 3
+mouse_filter = 0
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card5"]
+position = Vector2(67, 88)
 
 [node name="Player2Card6" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Hand"]
 layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-mouse_filter = 2
+size_flags_horizontal = 3
+mouse_filter = 0
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card6"]
+position = Vector2(69, 88)
 
 [node name="Player2Table" type="HBoxContainer" parent="CanvasLayer/Control/Root/Middle"]
 layout_mode = 2
@@ -172,35 +172,35 @@ mouse_filter = 2
 
 [node name="Player2Card1" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Table"]
 layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-mouse_filter = 2
+size_flags_horizontal = 3
+mouse_filter = 0
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card1"]
+position = Vector2(104, 83)
 
 [node name="Player2Card2" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Table"]
 layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-mouse_filter = 2
+size_flags_horizontal = 3
+mouse_filter = 0
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card2"]
+position = Vector2(104, 83)
 
 [node name="Player2Card3" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Table"]
 layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-mouse_filter = 2
+size_flags_horizontal = 3
+mouse_filter = 0
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card3"]
+position = Vector2(104, 83)
 
 [node name="Player2Card4" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Table"]
 layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-mouse_filter = 2
+size_flags_horizontal = 3
+mouse_filter = 0
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card4"]
+position = Vector2(104, 83)
 
 [node name="Player1Table" type="HBoxContainer" parent="CanvasLayer/Control/Root/Middle"]
 layout_mode = 2
@@ -345,10 +345,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/Root/Right"]
+[node name="LabelMargin" type="BoxContainer" parent="CanvasLayer/Control/Root/Right"]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.5
+
+[node name="CardDescription" type="Label" parent="CanvasLayer/Control/Root/Right/LabelMargin"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Placsdcerrshodler"
+autowrap_mode = 2
 
 [node name="BoxContainer2" type="BoxContainer" parent="CanvasLayer/Control/Root/Right"]
 layout_mode = 2
@@ -374,6 +383,26 @@ volume_db = -15.0
 stream = ExtResource("6_lsap4")
 volume_db = -15.0
 
+[connection signal="mouse_entered" from="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card1" to="." method="card_hover_enter" binds= [6]]
+[connection signal="mouse_exited" from="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card1" to="." method="card_hover_exit"]
+[connection signal="mouse_entered" from="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card2" to="." method="card_hover_enter" binds= [7]]
+[connection signal="mouse_exited" from="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card2" to="." method="card_hover_exit"]
+[connection signal="mouse_entered" from="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card3" to="." method="card_hover_enter" binds= [8]]
+[connection signal="mouse_exited" from="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card3" to="." method="card_hover_exit"]
+[connection signal="mouse_entered" from="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card4" to="." method="card_hover_enter" binds= [9]]
+[connection signal="mouse_exited" from="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card4" to="." method="card_hover_exit"]
+[connection signal="mouse_entered" from="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card5" to="." method="card_hover_enter" binds= [10]]
+[connection signal="mouse_exited" from="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card5" to="." method="card_hover_exit"]
+[connection signal="mouse_entered" from="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card6" to="." method="card_hover_enter" binds= [11]]
+[connection signal="mouse_exited" from="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card6" to="." method="card_hover_exit"]
+[connection signal="mouse_entered" from="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card1" to="." method="tile_hover_enter" binds= [4]]
+[connection signal="mouse_exited" from="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card1" to="." method="tile_hover_exit" binds= [4]]
+[connection signal="mouse_entered" from="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card2" to="." method="tile_hover_enter" binds= [5]]
+[connection signal="mouse_exited" from="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card2" to="." method="tile_hover_exit" binds= [5]]
+[connection signal="mouse_entered" from="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card3" to="." method="tile_hover_enter" binds= [6]]
+[connection signal="mouse_exited" from="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card3" to="." method="tile_hover_exit" binds= [6]]
+[connection signal="mouse_entered" from="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card4" to="." method="tile_hover_enter" binds= [7]]
+[connection signal="mouse_exited" from="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card4" to="." method="tile_hover_exit" binds= [7]]
 [connection signal="mouse_entered" from="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card1" to="." method="tile_hover_enter" binds= [0]]
 [connection signal="mouse_exited" from="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card1" to="." method="tile_hover_exit" binds= [0]]
 [connection signal="pressed" from="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card1" to="." method="tile_selected" binds= [0]]
@@ -386,10 +415,22 @@ volume_db = -15.0
 [connection signal="mouse_entered" from="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card4" to="." method="tile_hover_enter" binds= [3]]
 [connection signal="mouse_exited" from="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card4" to="." method="tile_hover_exit" binds= [3]]
 [connection signal="pressed" from="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card4" to="." method="tile_selected" binds= [3]]
+[connection signal="mouse_entered" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand1" to="." method="card_hover_enter" binds= [0]]
+[connection signal="mouse_exited" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand1" to="." method="card_hover_exit"]
 [connection signal="pressed" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand1" to="." method="card_selected" binds= [0]]
+[connection signal="mouse_entered" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand2" to="." method="card_hover_enter" binds= [1]]
+[connection signal="mouse_exited" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand2" to="." method="card_hover_exit"]
 [connection signal="pressed" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand2" to="." method="card_selected" binds= [1]]
+[connection signal="mouse_entered" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand3" to="." method="card_hover_enter" binds= [2]]
+[connection signal="mouse_exited" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand3" to="." method="card_hover_exit"]
 [connection signal="pressed" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand3" to="." method="card_selected" binds= [2]]
+[connection signal="mouse_entered" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand4" to="." method="card_hover_enter" binds= [3]]
+[connection signal="mouse_exited" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand4" to="." method="card_hover_exit"]
 [connection signal="pressed" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand4" to="." method="card_selected" binds= [3]]
+[connection signal="mouse_entered" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand5" to="." method="card_hover_enter" binds= [4]]
+[connection signal="mouse_exited" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand5" to="." method="card_hover_exit"]
 [connection signal="pressed" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand5" to="." method="card_selected" binds= [4]]
+[connection signal="mouse_entered" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand6" to="." method="card_hover_enter" binds= [5]]
+[connection signal="mouse_exited" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand6" to="." method="card_hover_exit"]
 [connection signal="pressed" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand6" to="." method="card_selected" binds= [5]]
 [connection signal="pressed" from="CanvasLayer/Control/Root/Right/BoxContainer2/Marker2D/Button" to="." method="end_turn"]

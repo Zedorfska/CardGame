@@ -1,21 +1,17 @@
 extends Node
 
-var Player1HP
-var Player2HP
-
-#
 var Table
 var Player1Table
 var Player2Table
-
-#
 var Player1Hand
 var Player2Hand
-
+var Player1HP
+var Player2HP
 var P1Mana
 var P2Mana
 var P1ManaBar
 var P2ManaBar
+var CardDescriptionLabel
 
 var Stats
 var ManaGainAmount
@@ -64,6 +60,8 @@ func _ready():
 	Deck = $CanvasLayer/Control/Root/Stats/Deck
 	Turn = 0
 	
+	CardDescriptionLabel = $CanvasLayer/Control/Root/Right/LabelMargin/CardDescription
+	CardDescriptionLabel.set_text("Hover over a card to see description")
 	Table = $CanvasLayer/Control/Root/Middle
 	Player1Table = $CanvasLayer/Control/Root/Middle/Player1Table
 	Player2Table = $CanvasLayer/Control/Root/Middle/Player2Table
@@ -133,11 +131,31 @@ func player2_play_random_card():
 		RandomCard.get_child(0).reparent(RandomTile, false)
 
 func tile_hover_enter(TileNumber):
-	Player1Table.get_child(TileNumber).get_child(1).visible = true
-	HoverSound.play()
+	print(TileNumber)
+	if TileNumber < 4:
+		Player1Table.get_child(TileNumber).get_child(1).visible = true
+		HoverSound.play()
+		if Player1Table.get_child(TileNumber).get_child(0).get_child_count() != 0:
+			CardDescriptionLabel.set_text(Player1Table.get_child(TileNumber).get_child(0).get_child(0).Description)
+	else:
+		if Player2Table.get_child(TileNumber - 4).get_child(0).get_child_count() != 0:
+			CardDescriptionLabel.set_text(Player2Table.get_child(TileNumber - 4).get_child(0).get_child(0).Description)
 
 func tile_hover_exit(TileNumber):
-	Player1Table.get_child(TileNumber).get_child(1).visible = false
+	if TileNumber < 4:
+		Player1Table.get_child(TileNumber).get_child(1).visible = false
+	CardDescriptionLabel.set_text("Hover over a card to see description")
+
+func card_hover_enter(CardNumber):
+	if CardNumber < 6:
+		if Player1Hand.get_child(CardNumber).get_child(0).get_child_count() != 0:
+			CardDescriptionLabel.set_text(Player1Hand.get_child(CardNumber).get_child(0).get_child(0).Description)
+	else:
+		if Player2Hand.get_child(CardNumber - 6).get_child(0).get_child_count() != 0:
+			CardDescriptionLabel.set_text(Player2Hand.get_child(CardNumber - 6).get_child(0).get_child(0).Description)
+
+func card_hover_exit():
+	CardDescriptionLabel.set_text("Hover over a card to see description")
 
 func tile_selected(TileNumber):
 	for CurrentSelectedTile in 4:

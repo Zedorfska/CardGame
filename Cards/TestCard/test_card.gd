@@ -13,6 +13,8 @@ var DamageAmount = 2
 var CostAmount = 1
 var DamageType = 0
 
+@onready var Description = "Yo"
+
 func _ready():
 	self.add_child(DamageLabelScene.instantiate())
 	DamageLabel = self.get_child(1)
