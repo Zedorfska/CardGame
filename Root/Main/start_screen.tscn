@@ -1,0 +1,78 @@
+[gd_scene load_steps=2 format=3 uid="uid://id8h0m40vhuh"]
+
+[ext_resource type="Script" uid="uid://l55f71v6xljn" path="res://Root/Main/start_screen.gd" id="1_r06p8"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_r06p8")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1280.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="BoxContainer" parent="Control"]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="Left" type="BoxContainer" parent="Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Middle" type="VBoxContainer" parent="Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="Up" type="BoxContainer" parent="Control/HBoxContainer/Middle"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Middle" type="VBoxContainer" parent="Control/HBoxContainer/Middle"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="BoxContainer" type="HBoxContainer" parent="Control/HBoxContainer/Middle/Middle"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="P1" type="CenterContainer" parent="Control/HBoxContainer/Middle/Middle/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BoxContainer" type="BoxContainer" parent="Control/HBoxContainer/Middle/Middle/BoxContainer/P1"]
+custom_minimum_size = Vector2(420, 85)
+layout_mode = 2
+
+[node name="TextEdit" type="TextEdit" parent="Control/HBoxContainer/Middle/Middle/BoxContainer/P1/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "ENTER NAME"
+
+[node name="BoxContainer2" type="CenterContainer" parent="Control/HBoxContainer/Middle/Middle"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="Control/HBoxContainer/Middle/Middle/BoxContainer2"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+text = "START"
+
+[node name="Down" type="BoxContainer" parent="Control/HBoxContainer/Middle"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Right" type="BoxContainer" parent="Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="text_changed" from="Control/HBoxContainer/Middle/Middle/BoxContainer/P1/BoxContainer/TextEdit" to="." method="update_name"]
+[connection signal="pressed" from="Control/HBoxContainer/Middle/Middle/BoxContainer2/Button" to="." method="start_game"]

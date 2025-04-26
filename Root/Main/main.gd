@@ -1,6 +1,7 @@
 extends Node
 
 var Table
+var Name
 var Player1Table
 var Player2Table
 var Player1Hand
@@ -32,6 +33,7 @@ var SelectSound
 
 var ManaBarScene = preload("res://Root/Labels/mana_bar.tscn")
 
+var GameOverScene = preload("res://Root/Main/game_over.tscn")
 var TestCard = preload("res://Cards/TestCard/test_card.tscn")
 
 var ListOfCards = [
@@ -70,6 +72,8 @@ func _ready():
 	Player2Hand = $CanvasLayer/Control/Root/Middle/Player2Hand
 	
 	Stats = $CanvasLayer/Control/Root/Stats
+	Name = self.get_parent().Name
+	Stats.get_child(2).get_child(0).set_text(Name)
 	
 	SelectedTile = $CanvasLayer/Control/Root/Middle/Player1Table/Player1Card1/Marker2D
 	
@@ -131,7 +135,6 @@ func player2_play_random_card():
 		RandomCard.get_child(0).reparent(RandomTile, false)
 
 func tile_hover_enter(TileNumber):
-	print(TileNumber)
 	if TileNumber < 4:
 		Player1Table.get_child(TileNumber).get_child(1).visible = true
 		HoverSound.play()
@@ -181,8 +184,11 @@ func player_take_damage(Player, Damage):
 		Player1HP -= Damage
 	else:
 		Player2HP -= Damage
-	update_player_health()
 	
+	if Player1HP <= 0 or Player2HP <= 0:
+		self.get_parent().go_to_scene(GameOverScene)
+	
+	update_player_health()
 
 func update_player_health():
 	Stats.get_child(0).get_child(1).set_text(str(Player2HP))

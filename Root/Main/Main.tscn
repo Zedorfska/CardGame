@@ -51,9 +51,10 @@ size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="P2NameLabel" type="Label" parent="CanvasLayer/Control/Root/Stats/P2"]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 3
-text = "NAME 1"
+text = "AI"
 
 [node name="P2HealthLabel" type="Label" parent="CanvasLayer/Control/Root/Stats/P2"]
 modulate = Color(0, 0, 0, 1)
@@ -86,6 +87,7 @@ size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="P1Name" type="Label" parent="CanvasLayer/Control/Root/Stats/P1"]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 3
 text = "NAME 2"
