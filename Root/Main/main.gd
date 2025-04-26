@@ -12,7 +12,13 @@ var Player2Table
 var Player1Hand
 var Player2Hand
 
+var P1Mana
+var P2Mana
+var P1ManaBar
+var P2ManaBar
+
 var Stats
+var ManaGainAmount
 
 var Turn
 var TopCardInDeck
@@ -21,11 +27,14 @@ var SelectedTile
 var SelectedCard
 var RandomTile
 var RandomCard
+var Get
 var CurrentClearedTable
 var RootNode
 
 var HoverSound
 var SelectSound
+
+var ManaBarScene = preload("res://Root/Labels/mana_bar.tscn")
 
 var TestCard = preload("res://Cards/TestCard/test_card.tscn")
 
@@ -49,6 +58,9 @@ func _ready():
 	RootNode = $"."
 	Player1HP = 20
 	Player2HP = 20
+	P1Mana = 1
+	P2Mana = 1
+	ManaGainAmount = 1
 	Deck = $CanvasLayer/Control/Root/Stats/Deck
 	Turn = 0
 	
@@ -65,6 +77,13 @@ func _ready():
 	
 	HoverSound = $HoverSound
 	SelectSound = $SelectSound
+	
+	Stats.get_child(0).get_child(2).add_child(ManaBarScene.instantiate())
+	Stats.get_child(2).get_child(2).add_child(ManaBarScene.instantiate())
+	P1ManaBar = Stats.get_child(2).get_child(2).get_child(0)
+	P2ManaBar = Stats.get_child(0).get_child(2).get_child(0)
+	P1ManaBar.update_label(P1Mana)
+	P2ManaBar.update_label(P2Mana)
 	
 	update_player_health()
 	setup_deck()	# fills the deck!
@@ -104,10 +123,13 @@ func player2_play_random_card():
 	for Card in 6:													# Go through cards
 		var CheckValidCard = Player2Hand.get_child(Card).get_child(0)
 		if CheckValidCard.get_child_count() != 0:					# If there is a card here:
-			ValidCardList.append(CheckValidCard)					#	Append it to the list of cards
+			if CheckValidCard.get_child(0).CostAmount <= P2Mana:	# If there is enough mana to play it
+				ValidCardList.append(CheckValidCard)					#	Append it to the list of cards
 	if ValidTileList.is_empty() == false and ValidCardList.is_empty() == false:	# Check if lists empty
 		RandomCard = ValidCardList.pick_random()
 		RandomTile = ValidTileList.pick_random()
+		P2Mana -= RandomCard.get_child(0).CostAmount
+		P2ManaBar.update_label(P2Mana)
 		RandomCard.get_child(0).reparent(RandomTile, false)
 
 func tile_hover_enter(TileNumber):
@@ -131,7 +153,10 @@ func tile_selected(TileNumber):
 func card_selected(CardNumber):
 	SelectedCard = Player1Hand.get_child(CardNumber).get_child(0)
 	if SelectedCard.get_child_count() != 0 and SelectedTile.get_child_count() == 0:
-		SelectedCard.get_child(0).reparent(SelectedTile, false)
+		if SelectedCard.get_child(0).CostAmount <= P1Mana:
+			P1Mana -= SelectedCard.get_child(0).CostAmount
+			SelectedCard.get_child(0).reparent(SelectedTile, false)
+			P1ManaBar.update_label(P1Mana)
 
 func player_take_damage(Player, Damage):
 	if Player == 2:
@@ -142,8 +167,8 @@ func player_take_damage(Player, Damage):
 	
 
 func update_player_health():
-	Stats.get_child(0).get_child(2).set_text(str(Player2HP))
-	Stats.get_child(2).get_child(2).set_text(str(Player1HP))
+	Stats.get_child(0).get_child(1).set_text(str(Player2HP))
+	Stats.get_child(2).get_child(1).set_text(str(Player1HP))
 
 func end_turn():
 	for CardPosition in 4:
@@ -151,6 +176,8 @@ func end_turn():
 			SelectedCard = Player1Table.get_child(CardPosition).get_child(0).get_child(0)
 			print("Card ", CardPosition + 1, " of P1 attacks")
 			SelectedCard.activate(RootNode, CardPosition, 1)
+	
+	fill_mana(2, ManaGainAmount)
 	player2_play_random_card()
 	if 0.75 > randf():
 		player2_play_random_card()
@@ -159,12 +186,26 @@ func end_turn():
 			if 0.25 > randf():
 				player2_play_random_card()
 	for CardPosition in 4:
-		print(CardPosition)
 		if Player2Table.get_child(CardPosition).get_child(0).get_child_count() != 0:
-			print(Player2Table.get_child(CardPosition).get_name())
 			SelectedCard = Player2Table.get_child(CardPosition).get_child(0).get_child(0)
 			SelectedCard.activate(RootNode, CardPosition, 2)
 	deal_cards()
+	
+	fill_mana(1, ManaGainAmount)
+	if ManaGainAmount < 5:
+		ManaGainAmount += 1
+
+func fill_mana(Player, ManaGain):
+	if Player == 1 or 0:
+		P1Mana += ManaGain
+		if P1Mana > 5:
+			P1Mana = 5
+		P1ManaBar.update_label(P1Mana)
+	elif Player == 2 or 0:
+		P2Mana += ManaGain
+		if P2Mana > 5:
+			P2Mana = 5
+		P2ManaBar.update_label(P2Mana)
 
 # Types of attacks cards can do
 # Attacks card opposite of it, else the player.
@@ -173,3 +214,4 @@ func basic_common_attack(CardPosition, Damage, DamageType, Player):
 		Table.get_child(Player).get_child(CardPosition).get_child(0).get_child(0).take_damage(Damage, DamageType)
 	else:
 		player_take_damage(Player, Damage)
+		print("Player ", Player, " takes ",  Damage,  " damage.")

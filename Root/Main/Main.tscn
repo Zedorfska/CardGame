@@ -50,22 +50,26 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/Root/Stats/P2"]
+[node name="P2NameLabel" type="Label" parent="CanvasLayer/Control/Root/Stats/P2"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "NAME 1"
-
-[node name="BoxContainer2" type="BoxContainer" parent="CanvasLayer/Control/Root/Stats/P2"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 2.0
-mouse_filter = 2
 
 [node name="P2HealthLabel" type="Label" parent="CanvasLayer/Control/Root/Stats/P2"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
 text = "Placeholder"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="P2ManaLabel" type="BoxContainer" parent="CanvasLayer/Control/Root/Stats/P2"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 2
 
 [node name="Deck" type="BoxContainer" parent="CanvasLayer/Control/Root/Stats"]
 layout_mode = 2
@@ -81,22 +85,26 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/Root/Stats/P1"]
+[node name="P1Name" type="Label" parent="CanvasLayer/Control/Root/Stats/P1"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "NAME 2"
-
-[node name="BoxContainer2" type="BoxContainer" parent="CanvasLayer/Control/Root/Stats/P1"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 2.0
-mouse_filter = 2
 
 [node name="P1HealthLabel" type="Label" parent="CanvasLayer/Control/Root/Stats/P1"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
 text = "Placeholder"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="P1ManaLabel" type="BoxContainer" parent="CanvasLayer/Control/Root/Stats/P1"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_filter = 2
 
 [node name="Middle" type="VBoxContainer" parent="CanvasLayer/Control/Root"]
 layout_mode = 2
