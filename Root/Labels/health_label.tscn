@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://umqhxxkqmkm1"]
+
+[ext_resource type="Script" uid="uid://3adcnbqkwarj" path="res://Root/Labels/health_label.gd" id="1_lsb8a"]
+
+[node name="HealthLabel" type="Label"]
+offset_top = 44.0
+offset_right = 92.0
+offset_bottom = 92.0
+text = "Placeholder"
+horizontal_alignment = 2
+script = ExtResource("1_lsb8a")

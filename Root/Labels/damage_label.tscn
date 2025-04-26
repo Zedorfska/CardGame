@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://lmygfgi6x5k7"]
+
+[ext_resource type="Script" uid="uid://r1je3s2fc06i" path="res://Root/Labels/damage_label.gd" id="1_vb3oq"]
+
+[node name="DamageLabel" type="Label"]
+offset_left = -92.0
+offset_top = 44.0
+offset_bottom = 92.0
+text = "Placeholder"
+script = ExtResource("1_vb3oq")
