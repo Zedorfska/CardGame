@@ -4,6 +4,7 @@ var Table
 var Name
 var Player1Table
 var Player2Table
+var Hands
 var Player1Hand
 var Player2Hand
 var Player1HP
@@ -67,7 +68,6 @@ func _ready():
 	Table = $CanvasLayer/Control/Root/Middle
 	Player1Table = $CanvasLayer/Control/Root/Middle/Player1Table
 	Player2Table = $CanvasLayer/Control/Root/Middle/Player2Table
-	
 	Player1Hand = $CanvasLayer/Control/Root/Middle/Player1Hand
 	Player2Hand = $CanvasLayer/Control/Root/Middle/Player2Hand
 	
@@ -88,8 +88,9 @@ func _ready():
 	P2ManaBar.update_label(P2Mana)
 	
 	update_player_health()
-	setup_deck()	# fills the deck!
-	deal_cards()	# deals the cards!
+	setup_deck()			# fills the deck!
+	deal_cards_to_player(1)	# deals the cards!
+	deal_cards_to_player(2)
 	
 	player2_play_random_card()
 	player2_play_random_card()
@@ -101,19 +102,18 @@ func setup_deck():
 	for Card in range(ListOfCards.size()):
 		Deck.add_child(ListOfCards[Card].instantiate())
 
-func deal_cards():
+func deal_cards_to_player(Player):
+	if Player == 2:
+		Player = 0
+	else:
+		Player = 3
 	for HandToBeDealtTo in 6:
 		if Deck.get_child_count() > 1:
 			TopCardInDeck = Deck.get_child(1)
-			var Player1HandToBeDealtTo = Player1Hand.get_child(HandToBeDealtTo).get_child(0)
-			if Player1HandToBeDealtTo.get_child_count() == 0:
-				TopCardInDeck.reparent(Player1HandToBeDealtTo, false)
-
-		if Deck.get_child_count() > 1:
-			TopCardInDeck = Deck.get_child(1)
-			var Player2HandToBeDealtTo = Player2Hand.get_child(HandToBeDealtTo).get_child(0)
-			if Player2HandToBeDealtTo.get_child_count() == 0:
-				TopCardInDeck.reparent(Player2HandToBeDealtTo, false)
+			if Table.get_child(Player).get_child(HandToBeDealtTo).get_child(0).get_child_count() == 0:
+				TopCardInDeck.reparent(Table.get_child(Player).get_child(HandToBeDealtTo).get_child(0), false)
+		else:
+			break
 
 func player2_play_random_card():
 	var ValidTileList = []											# Create list of valid tiles
@@ -195,27 +195,31 @@ func update_player_health():
 	Stats.get_child(2).get_child(1).set_text(str(Player1HP))
 
 func end_turn():
-	for CardPosition in 4:
+	for CardPosition in 4:			# Player 1 cards activate in order left to right
 		if Player1Table.get_child(CardPosition).get_child(0).get_child_count() != 0:
 			SelectedCard = Player1Table.get_child(CardPosition).get_child(0).get_child(0)
-			print("Card ", CardPosition + 1, " of P1 attacks")
+			print("Card ", CardPosition + 1, " of P1 activates")
 			SelectedCard.activate(RootNode, CardPosition, 1)
 	
-	fill_mana(2, ManaGainAmount)
-	player2_play_random_card()
+	fill_mana(2, ManaGainAmount)	# Player 2 gets their mana and cards
+	deal_cards_to_player(2)
+	
+	player2_play_random_card()		# Player 2 makes moves
 	if 0.75 > randf():
 		player2_play_random_card()
 		if 0.5 > randf():
 			player2_play_random_card()
 			if 0.25 > randf():
 				player2_play_random_card()
-	for CardPosition in 4:
+	
+	for CardPosition in 4:			# Player 2 cards activate
 		if Player2Table.get_child(CardPosition).get_child(0).get_child_count() != 0:
 			SelectedCard = Player2Table.get_child(CardPosition).get_child(0).get_child(0)
 			SelectedCard.activate(RootNode, CardPosition, 2)
-	deal_cards()
 	
+	deal_cards_to_player(1)			# Player 1 gets their mana and cards
 	fill_mana(1, ManaGainAmount)
+	
 	if ManaGainAmount < 5:
 		ManaGainAmount += 1
 
