@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dpc82qm4v717x"]
+[gd_scene load_steps=8 format=3 uid="uid://dpc82qm4v717x"]
 
 [ext_resource type="Script" uid="uid://d0j17u57glsw6" path="res://Root/Main/main.gd" id="1_th7xa"]
-[ext_resource type="Texture2D" uid="uid://b0vv1e3nkst82" path="res://Sprites/SketchBoard.png" id="2_50vke"]
+[ext_resource type="Texture2D" uid="uid://b0evji5mq5mk5" path="res://Sprites/Board.svg" id="2_th7xa"]
+[ext_resource type="Texture2D" uid="uid://cqdiu48bafima" path="res://Sprites/LighterColour.svg" id="3_50vke"]
 [ext_resource type="Texture2D" uid="uid://crwjtrip521kn" path="res://Sprites/SketchTargetSelect.png" id="3_b5gtr"]
 [ext_resource type="Texture2D" uid="uid://bhxdjut18d871" path="res://Sprites/SketchSelect.png" id="4_ymg86"]
 [ext_resource type="AudioStream" uid="uid://bcemh5uohctui" path="res://Sounds/Hover.wav" id="5_dn23c"]
@@ -21,14 +22,14 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+[node name="Board" type="TextureRect" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_50vke")
+texture = ExtResource("2_th7xa")
 expand_mode = 1
 
 [node name="Root" type="HBoxContainer" parent="CanvasLayer/Control"]
@@ -40,23 +41,28 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Stats" type="VBoxContainer" parent="CanvasLayer/Control/Root"]
+[node name="StatsContainer" type="HBoxContainer" parent="CanvasLayer/Control/Root"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Stats" type="VBoxContainer" parent="CanvasLayer/Control/Root/StatsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
 mouse_filter = 2
 
-[node name="P2" type="VBoxContainer" parent="CanvasLayer/Control/Root/Stats"]
+[node name="P2" type="VBoxContainer" parent="CanvasLayer/Control/Root/StatsContainer/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="P2NameLabel" type="Label" parent="CanvasLayer/Control/Root/Stats/P2"]
+[node name="P2NameLabel" type="Label" parent="CanvasLayer/Control/Root/StatsContainer/Stats/P2"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 3
 text = "AI"
 
-[node name="P2HealthLabel" type="Label" parent="CanvasLayer/Control/Root/Stats/P2"]
+[node name="P2HealthLabel" type="Label" parent="CanvasLayer/Control/Root/StatsContainer/Stats/P2"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 3
@@ -65,34 +71,49 @@ text = "Placeholder"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="P2ManaLabel" type="BoxContainer" parent="CanvasLayer/Control/Root/Stats/P2"]
+[node name="P2ManaLabel" type="BoxContainer" parent="CanvasLayer/Control/Root/StatsContainer/Stats/P2"]
 z_index = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 mouse_filter = 2
 
-[node name="Deck" type="BoxContainer" parent="CanvasLayer/Control/Root/Stats"]
+[node name="Deck" type="VBoxContainer" parent="CanvasLayer/Control/Root/StatsContainer/Stats"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
+size_flags_vertical = 3
 size_flags_stretch_ratio = 1.5
 mouse_filter = 2
 
-[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Stats/Deck"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Root/StatsContainer/Stats/Deck"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_50vke")
 
-[node name="P1" type="VBoxContainer" parent="CanvasLayer/Control/Root/Stats"]
+[node name="Deck" type="CenterContainer" parent="CanvasLayer/Control/Root/StatsContainer/Stats/Deck"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+size_flags_stretch_ratio = 20.0
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/StatsContainer/Stats/Deck/Deck"]
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/Root/StatsContainer/Stats/Deck"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("3_50vke")
+
+[node name="P1" type="VBoxContainer" parent="CanvasLayer/Control/Root/StatsContainer/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="P1Name" type="Label" parent="CanvasLayer/Control/Root/Stats/P1"]
+[node name="P1Name" type="Label" parent="CanvasLayer/Control/Root/StatsContainer/Stats/P1"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 3
 text = "NAME 2"
 
-[node name="P1HealthLabel" type="Label" parent="CanvasLayer/Control/Root/Stats/P1"]
+[node name="P1HealthLabel" type="Label" parent="CanvasLayer/Control/Root/StatsContainer/Stats/P1"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 3
@@ -101,12 +122,17 @@ text = "Placeholder"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="P1ManaLabel" type="BoxContainer" parent="CanvasLayer/Control/Root/Stats/P1"]
+[node name="P1ManaLabel" type="CenterContainer" parent="CanvasLayer/Control/Root/StatsContainer/Stats/P1"]
 z_index = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Root/StatsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_50vke")
 
 [node name="Middle" type="VBoxContainer" parent="CanvasLayer/Control/Root"]
 layout_mode = 2
@@ -342,18 +368,84 @@ flat = true
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand6"]
 position = Vector2(69, 89)
 
-[node name="Right" type="VBoxContainer" parent="CanvasLayer/Control/Root"]
-layout_mode = 2
-size_flags_horizontal = 3
+[node name="CanvasLayer" type="CanvasLayer" parent="CanvasLayer/Control/Root/Middle"]
+
+[node name="BotchLines" type="VBoxContainer" parent="CanvasLayer/Control/Root/Middle/CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 216.0
+offset_right = -216.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
-[node name="LabelMargin" type="BoxContainer" parent="CanvasLayer/Control/Root/Right"]
+[node name="Spacer" type="VBoxContainer" parent="CanvasLayer/Control/Root/Middle/CanvasLayer/BotchLines"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Spacer2" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/CanvasLayer/BotchLines/Spacer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Root/Middle/CanvasLayer/BotchLines/Spacer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+texture = ExtResource("3_50vke")
+
+[node name="Spacer2" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/CanvasLayer/BotchLines"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Spacer3" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/CanvasLayer/BotchLines"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Spacer4" type="VBoxContainer" parent="CanvasLayer/Control/Root/Middle/CanvasLayer/BotchLines"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/Root/Middle/CanvasLayer/BotchLines/Spacer4"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+texture = ExtResource("3_50vke")
+
+[node name="Spacer2" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/CanvasLayer/BotchLines/Spacer4"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
+mouse_filter = 2
+
+[node name="RightContainer" type="HBoxContainer" parent="CanvasLayer/Control/Root"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Root/RightContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_50vke")
+
+[node name="Right" type="VBoxContainer" parent="CanvasLayer/Control/Root/RightContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+mouse_filter = 2
+
+[node name="LabelMargin" type="BoxContainer" parent="CanvasLayer/Control/Root/RightContainer/Right"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.5
 
-[node name="CardDescription" type="Label" parent="CanvasLayer/Control/Root/Right/LabelMargin"]
+[node name="CardDescription" type="Label" parent="CanvasLayer/Control/Root/RightContainer/Right/LabelMargin"]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -361,15 +453,15 @@ size_flags_vertical = 1
 text = "Placsdcerrshodler"
 autowrap_mode = 2
 
-[node name="BoxContainer2" type="BoxContainer" parent="CanvasLayer/Control/Root/Right"]
+[node name="BoxContainer2" type="BoxContainer" parent="CanvasLayer/Control/Root/RightContainer/Right"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 alignment = 1
 
-[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Right/BoxContainer2"]
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/RightContainer/Right/BoxContainer2"]
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/Root/Right/BoxContainer2/Marker2D"]
+[node name="Button" type="Button" parent="CanvasLayer/Control/Root/RightContainer/Right/BoxContainer2/Marker2D"]
 offset_left = 44.0
 offset_top = 45.0
 offset_right = 192.0
@@ -435,4 +527,4 @@ volume_db = -15.0
 [connection signal="mouse_entered" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand6" to="." method="card_hover_enter" binds= [5]]
 [connection signal="mouse_exited" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand6" to="." method="card_hover_exit"]
 [connection signal="pressed" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand6" to="." method="card_selected" binds= [5]]
-[connection signal="pressed" from="CanvasLayer/Control/Root/Right/BoxContainer2/Marker2D/Button" to="." method="end_turn"]
+[connection signal="pressed" from="CanvasLayer/Control/Root/RightContainer/Right/BoxContainer2/Marker2D/Button" to="." method="end_turn"]

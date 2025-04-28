@@ -61,11 +61,11 @@ func _ready():
 	P1Mana = 1
 	P2Mana = 1
 	ManaGainAmount = 1
-	Deck = $CanvasLayer/Control/Root/Stats/Deck
+	Deck = $CanvasLayer/Control/Root/StatsContainer/Stats/Deck/Deck/Marker2D
 	Turn = 0
 	AbleToPlay = true
 	
-	CardDescriptionLabel = $CanvasLayer/Control/Root/Right/LabelMargin/CardDescription
+	CardDescriptionLabel = $CanvasLayer/Control/Root/RightContainer/Right/LabelMargin/CardDescription
 	CardDescriptionLabel.set_text("Hover over a card to see description")
 	Table = $CanvasLayer/Control/Root/Middle
 	Player1Table = $CanvasLayer/Control/Root/Middle/Player1Table
@@ -73,7 +73,7 @@ func _ready():
 	Player1Hand = $CanvasLayer/Control/Root/Middle/Player1Hand
 	Player2Hand = $CanvasLayer/Control/Root/Middle/Player2Hand
 	
-	Stats = $CanvasLayer/Control/Root/Stats
+	Stats = $CanvasLayer/Control/Root/StatsContainer/Stats
 	Name = self.get_parent().Name
 	Stats.get_child(2).get_child(0).set_text(Name)
 	
@@ -113,8 +113,8 @@ func deal_cards_to_player(Player):
 	else:
 		Player = 3
 	for HandToBeDealtTo in 6:
-		if Deck.get_child_count() > 1:
-			TopCardInDeck = Deck.get_child(1)
+		if Deck.get_child_count() != 0:
+			TopCardInDeck = Deck.get_child(0)
 			if Table.get_child(Player).get_child(HandToBeDealtTo).get_child(0).get_child_count() == 0:
 				TopCardInDeck.reparent(Table.get_child(Player).get_child(HandToBeDealtTo).get_child(0), false)
 		else:
@@ -140,6 +140,7 @@ func player2_play_random_card():
 		RandomCard.get_child(0).reparent(RandomTile, true)
 		var tween = get_tree().create_tween()
 		tween.tween_property(RandomTile.get_child(0), "position", Vector2.ZERO, 0.1)
+		await get_tree().create_timer(0.25).timeout
 
 func tile_hover_enter(TileNumber):
 	if TileNumber < 4:
@@ -224,16 +225,12 @@ func end_turn():
 		await get_tree().create_timer(0.5).timeout
 	
 		player2_play_random_card()		# Player 2 makes moves
-		await get_tree().create_timer(0.25).timeout
 		if 0.75 > randf():
 			player2_play_random_card()
-			await get_tree().create_timer(0.25).timeout
 			if 0.5 > randf():
 				player2_play_random_card()
-				await get_tree().create_timer(0.25).timeout
 				if 0.25 > randf():
 					player2_play_random_card()
-					await get_tree().create_timer(0.25).timeout
 	
 		for CardPosition in 4:			# Player 2 cards activate
 			if Player2Table.get_child(CardPosition).get_child(0).get_child_count() != 0:

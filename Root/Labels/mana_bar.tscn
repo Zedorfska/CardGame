@@ -1,38 +1,38 @@
 [gd_scene load_steps=8 format=3 uid="uid://cge43gnv8t42f"]
 
-[ext_resource type="Texture2D" uid="uid://3vog7qa8tknc" path="res://Sprites/SketchManaBar.png" id="1_gmmj1"]
-[ext_resource type="Texture2D" uid="uid://cociyx1mnrsb3" path="res://Sprites/SketchMana1.png" id="2_letn2"]
+[ext_resource type="Texture2D" uid="uid://daod22cpwqcm5" path="res://Sprites/ManaBar.png" id="1_letn2"]
 [ext_resource type="Script" uid="uid://cg4c8swc2a4g7" path="res://Root/Labels/mana_bar.gd" id="2_uhogb"]
-[ext_resource type="Texture2D" uid="uid://dfdi5cqs8juib" path="res://Sprites/SketchMana2.png" id="3_uhogb"]
-[ext_resource type="Texture2D" uid="uid://duxapdsrdxi6t" path="res://Sprites/SketchMana3.png" id="4_bsn71"]
-[ext_resource type="Texture2D" uid="uid://gxtrd21yq8c2" path="res://Sprites/SketchMana4.png" id="5_bjm4t"]
-[ext_resource type="Texture2D" uid="uid://cgcddwlhfjvb" path="res://Sprites/SketchMana5.png" id="6_4qv3i"]
+[ext_resource type="Texture2D" uid="uid://cmn1b84xb0tlg" path="res://Sprites/ManaBar1.png" id="3_uhogb"]
+[ext_resource type="Texture2D" uid="uid://bmibdkpxii45" path="res://Sprites/ManaBar2.png" id="4_bsn71"]
+[ext_resource type="Texture2D" uid="uid://bi3f3r2qgjkkl" path="res://Sprites/ManaBar3.png" id="5_bjm4t"]
+[ext_resource type="Texture2D" uid="uid://dj0rhnjx4airh" path="res://Sprites/ManaBar4.png" id="6_4qv3i"]
+[ext_resource type="Texture2D" uid="uid://dgf7e1gk6f8b7" path="res://Sprites/ManaBar5.png" id="7_kk2rk"]
 
 [node name="ManaBar" type="Sprite2D"]
-texture = ExtResource("1_gmmj1")
+texture = ExtResource("1_letn2")
 script = ExtResource("2_uhogb")
 
 [node name="Mana1" type="Sprite2D" parent="."]
 visible = false
 z_index = -1
-texture = ExtResource("2_letn2")
+texture = ExtResource("3_uhogb")
 
 [node name="Mana2" type="Sprite2D" parent="."]
 visible = false
 z_index = -1
-texture = ExtResource("3_uhogb")
+texture = ExtResource("4_bsn71")
 
 [node name="Mana3" type="Sprite2D" parent="."]
 visible = false
 z_index = -1
-texture = ExtResource("4_bsn71")
+texture = ExtResource("5_bjm4t")
 
 [node name="Mana4" type="Sprite2D" parent="."]
 visible = false
 z_index = -1
-texture = ExtResource("5_bjm4t")
+texture = ExtResource("6_4qv3i")
 
 [node name="Mana5" type="Sprite2D" parent="."]
 visible = false
 z_index = -1
-texture = ExtResource("6_4qv3i")
+texture = ExtResource("7_kk2rk")
