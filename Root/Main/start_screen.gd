@@ -10,3 +10,7 @@ func update_name():
 
 func start_game():
 	self.get_parent().go_to_scene(GameScene)
+
+func _ready():
+	if self.get_parent().Name != null:
+		NameBox.set_text(self.get_parent().Name)

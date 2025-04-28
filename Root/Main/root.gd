@@ -6,6 +6,8 @@ var StartMenuScene = preload("res://Root/Main/start_screen.tscn")
 var GameScene = preload("res://Root/Main/Main.tscn")
 var GameOverScene = preload("res://Root/Main/game_over.tscn")
 
+@onready var CardAttackMoveAmount = 50
+
 func _ready():
 	go_to_scene(StartMenuScene)
 

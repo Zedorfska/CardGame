@@ -14,6 +14,7 @@ var P2Mana
 var P1ManaBar
 var P2ManaBar
 var CardDescriptionLabel
+var AbleToPlay
 
 var Stats
 var ManaGainAmount
@@ -62,6 +63,7 @@ func _ready():
 	ManaGainAmount = 1
 	Deck = $CanvasLayer/Control/Root/Stats/Deck
 	Turn = 0
+	AbleToPlay = true
 	
 	CardDescriptionLabel = $CanvasLayer/Control/Root/Right/LabelMargin/CardDescription
 	CardDescriptionLabel.set_text("Hover over a card to see description")
@@ -98,6 +100,9 @@ func _ready():
 	tile_selected(0)	# TODO: BOTCH - necessary because shit breaks when not selected
 	print("ready")
 
+func wait(TimeAmount):
+	await get_tree().create_timer(TimeAmount).timeout
+
 func setup_deck():
 	for Card in range(ListOfCards.size()):
 		Deck.add_child(ListOfCards[Card].instantiate())
@@ -132,7 +137,9 @@ func player2_play_random_card():
 		RandomTile = ValidTileList.pick_random()
 		P2Mana -= RandomCard.get_child(0).CostAmount
 		P2ManaBar.update_label(P2Mana)
-		RandomCard.get_child(0).reparent(RandomTile, false)
+		RandomCard.get_child(0).reparent(RandomTile, true)
+		var tween = get_tree().create_tween()
+		tween.tween_property(RandomTile.get_child(0), "position", Vector2.ZERO, 0.1)
 
 func tile_hover_enter(TileNumber):
 	if TileNumber < 4:
@@ -161,23 +168,30 @@ func card_hover_exit():
 	CardDescriptionLabel.set_text("Hover over a card to see description")
 
 func tile_selected(TileNumber):
-	for CurrentSelectedTile in 4:
-		var SelectedTileSelector = Player1Table.get_child(CurrentSelectedTile).get_child(2)
-		var DesiredTileSelector = Player1Table.get_child(TileNumber).get_child(2)
-		if SelectedTileSelector == DesiredTileSelector:
-			SelectedTileSelector.visible = true
-		else:
-			SelectedTileSelector.visible = false
-	SelectedTile = Player1Table.get_child(TileNumber).get_child(0)
-	SelectSound.play()
+	if AbleToPlay == true:
+		for CurrentSelectedTile in 4:
+			var SelectedTileSelector = Player1Table.get_child(CurrentSelectedTile).get_child(2)
+			var DesiredTileSelector = Player1Table.get_child(TileNumber).get_child(2)
+			if SelectedTileSelector == DesiredTileSelector:
+				SelectedTileSelector.visible = true
+			else:
+				SelectedTileSelector.visible = false
+		SelectedTile = Player1Table.get_child(TileNumber).get_child(0)
+		SelectSound.play()
 
 func card_selected(CardNumber):
-	SelectedCard = Player1Hand.get_child(CardNumber).get_child(0)
-	if SelectedCard.get_child_count() != 0 and SelectedTile.get_child_count() == 0:
-		if SelectedCard.get_child(0).CostAmount <= P1Mana:
-			P1Mana -= SelectedCard.get_child(0).CostAmount
-			SelectedCard.get_child(0).reparent(SelectedTile, false)
-			P1ManaBar.update_label(P1Mana)
+	if AbleToPlay == true:
+		SelectedCard = Player1Hand.get_child(CardNumber).get_child(0)
+		if SelectedCard.get_child_count() != 0 and SelectedTile.get_child_count() == 0:
+			if SelectedCard.get_child(0).CostAmount <= P1Mana:
+				P1Mana -= SelectedCard.get_child(0).CostAmount
+				SelectedCard.get_child(0).reparent(SelectedTile, true)
+				var tween = get_tree().create_tween()
+				tween.tween_property(SelectedTile.get_child(0), "position", Vector2.ZERO, 0.1)
+				AbleToPlay = false
+				await get_tree().create_timer(0.1).timeout
+				P1ManaBar.update_label(P1Mana)
+				AbleToPlay = true
 
 func player_take_damage(Player, Damage):
 	if Player == 2:
@@ -195,33 +209,46 @@ func update_player_health():
 	Stats.get_child(2).get_child(1).set_text(str(Player1HP))
 
 func end_turn():
-	for CardPosition in 4:			# Player 1 cards activate in order left to right
-		if Player1Table.get_child(CardPosition).get_child(0).get_child_count() != 0:
-			SelectedCard = Player1Table.get_child(CardPosition).get_child(0).get_child(0)
-			print("Card ", CardPosition + 1, " of P1 activates")
-			SelectedCard.activate(RootNode, CardPosition, 1)
+	if AbleToPlay == true:
+		AbleToPlay = false
+		for CardPosition in 4:			# Player 1 cards activate in order left to right
+			if Player1Table.get_child(CardPosition).get_child(0).get_child_count() != 0:
+				SelectedCard = Player1Table.get_child(CardPosition).get_child(0).get_child(0)
+				print("Card ", CardPosition + 1, " of P1 activates")
+				SelectedCard.activate(RootNode, CardPosition, 1)
+				await get_tree().create_timer(0.5).timeout
 	
-	fill_mana(2, ManaGainAmount)	# Player 2 gets their mana and cards
-	deal_cards_to_player(2)
+		fill_mana(2, ManaGainAmount)	# Player 2 gets their mana and cards
+		await get_tree().create_timer(0.25).timeout
+		deal_cards_to_player(2)
+		await get_tree().create_timer(0.5).timeout
 	
-	player2_play_random_card()		# Player 2 makes moves
-	if 0.75 > randf():
-		player2_play_random_card()
-		if 0.5 > randf():
+		player2_play_random_card()		# Player 2 makes moves
+		await get_tree().create_timer(0.25).timeout
+		if 0.75 > randf():
 			player2_play_random_card()
-			if 0.25 > randf():
+			await get_tree().create_timer(0.25).timeout
+			if 0.5 > randf():
 				player2_play_random_card()
+				await get_tree().create_timer(0.25).timeout
+				if 0.25 > randf():
+					player2_play_random_card()
+					await get_tree().create_timer(0.25).timeout
 	
-	for CardPosition in 4:			# Player 2 cards activate
-		if Player2Table.get_child(CardPosition).get_child(0).get_child_count() != 0:
-			SelectedCard = Player2Table.get_child(CardPosition).get_child(0).get_child(0)
-			SelectedCard.activate(RootNode, CardPosition, 2)
+		for CardPosition in 4:			# Player 2 cards activate
+			if Player2Table.get_child(CardPosition).get_child(0).get_child_count() != 0:
+				SelectedCard = Player2Table.get_child(CardPosition).get_child(0).get_child(0)
+				SelectedCard.activate(RootNode, CardPosition, 2)
+				await get_tree().create_timer(0.5).timeout
 	
-	deal_cards_to_player(1)			# Player 1 gets their mana and cards
-	fill_mana(1, ManaGainAmount)
+		deal_cards_to_player(1)			# Player 1 gets their mana and cards
+		await get_tree().create_timer(0.25).timeout
+		fill_mana(1, ManaGainAmount)
 	
-	if ManaGainAmount < 5:
-		ManaGainAmount += 1
+		if ManaGainAmount < 5:
+			ManaGainAmount += 1
+		await get_tree().create_timer(0.25).timeout
+		AbleToPlay = true
 
 func fill_mana(Player, ManaGain):
 	if Player == 1 or 0:

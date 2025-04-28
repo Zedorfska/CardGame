@@ -30,6 +30,14 @@ func _ready():
 
 func activate(RootNode, CardPosition, Player):
 	RootNode.basic_common_attack(CardPosition, DamageAmount, DamageType, Player)
+	if Player == 1:				#TODO: shitcode
+		self.position.y -= 50
+		var tween = get_tree().create_tween()
+		tween.tween_property(self, "position", Vector2(), 0.25)
+	else:
+		self.position.y += 50
+		var tween = get_tree().create_tween()
+		tween.tween_property(self, "position", Vector2(), 0.25)
 
 func take_damage(Damage, _DamageType):
 	HealthAmount -= Damage
