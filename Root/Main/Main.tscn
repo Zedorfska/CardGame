@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dpc82qm4v717x"]
+[gd_scene load_steps=9 format=3 uid="uid://dpc82qm4v717x"]
 
 [ext_resource type="Script" uid="uid://d0j17u57glsw6" path="res://Root/Main/main.gd" id="1_th7xa"]
-[ext_resource type="Texture2D" uid="uid://b0evji5mq5mk5" path="res://Sprites/Board.svg" id="2_th7xa"]
-[ext_resource type="Texture2D" uid="uid://cqdiu48bafima" path="res://Sprites/LighterColour.svg" id="3_50vke"]
-[ext_resource type="Texture2D" uid="uid://crwjtrip521kn" path="res://Sprites/SketchTargetSelect.png" id="3_b5gtr"]
-[ext_resource type="Texture2D" uid="uid://bhxdjut18d871" path="res://Sprites/SketchSelect.png" id="4_ymg86"]
+[ext_resource type="Texture2D" uid="uid://b0evji5mq5mk5" path="res://Sprites/Board/Board.svg" id="2_th7xa"]
+[ext_resource type="Texture2D" uid="uid://cqdiu48bafima" path="res://Sprites/Board/LighterColour.svg" id="3_50vke"]
+[ext_resource type="Texture2D" uid="uid://crwjtrip521kn" path="res://Sprites/Sketch/SketchTargetSelect.png" id="3_b5gtr"]
+[ext_resource type="PackedScene" uid="uid://qyi5sea224o7" path="res://Root/Objects/tile.tscn" id="4_b5gtr"]
+[ext_resource type="Texture2D" uid="uid://bhxdjut18d871" path="res://Sprites/Sketch/SketchSelect.png" id="4_ymg86"]
 [ext_resource type="AudioStream" uid="uid://bcemh5uohctui" path="res://Sounds/Hover.wav" id="5_dn23c"]
 [ext_resource type="AudioStream" uid="uid://b7123um0cumph" path="res://Sounds/Select.wav" id="6_lsap4"]
 
@@ -23,6 +24,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Board" type="TextureRect" parent="CanvasLayer/Control"]
+z_index = -500
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -71,36 +73,26 @@ text = "Placeholder"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="P2ManaLabel" type="BoxContainer" parent="CanvasLayer/Control/Root/StatsContainer/Stats/P2"]
+[node name="P2ManaLabel" type="CenterContainer" parent="CanvasLayer/Control/Root/StatsContainer/Stats/P2"]
 z_index = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 mouse_filter = 2
 
-[node name="Deck" type="VBoxContainer" parent="CanvasLayer/Control/Root/StatsContainer/Stats"]
+[node name="Deck" type="CenterContainer" parent="CanvasLayer/Control/Root/StatsContainer/Stats"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.5
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Root/StatsContainer/Stats/Deck"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("3_50vke")
-
-[node name="Deck" type="CenterContainer" parent="CanvasLayer/Control/Root/StatsContainer/Stats/Deck"]
+[node name="Deck" type="BoxContainer" parent="CanvasLayer/Control/Root/StatsContainer/Stats/Deck"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 size_flags_stretch_ratio = 20.0
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/StatsContainer/Stats/Deck/Deck"]
-
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/Root/StatsContainer/Stats/Deck"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("3_50vke")
 
 [node name="P1" type="VBoxContainer" parent="CanvasLayer/Control/Root/StatsContainer/Stats"]
 layout_mode = 2
@@ -129,10 +121,9 @@ size_flags_horizontal = 4
 size_flags_vertical = 6
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Root/StatsContainer"]
+[node name="Margin" type="BoxContainer" parent="CanvasLayer/Control/Root/StatsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("3_50vke")
 
 [node name="Middle" type="VBoxContainer" parent="CanvasLayer/Control/Root"]
 layout_mode = 2
@@ -206,12 +197,18 @@ mouse_filter = 0
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card1"]
 position = Vector2(104, 83)
 
+[node name="Tile" parent="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card1" instance=ExtResource("4_b5gtr")]
+position = Vector2(104, 83)
+
 [node name="Player2Card2" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Table"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 0
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card2"]
+position = Vector2(104, 83)
+
+[node name="Tile" parent="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card2" instance=ExtResource("4_b5gtr")]
 position = Vector2(104, 83)
 
 [node name="Player2Card3" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Table"]
@@ -222,12 +219,18 @@ mouse_filter = 0
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card3"]
 position = Vector2(104, 83)
 
+[node name="Tile" parent="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card3" instance=ExtResource("4_b5gtr")]
+position = Vector2(104, 83)
+
 [node name="Player2Card4" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/Player2Table"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 0
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card4"]
+position = Vector2(104, 83)
+
+[node name="Tile" parent="CanvasLayer/Control/Root/Middle/Player2Table/Player2Card4" instance=ExtResource("4_b5gtr")]
 position = Vector2(104, 83)
 
 [node name="Player1Table" type="HBoxContainer" parent="CanvasLayer/Control/Root/Middle"]
@@ -241,7 +244,7 @@ size_flags_horizontal = 3
 flat = true
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card1"]
-position = Vector2(104, 86)
+position = Vector2(104, 83)
 
 [node name="TargetSelect" type="Sprite2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card1"]
 visible = false
@@ -255,13 +258,16 @@ position = Vector2(104, 86)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_ymg86")
 
+[node name="Tile" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card1" instance=ExtResource("4_b5gtr")]
+position = Vector2(104, 83)
+
 [node name="Player1Card2" type="Button" parent="CanvasLayer/Control/Root/Middle/Player1Table"]
 layout_mode = 2
 size_flags_horizontal = 3
 flat = true
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card2"]
-position = Vector2(104, 86)
+position = Vector2(104, 83)
 
 [node name="TargetSelect" type="Sprite2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card2"]
 visible = false
@@ -275,13 +281,16 @@ position = Vector2(104, 86)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_ymg86")
 
+[node name="Tile" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card2" instance=ExtResource("4_b5gtr")]
+position = Vector2(104, 83)
+
 [node name="Player1Card3" type="Button" parent="CanvasLayer/Control/Root/Middle/Player1Table"]
 layout_mode = 2
 size_flags_horizontal = 3
 flat = true
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card3"]
-position = Vector2(104, 86)
+position = Vector2(104, 83)
 
 [node name="TargetSelect" type="Sprite2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card3"]
 visible = false
@@ -295,13 +304,16 @@ position = Vector2(104, 86)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_ymg86")
 
+[node name="Tile" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card3" instance=ExtResource("4_b5gtr")]
+position = Vector2(104, 83)
+
 [node name="Player1Card4" type="Button" parent="CanvasLayer/Control/Root/Middle/Player1Table"]
 layout_mode = 2
 size_flags_horizontal = 3
 flat = true
 
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card4"]
-position = Vector2(104, 86)
+position = Vector2(104, 83)
 
 [node name="TargetSelect" type="Sprite2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card4"]
 visible = false
@@ -314,6 +326,9 @@ visible = false
 position = Vector2(105, 86)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_ymg86")
+
+[node name="Tile" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card4" instance=ExtResource("4_b5gtr")]
+position = Vector2(104, 83)
 
 [node name="Player1Hand" type="HBoxContainer" parent="CanvasLayer/Control/Root/Middle"]
 layout_mode = 2
@@ -368,70 +383,13 @@ flat = true
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand6"]
 position = Vector2(69, 89)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="CanvasLayer/Control/Root/Middle"]
-
-[node name="BotchLines" type="VBoxContainer" parent="CanvasLayer/Control/Root/Middle/CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 216.0
-offset_right = -216.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Spacer" type="VBoxContainer" parent="CanvasLayer/Control/Root/Middle/CanvasLayer/BotchLines"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="Spacer2" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/CanvasLayer/BotchLines/Spacer"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 20.0
-mouse_filter = 2
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Root/Middle/CanvasLayer/BotchLines/Spacer"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-texture = ExtResource("3_50vke")
-
-[node name="Spacer2" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/CanvasLayer/BotchLines"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="Spacer3" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/CanvasLayer/BotchLines"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="Spacer4" type="VBoxContainer" parent="CanvasLayer/Control/Root/Middle/CanvasLayer/BotchLines"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/Root/Middle/CanvasLayer/BotchLines/Spacer4"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-texture = ExtResource("3_50vke")
-
-[node name="Spacer2" type="BoxContainer" parent="CanvasLayer/Control/Root/Middle/CanvasLayer/BotchLines/Spacer4"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 20.0
-mouse_filter = 2
-
 [node name="RightContainer" type="HBoxContainer" parent="CanvasLayer/Control/Root"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Root/RightContainer"]
+[node name="Margin" type="BoxContainer" parent="CanvasLayer/Control/Root/RightContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("3_50vke")
 
 [node name="Right" type="VBoxContainer" parent="CanvasLayer/Control/Root/RightContainer"]
 layout_mode = 2
@@ -468,6 +426,198 @@ offset_right = 192.0
 offset_bottom = 186.0
 size_flags_horizontal = 3
 text = "END TURN"
+
+[node name="Pretty" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="Pretty"]
+z_index = -1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VerticalLines" type="HBoxContainer" parent="Pretty/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Container" type="BoxContainer" parent="Pretty/Control/VerticalLines"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Pretty/Control/VerticalLines"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("3_50vke")
+
+[node name="Container2" type="BoxContainer" parent="Pretty/Control/VerticalLines"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 80.0
+mouse_filter = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Pretty/Control/VerticalLines"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("3_50vke")
+
+[node name="Container3" type="BoxContainer" parent="Pretty/Control/VerticalLines"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+mouse_filter = 2
+
+[node name="HorizontalLines" type="HBoxContainer" parent="Pretty/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pretty/Control/HorizontalLines"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="BoxContainer" type="VBoxContainer" parent="Pretty/Control/HorizontalLines/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="Pretty/Control/HorizontalLines/VBoxContainer/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Pretty/Control/HorizontalLines/VBoxContainer/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+texture = ExtResource("3_50vke")
+
+[node name="BoxContainer2" type="BoxContainer" parent="Pretty/Control/HorizontalLines/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.3
+mouse_filter = 2
+
+[node name="BoxContainer3" type="VBoxContainer" parent="Pretty/Control/HorizontalLines/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Pretty/Control/HorizontalLines/VBoxContainer/BoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+texture = ExtResource("3_50vke")
+
+[node name="BoxContainer" type="BoxContainer" parent="Pretty/Control/HorizontalLines/VBoxContainer/BoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
+mouse_filter = 2
+
+[node name="BoxContainer" type="VBoxContainer" parent="Pretty/Control/HorizontalLines"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+mouse_filter = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="Pretty/Control/HorizontalLines/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="BoxContainer2" type="VBoxContainer" parent="Pretty/Control/HorizontalLines/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.25
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Pretty/Control/HorizontalLines/BoxContainer/BoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.3
+mouse_filter = 2
+texture = ExtResource("3_50vke")
+
+[node name="BoxContainer" type="BoxContainer" parent="Pretty/Control/HorizontalLines/BoxContainer/BoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 40.0
+mouse_filter = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Pretty/Control/HorizontalLines/BoxContainer/BoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.3
+mouse_filter = 2
+texture = ExtResource("3_50vke")
+
+[node name="BoxContainer3" type="BoxContainer" parent="Pretty/Control/HorizontalLines/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Pretty/Control/HorizontalLines"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="BoxContainer" type="VBoxContainer" parent="Pretty/Control/HorizontalLines/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="Pretty/Control/HorizontalLines/VBoxContainer2/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Pretty/Control/HorizontalLines/VBoxContainer2/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+texture = ExtResource("3_50vke")
+
+[node name="BoxContainer2" type="BoxContainer" parent="Pretty/Control/HorizontalLines/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+mouse_filter = 2
+
+[node name="BoxContainer3" type="VBoxContainer" parent="Pretty/Control/HorizontalLines/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Pretty/Control/HorizontalLines/VBoxContainer2/BoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+texture = ExtResource("3_50vke")
+
+[node name="BoxContainer" type="BoxContainer" parent="Pretty/Control/HorizontalLines/VBoxContainer2/BoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
+mouse_filter = 2
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_dn23c")

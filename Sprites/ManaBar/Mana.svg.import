@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqdiu48bafima"
-path="res://.godot/imported/LighterColour.svg-586503b30ebb1fdf8dd49d86498ddafa.ctex"
+uid="uid://3ff0jtt0c0or"
+path="res://.godot/imported/Mana.svg-b18a23fafa1ba3e53b49633c070e99a7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/LighterColour.svg"
-dest_files=["res://.godot/imported/LighterColour.svg-586503b30ebb1fdf8dd49d86498ddafa.ctex"]
+source_file="res://Sprites/ManaBar/Mana.svg"
+dest_files=["res://.godot/imported/Mana.svg-b18a23fafa1ba3e53b49633c070e99a7.ctex"]
 
 [params]
 

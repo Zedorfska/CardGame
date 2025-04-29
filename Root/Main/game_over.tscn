@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://blgdftdndo3na"]
 
-[ext_resource type="Texture2D" uid="uid://cm5v2abohbi1q" path="res://Sprites/SketchKILLYOURSELF.png" id="1_v2owy"]
+[ext_resource type="Texture2D" uid="uid://cm5v2abohbi1q" path="res://Sprites/Sketch/SketchKILLYOURSELF.png" id="1_v2owy"]
 [ext_resource type="Script" uid="uid://cfgiaxvbiyc5i" path="res://Root/Main/game_over.gd" id="2_kbyby"]
 
 [node name="TextureRect2" type="TextureRect"]

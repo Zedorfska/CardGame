@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3vog7qa8tknc"
-path="res://.godot/imported/SketchManaBar.png-4a40a4991644a0d165e948297ac866eb.ctex"
+uid="uid://b0vv1e3nkst82"
+path="res://.godot/imported/SketchBoard.png-45b2f03beac3fab5af60f6d40db45cbd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/SketchManaBar.png"
-dest_files=["res://.godot/imported/SketchManaBar.png-4a40a4991644a0d165e948297ac866eb.ctex"]
+source_file="res://Sprites/Sketch/SketchBoard.png"
+dest_files=["res://.godot/imported/SketchBoard.png-45b2f03beac3fab5af60f6d40db45cbd.ctex"]
 
 [params]
 

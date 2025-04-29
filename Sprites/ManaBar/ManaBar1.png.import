@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://daod22cpwqcm5"
-path="res://.godot/imported/ManaBar.png-12793c5fc385e5321cd36c6f0a00cdae.ctex"
+uid="uid://cmn1b84xb0tlg"
+path="res://.godot/imported/ManaBar1.png-59c28546e8f31269d5129c95ad548119.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/ManaBar.png"
-dest_files=["res://.godot/imported/ManaBar.png-12793c5fc385e5321cd36c6f0a00cdae.ctex"]
+source_file="res://Sprites/ManaBar/ManaBar1.png"
+dest_files=["res://.godot/imported/ManaBar1.png-59c28546e8f31269d5129c95ad548119.ctex"]
 
 [params]
 

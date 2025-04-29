@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhxdjut18d871"
-path="res://.godot/imported/SketchSelect.png-3966697256b432e0e15377e41b493581.ctex"
+uid="uid://cqdiu48bafima"
+path="res://.godot/imported/LighterColour.svg-4986c3c43a8a88d16159b9322532ff16.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/SketchSelect.png"
-dest_files=["res://.godot/imported/SketchSelect.png-3966697256b432e0e15377e41b493581.ctex"]
+source_file="res://Sprites/Board/LighterColour.svg"
+dest_files=["res://.godot/imported/LighterColour.svg-4986c3c43a8a88d16159b9322532ff16.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://c7qlty5xiulw1"]
 
 [ext_resource type="Script" uid="uid://c4bjmws7jele6" path="res://Cards/TestCard/test_card.gd" id="1_f8du8"]
-[ext_resource type="Texture2D" uid="uid://ce00ju24ilwak" path="res://Cards/TestCard/Zedorfska.jpg" id="2_jkomm"]
+[ext_resource type="Texture2D" uid="uid://bswqkhdaglscd" path="res://Sprites/TestCard.svg" id="2_f8du8"]
 
 [node name="TestCard" type="Node2D"]
 script = ExtResource("1_f8du8")
 
 [node name="TestCardSprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_jkomm")
+texture = ExtResource("2_f8du8")

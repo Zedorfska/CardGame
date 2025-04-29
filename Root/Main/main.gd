@@ -94,6 +94,7 @@ func _ready():
 	deal_cards_to_player(1)	# deals the cards!
 	deal_cards_to_player(2)
 	
+	await get_tree().create_timer(0.75).timeout
 	player2_play_random_card()
 	player2_play_random_card()
 	
@@ -116,7 +117,10 @@ func deal_cards_to_player(Player):
 		if Deck.get_child_count() != 0:
 			TopCardInDeck = Deck.get_child(0)
 			if Table.get_child(Player).get_child(HandToBeDealtTo).get_child(0).get_child_count() == 0:
-				TopCardInDeck.reparent(Table.get_child(Player).get_child(HandToBeDealtTo).get_child(0), false)
+				TopCardInDeck.reparent(Table.get_child(Player).get_child(HandToBeDealtTo).get_child(0), true)
+				var tween = get_tree().create_tween()
+				tween.tween_property(TopCardInDeck, "position", Vector2.ZERO, 0.1)
+				await get_tree().create_timer(0.1).timeout
 		else:
 			break
 
@@ -140,7 +144,6 @@ func player2_play_random_card():
 		RandomCard.get_child(0).reparent(RandomTile, true)
 		var tween = get_tree().create_tween()
 		tween.tween_property(RandomTile.get_child(0), "position", Vector2.ZERO, 0.1)
-		await get_tree().create_timer(0.25).timeout
 
 func tile_hover_enter(TileNumber):
 	if TileNumber < 4:
@@ -223,7 +226,7 @@ func end_turn():
 		await get_tree().create_timer(0.25).timeout
 		deal_cards_to_player(2)
 		await get_tree().create_timer(0.5).timeout
-	
+		
 		player2_play_random_card()		# Player 2 makes moves
 		if 0.75 > randf():
 			player2_play_random_card()
@@ -231,6 +234,7 @@ func end_turn():
 				player2_play_random_card()
 				if 0.25 > randf():
 					player2_play_random_card()
+		await get_tree().create_timer(0.25).timeout
 	
 		for CardPosition in 4:			# Player 2 cards activate
 			if Player2Table.get_child(CardPosition).get_child(0).get_child_count() != 0:
@@ -261,9 +265,15 @@ func fill_mana(Player, ManaGain):
 
 # Types of attacks cards can do
 # Attacks card opposite of it, else the player.
-func basic_common_attack(CardPosition, Damage, DamageType, Player):
+func basic_common_attack(CardPosition, Damage, DamageType, Player, Card):
 	if Table.get_child(Player).get_child(CardPosition).get_child(0).get_child_count() != 0:
 		Table.get_child(Player).get_child(CardPosition).get_child(0).get_child(0).take_damage(Damage, DamageType)
 	else:
 		player_take_damage(Player, Damage)
 		print("Player ", Player, " takes ",  Damage,  " damage.")
+	var Offset = 1
+	if Player == 2:
+		Offset = -1
+	Card.position.y -= 50 * Offset
+	var tween = get_tree().create_tween()
+	tween.tween_property(Card, "position", Vector2.ZERO, 0.25)

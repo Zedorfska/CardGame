@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cm5v2abohbi1q"
-path="res://.godot/imported/SketchKILLYOURSELF.png-ec8ae5abfe494ac129e5f5cdbccfc2b0.ctex"
+uid="uid://duxapdsrdxi6t"
+path="res://.godot/imported/SketchMana3.png-15cb2c9a6669e024a3eba97c22c20aa2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/SketchKILLYOURSELF.png"
-dest_files=["res://.godot/imported/SketchKILLYOURSELF.png-ec8ae5abfe494ac129e5f5cdbccfc2b0.ctex"]
+source_file="res://Sprites/Sketch/SketchMana3.png"
+dest_files=["res://.godot/imported/SketchMana3.png-15cb2c9a6669e024a3eba97c22c20aa2.ctex"]
 
 [params]
 

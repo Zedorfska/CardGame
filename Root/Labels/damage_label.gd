@@ -1,4 +1,11 @@
 extends Label
 
-func update_label(Damage):
+func update_label(Damage, SCPClass):
 	self.set_text(str(Damage))
+	match SCPClass:
+		"Safe":
+			self.set("theme_override_colors/font_color", get_tree().root.get_child(0).ColorSafe)
+		"Euclid":
+			self.set("theme_override_colors/font_color", get_tree().root.get_child(0).ColorEuclid)
+		"Keter":
+			self.set("theme_override_colors/font_color", get_tree().root.get_child(0).ColorKeter)
