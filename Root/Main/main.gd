@@ -14,10 +14,12 @@ var P2Mana
 var P1ManaBar
 var P2ManaBar
 var CardDescriptionLabel
+var TurnCountLabel
 var AbleToPlay
 
 var Stats
 var ManaGainAmount
+var CardGainAmount
 
 var Turn
 var TopCardInDeck
@@ -61,12 +63,15 @@ func _ready():
 	P1Mana = 1
 	P2Mana = 1
 	ManaGainAmount = 1
+	CardGainAmount = 1
 	Deck = $CanvasLayer/Control/Root/StatsContainer/Stats/Deck/Deck/Marker2D
 	Turn = 0
 	AbleToPlay = true
 	
 	CardDescriptionLabel = $CanvasLayer/Control/Root/RightContainer/Right/LabelMargin/CardDescription
 	CardDescriptionLabel.set_text("Hover over a card to see description")
+	TurnCountLabel = $CanvasLayer/Control/Root/RightContainer/Right/TurnCountLabel
+	TurnCountLabel.set_text(str("Turn: ", Turn))
 	Table = $CanvasLayer/Control/Root/Middle
 	Player1Table = $CanvasLayer/Control/Root/Middle/Player1Table
 	Player2Table = $CanvasLayer/Control/Root/Middle/Player2Table
@@ -91,8 +96,8 @@ func _ready():
 	
 	update_player_health()
 	setup_deck()			# fills the deck!
-	deal_cards_to_player(1)	# deals the cards!
-	deal_cards_to_player(2)
+	deal_cards_to_player(1, 3)	# deals the cards!
+	deal_cards_to_player(2, 3)
 	
 	await get_tree().create_timer(0.75).timeout
 	player2_play_random_card()
@@ -108,21 +113,20 @@ func setup_deck():
 	for Card in range(ListOfCards.size()):
 		Deck.add_child(ListOfCards[Card].instantiate())
 
-func deal_cards_to_player(Player):
-	if Player == 2:
-		Player = 0
-	else:
-		Player = 3
-	for HandToBeDealtTo in 6:
-		if Deck.get_child_count() != 0:
-			TopCardInDeck = Deck.get_child(0)
-			if Table.get_child(Player).get_child(HandToBeDealtTo).get_child(0).get_child_count() == 0:
-				TopCardInDeck.reparent(Table.get_child(Player).get_child(HandToBeDealtTo).get_child(0), true)
-				var tween = get_tree().create_tween()
-				tween.tween_property(TopCardInDeck, "position", Vector2.ZERO, 0.1)
-				await get_tree().create_timer(0.1).timeout
-		else:
-			break
+func deal_cards_to_player(Player, Amount):
+	var ChildToGet = 0
+	if Player == 1:
+		ChildToGet = 3
+	for CurrentAmount in Amount:
+		for HandToBeDealtTo in 6:
+			if Table.get_child(ChildToGet).get_child(HandToBeDealtTo).get_child(0).get_child_count() == 0:
+				if Deck.get_child_count() != 0:
+					TopCardInDeck = Deck.get_child(0)
+					TopCardInDeck.reparent(Table.get_child(ChildToGet).get_child(HandToBeDealtTo).get_child(0), true)
+					var tween = get_tree().create_tween()
+					tween.tween_property(TopCardInDeck, "position", Vector2.ZERO, 0.1)
+					await get_tree().create_timer(0.1).timeout
+				break
 
 func player2_play_random_card():
 	var ValidTileList = []											# Create list of valid tiles
@@ -224,7 +228,7 @@ func end_turn():
 	
 		fill_mana(2, ManaGainAmount)	# Player 2 gets their mana and cards
 		await get_tree().create_timer(0.25).timeout
-		deal_cards_to_player(2)
+		deal_cards_to_player(2, CardGainAmount)
 		await get_tree().create_timer(0.5).timeout
 		
 		player2_play_random_card()		# Player 2 makes moves
@@ -242,13 +246,21 @@ func end_turn():
 				SelectedCard.activate(RootNode, CardPosition, 2)
 				await get_tree().create_timer(0.5).timeout
 	
-		deal_cards_to_player(1)			# Player 1 gets their mana and cards
+		match Turn:						# After X turns, start giving one more card
+			3:
+				CardGainAmount += 1
+			5:
+				CardGainAmount += 1
+	
+		deal_cards_to_player(1, CardGainAmount)			# Player 1 gets their mana and cards
 		await get_tree().create_timer(0.25).timeout
 		fill_mana(1, ManaGainAmount)
 	
 		if ManaGainAmount < 5:
 			ManaGainAmount += 1
 		await get_tree().create_timer(0.25).timeout
+		Turn += 1
+		TurnCountLabel.set_text(str("Turn: ", Turn))
 		AbleToPlay = true
 
 func fill_mana(Player, ManaGain):

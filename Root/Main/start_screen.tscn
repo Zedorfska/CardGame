@@ -55,7 +55,7 @@ layout_mode = 2
 [node name="TextEdit" type="TextEdit" parent="Control/HBoxContainer/Middle/Middle/BoxContainer/P1/BoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "ENTER NAME"
+placeholder_text = "Enter name!"
 
 [node name="BoxContainer2" type="CenterContainer" parent="Control/HBoxContainer/Middle/Middle"]
 layout_mode = 2

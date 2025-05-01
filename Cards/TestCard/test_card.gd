@@ -11,7 +11,7 @@ var MaxHealth = 5
 var HealthAmount = 5
 var DamageAmount = 2
 var CostAmount = 1
-var DamageType = 0
+var DamageType = "Basic"
 
 @onready var SCPNumber = "000"
 @onready var CardName = "TestCard"

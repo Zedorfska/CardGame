@@ -9,7 +9,10 @@ func update_name():
 	self.get_parent().Name = NameBox.text
 
 func start_game():
-	self.get_parent().go_to_scene(GameScene)
+	if NameBox.get_text() == "":
+		NameBox.set_placeholder("ENTER NAME!!!")
+	else:
+		self.get_parent().go_to_scene(GameScene)
 
 func _ready():
 	if self.get_parent().Name != null:

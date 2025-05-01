@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://d0j17u57glsw6" path="res://Root/Main/main.gd" id="1_th7xa"]
 [ext_resource type="Texture2D" uid="uid://b0evji5mq5mk5" path="res://Sprites/Board/Board.svg" id="2_th7xa"]
 [ext_resource type="Texture2D" uid="uid://cqdiu48bafima" path="res://Sprites/Board/LighterColour.svg" id="3_50vke"]
-[ext_resource type="Texture2D" uid="uid://crwjtrip521kn" path="res://Sprites/Sketch/SketchTargetSelect.png" id="3_b5gtr"]
 [ext_resource type="PackedScene" uid="uid://qyi5sea224o7" path="res://Root/Objects/tile.tscn" id="4_b5gtr"]
-[ext_resource type="Texture2D" uid="uid://bhxdjut18d871" path="res://Sprites/Sketch/SketchSelect.png" id="4_ymg86"]
-[ext_resource type="AudioStream" uid="uid://bcemh5uohctui" path="res://Sounds/Hover.wav" id="5_dn23c"]
-[ext_resource type="AudioStream" uid="uid://b7123um0cumph" path="res://Sounds/Select.wav" id="6_lsap4"]
+[ext_resource type="PackedScene" uid="uid://c5jtbyp7q1spv" path="res://Root/Objects/selector_transparent.tscn" id="4_ymg86"]
+[ext_resource type="PackedScene" uid="uid://vwwg7xm1xksi" path="res://Root/Objects/selector.tscn" id="5_b5gtr"]
+[ext_resource type="AudioStream" uid="uid://cuoliicq5ywck" path="res://Sounds/Typing Notification.wav" id="7_b5gtr"]
+[ext_resource type="AudioStream" uid="uid://s3hee43xrrob" path="res://Sounds/Lock Door.wav" id="8_ymg86"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_th7xa")
@@ -246,17 +246,13 @@ flat = true
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card1"]
 position = Vector2(104, 83)
 
-[node name="TargetSelect" type="Sprite2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card1"]
+[node name="SelectTransparent" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card1" instance=ExtResource("4_ymg86")]
 visible = false
-position = Vector2(104, 86)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_b5gtr")
+position = Vector2(104, 83)
 
-[node name="Select" type="Sprite2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card1"]
+[node name="Select" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card1" instance=ExtResource("5_b5gtr")]
 visible = false
-position = Vector2(104, 86)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_ymg86")
+position = Vector2(104, 83)
 
 [node name="Tile" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card1" instance=ExtResource("4_b5gtr")]
 position = Vector2(104, 83)
@@ -269,17 +265,13 @@ flat = true
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card2"]
 position = Vector2(104, 83)
 
-[node name="TargetSelect" type="Sprite2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card2"]
+[node name="SelectTransparent" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card2" instance=ExtResource("4_ymg86")]
 visible = false
-position = Vector2(104, 86)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_b5gtr")
+position = Vector2(104, 83)
 
-[node name="Select" type="Sprite2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card2"]
+[node name="Select" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card2" instance=ExtResource("5_b5gtr")]
 visible = false
-position = Vector2(104, 86)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_ymg86")
+position = Vector2(104, 83)
 
 [node name="Tile" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card2" instance=ExtResource("4_b5gtr")]
 position = Vector2(104, 83)
@@ -292,17 +284,13 @@ flat = true
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card3"]
 position = Vector2(104, 83)
 
-[node name="TargetSelect" type="Sprite2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card3"]
+[node name="SelectTransparent" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card3" instance=ExtResource("4_ymg86")]
 visible = false
-position = Vector2(104, 86)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_b5gtr")
+position = Vector2(104, 83)
 
-[node name="Select" type="Sprite2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card3"]
+[node name="Select" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card3" instance=ExtResource("5_b5gtr")]
 visible = false
-position = Vector2(104, 86)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_ymg86")
+position = Vector2(104, 83)
 
 [node name="Tile" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card3" instance=ExtResource("4_b5gtr")]
 position = Vector2(104, 83)
@@ -315,17 +303,13 @@ flat = true
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card4"]
 position = Vector2(104, 83)
 
-[node name="TargetSelect" type="Sprite2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card4"]
+[node name="SelectTransparent" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card4" instance=ExtResource("4_ymg86")]
 visible = false
-position = Vector2(105, 86)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_b5gtr")
+position = Vector2(104, 83)
 
-[node name="TargetSelect2" type="Sprite2D" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card4"]
+[node name="Select" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card4" instance=ExtResource("5_b5gtr")]
 visible = false
-position = Vector2(105, 86)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_ymg86")
+position = Vector2(104, 83)
 
 [node name="Tile" parent="CanvasLayer/Control/Root/Middle/Player1Table/Player1Card4" instance=ExtResource("4_b5gtr")]
 position = Vector2(104, 83)
@@ -397,6 +381,10 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 20.0
 mouse_filter = 2
 
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/Control/Root/RightContainer/Right"]
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="LabelMargin" type="BoxContainer" parent="CanvasLayer/Control/Root/RightContainer/Right"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
@@ -411,19 +399,33 @@ size_flags_vertical = 1
 text = "Placsdcerrshodler"
 autowrap_mode = 2
 
-[node name="BoxContainer2" type="BoxContainer" parent="CanvasLayer/Control/Root/RightContainer/Right"]
+[node name="TurnCountLabel" type="Label" parent="CanvasLayer/Control/Root/RightContainer/Right"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Turncount"
+
+[node name="CenterButton" type="CenterContainer" parent="CanvasLayer/Control/Root/RightContainer/Right"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
-alignment = 1
 
-[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/RightContainer/Right/BoxContainer2"]
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/Control/Root/RightContainer/Right/CenterButton"]
+layout_mode = 2
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/Root/RightContainer/Right/BoxContainer2/Marker2D"]
-offset_left = 44.0
-offset_top = 45.0
-offset_right = 192.0
-offset_bottom = 186.0
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/Root/RightContainer/Right/CenterButton/BoxContainer"]
+
+[node name="EndTurnButton" type="Button" parent="CanvasLayer/Control/Root/RightContainer/Right/CenterButton/BoxContainer/Marker2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -74.0
+offset_top = -70.5
+offset_right = 74.0
+offset_bottom = 70.5
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 text = "END TURN"
 
@@ -579,27 +581,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="BoxContainer" type="VBoxContainer" parent="Pretty/Control/HorizontalLines/VBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="BoxContainer" type="BoxContainer" parent="Pretty/Control/HorizontalLines/VBoxContainer2/BoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 20.0
-mouse_filter = 2
-
-[node name="TextureRect" type="TextureRect" parent="Pretty/Control/HorizontalLines/VBoxContainer2/BoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-texture = ExtResource("3_50vke")
-
 [node name="BoxContainer2" type="BoxContainer" parent="Pretty/Control/HorizontalLines/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 1.5
+size_flags_stretch_ratio = 2.5
 mouse_filter = 2
 
 [node name="BoxContainer3" type="VBoxContainer" parent="Pretty/Control/HorizontalLines/VBoxContainer2"]
@@ -620,11 +605,11 @@ size_flags_stretch_ratio = 20.0
 mouse_filter = 2
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_dn23c")
+stream = ExtResource("7_b5gtr")
 volume_db = -15.0
 
 [node name="SelectSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_lsap4")
+stream = ExtResource("8_ymg86")
 volume_db = -15.0
 
 [connection signal="mouse_entered" from="CanvasLayer/Control/Root/Middle/Player2Hand/Player2Card1" to="." method="card_hover_enter" binds= [6]]
@@ -677,4 +662,4 @@ volume_db = -15.0
 [connection signal="mouse_entered" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand6" to="." method="card_hover_enter" binds= [5]]
 [connection signal="mouse_exited" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand6" to="." method="card_hover_exit"]
 [connection signal="pressed" from="CanvasLayer/Control/Root/Middle/Player1Hand/Player1Hand6" to="." method="card_selected" binds= [5]]
-[connection signal="pressed" from="CanvasLayer/Control/Root/RightContainer/Right/BoxContainer2/Marker2D/Button" to="." method="end_turn"]
+[connection signal="pressed" from="CanvasLayer/Control/Root/RightContainer/Right/CenterButton/BoxContainer/Marker2D/EndTurnButton" to="." method="end_turn"]
