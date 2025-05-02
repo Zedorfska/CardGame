@@ -49,19 +49,15 @@ var KeterIcon = preload("res://Sprites/SCPContainmentIcons/Keter.svg")
 var TestCard = preload("res://Cards/TestCard/test_card.tscn")
 var SCP049 = preload("res://Cards/049/049.tscn")
 var SCP049_2 = preload("res://Cards/049/049_2.tscn")
+var SCP173 = preload("res://Cards/173/173.tscn")
 
 var ListOfCards = [
 	TestCard,
 	SCP049,
 	SCP049,
 	SCP049,
-	SCP049,
-	SCP049,
-	TestCard,
-	TestCard,
-	TestCard,
-	TestCard,
-	TestCard,
+	SCP173,
+	SCP173,
 	TestCard,
 	TestCard
 ]
@@ -118,6 +114,15 @@ func _ready():
 	
 	tile_selected(0)	# TODO: BOTCH - necessary because shit breaks when not selected
 	print("ready")
+
+func get_amount_of_active_cards():
+	var Amount = 0
+	for i in 4:
+		if Table.get_child(1).get_child(i).get_child(0).get_child_count() != 0:
+			Amount += 1
+		if Table.get_child(2).get_child(i).get_child(0).get_child_count() != 0:
+			Amount += 1
+	return Amount
 
 func setup_deck():
 	for Card in range(ListOfCards.size()):
