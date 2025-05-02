@@ -13,7 +13,10 @@ var P1Mana
 var P2Mana
 var P1ManaBar
 var P2ManaBar
+var CardDisplay
+var ContainmentClassIcon
 var CardDescriptionLabel
+var CardNameLabel
 var TurnCountLabel
 var AbleToPlay
 
@@ -35,18 +38,25 @@ var RootNode
 var HoverSound
 var SelectSound
 
+var GameOverScene = preload("res://Root/Main/game_over.tscn")
+
 var ManaBarScene = preload("res://Root/Labels/mana_bar.tscn")
 
-var GameOverScene = preload("res://Root/Main/game_over.tscn")
+var SafeIcon = preload("res://Sprites/SCPContainmentIcons/Safe.svg")
+var EuclidIcon = preload("res://Sprites/SCPContainmentIcons/Euclid.svg")
+var KeterIcon = preload("res://Sprites/SCPContainmentIcons/Keter.svg")
+
 var TestCard = preload("res://Cards/TestCard/test_card.tscn")
+var SCP049 = preload("res://Cards/049/049.tscn")
+var SCP049_2 = preload("res://Cards/049/049_2.tscn")
 
 var ListOfCards = [
 	TestCard,
-	TestCard,
-	TestCard,
-	TestCard,
-	TestCard,
-	TestCard,
+	SCP049,
+	SCP049,
+	SCP049,
+	SCP049,
+	SCP049,
 	TestCard,
 	TestCard,
 	TestCard,
@@ -68,9 +78,12 @@ func _ready():
 	Turn = 0
 	AbleToPlay = true
 	
+	CardDisplay = $CanvasLayer/Control/Root/RightContainer/Right/HoverCardDisplay/CardDisplayMarker/Sprite2D
+	ContainmentClassIcon = $CanvasLayer/Control/Root/RightContainer/Right/HoverCardDisplay/ContainmentClassIcon
+	CardNameLabel = $CanvasLayer/Control/Root/RightContainer/Right/LabelMargin/CardNameLabel
 	CardDescriptionLabel = $CanvasLayer/Control/Root/RightContainer/Right/LabelMargin/CardDescription
 	CardDescriptionLabel.set_text("Hover over a card to see description")
-	TurnCountLabel = $CanvasLayer/Control/Root/RightContainer/Right/TurnCountLabel
+	TurnCountLabel = $CanvasLayer/Control/Root/RightContainer/Right/LabelMargin/TurnCountLabel
 	TurnCountLabel.set_text(str("Turn: ", Turn))
 	Table = $CanvasLayer/Control/Root/Middle
 	Player1Table = $CanvasLayer/Control/Root/Middle/Player1Table
@@ -105,9 +118,6 @@ func _ready():
 	
 	tile_selected(0)	# TODO: BOTCH - necessary because shit breaks when not selected
 	print("ready")
-
-func wait(TimeAmount):
-	await get_tree().create_timer(TimeAmount).timeout
 
 func setup_deck():
 	for Card in range(ListOfCards.size()):
@@ -149,31 +159,54 @@ func player2_play_random_card():
 		var tween = get_tree().create_tween()
 		tween.tween_property(RandomTile.get_child(0), "position", Vector2.ZERO, 0.1)
 
+func update_displayed_card(HoveredCard):
+	if HoveredCard == null:
+		CardNameLabel.set_text("")
+		CardDescriptionLabel.set_text("Hover over a card to see description")
+		CardDisplay.visible = false
+		ContainmentClassIcon.visible = false
+	else:
+		CardNameLabel.set_text(HoveredCard.SCPNumber)
+		
+		CardDescriptionLabel.set_text(HoveredCard.Description)
+		
+		CardDisplay.set_texture(HoveredCard.get_child(0).get_texture())
+		CardDisplay.visible = true
+		
+		match HoveredCard.ContainmentClass:
+			"Safe":
+				ContainmentClassIcon.set_texture(SafeIcon)
+			"Euclid":
+				ContainmentClassIcon.set_texture(EuclidIcon)
+			"Keter":
+				ContainmentClassIcon.set_texture(KeterIcon)
+		ContainmentClassIcon.visible = true
+
 func tile_hover_enter(TileNumber):
 	if TileNumber < 4:
 		Player1Table.get_child(TileNumber).get_child(1).visible = true
 		HoverSound.play()
 		if Player1Table.get_child(TileNumber).get_child(0).get_child_count() != 0:
-			CardDescriptionLabel.set_text(Player1Table.get_child(TileNumber).get_child(0).get_child(0).Description)
+			update_displayed_card(Player1Table.get_child(TileNumber).get_child(0).get_child(0))
 	else:
 		if Player2Table.get_child(TileNumber - 4).get_child(0).get_child_count() != 0:
-			CardDescriptionLabel.set_text(Player2Table.get_child(TileNumber - 4).get_child(0).get_child(0).Description)
+			update_displayed_card(Player2Table.get_child(TileNumber - 4).get_child(0).get_child(0))
 
 func tile_hover_exit(TileNumber):
 	if TileNumber < 4:
 		Player1Table.get_child(TileNumber).get_child(1).visible = false
-	CardDescriptionLabel.set_text("Hover over a card to see description")
+	update_displayed_card(null)
 
 func card_hover_enter(CardNumber):
 	if CardNumber < 6:
 		if Player1Hand.get_child(CardNumber).get_child(0).get_child_count() != 0:
-			CardDescriptionLabel.set_text(Player1Hand.get_child(CardNumber).get_child(0).get_child(0).Description)
+			update_displayed_card(Player1Hand.get_child(CardNumber).get_child(0).get_child(0))
 	else:
 		if Player2Hand.get_child(CardNumber - 6).get_child(0).get_child_count() != 0:
-			CardDescriptionLabel.set_text(Player2Hand.get_child(CardNumber - 6).get_child(0).get_child(0).Description)
+			update_displayed_card(Player2Hand.get_child(CardNumber - 6).get_child(0).get_child(0))
 
 func card_hover_exit():
-	CardDescriptionLabel.set_text("Hover over a card to see description")
+	update_displayed_card(null)
 
 func tile_selected(TileNumber):
 	if AbleToPlay == true:
@@ -186,6 +219,8 @@ func tile_selected(TileNumber):
 				SelectedTileSelector.visible = false
 		SelectedTile = Player1Table.get_child(TileNumber).get_child(0)
 		SelectSound.play()
+	else:
+		$DenySound.play()
 
 func card_selected(CardNumber):
 	if AbleToPlay == true:
@@ -282,7 +317,31 @@ func basic_common_attack(CardPosition, Damage, DamageType, Player, Card):
 		Table.get_child(Player).get_child(CardPosition).get_child(0).get_child(0).take_damage(Damage, DamageType)
 	else:
 		player_take_damage(Player, Damage)
-		print("Player ", Player, " takes ",  Damage,  " damage.")
+	var Offset = 1
+	if Player == 2:
+		Offset = -1
+	Card.position.y -= 50 * Offset
+	var tween = get_tree().create_tween()
+	tween.tween_property(Card, "position", Vector2.ZERO, 0.25)
+
+func basic_instakill_attack(CardPosition, Damage, DamageType, Player, Card):
+	if Table.get_child(Player).get_child(CardPosition).get_child(0).get_child_count() != 0:
+		Table.get_child(Player).get_child(CardPosition).get_child(0).get_child(0).take_damage(9999, DamageType)
+		if Card.SCPNumber == "049":
+			var ChildToGet = 0
+			if Player == 1:
+				ChildToGet = 1
+			for HandToBeDealtTo in 6:
+				if Table.get_child(ChildToGet).get_child(HandToBeDealtTo).get_child(0).get_child_count() != 0:
+					Table.get_child(ChildToGet).get_child(HandToBeDealtTo).get_child(0).get_child(0).add_child(SCP049_2.instantiate())
+					var TweenCard = Table.get_child(ChildToGet).get_child(HandToBeDealtTo).get_child(0).get_child(0).get_child(0)
+					TweenCard.position = Table.get_child(ChildToGet).get_child(HandToBeDealtTo).get_child(0).position
+					await get_tree().create_timer(0.5).timeout
+					var TweenCard049 = get_tree().create_tween()
+					TweenCard049.tween_property(TweenCard, "position", Vector2.ZERO, 0.25)
+					break
+	else:
+		player_take_damage(Player, Damage)
 	var Offset = 1
 	if Player == 2:
 		Offset = -1

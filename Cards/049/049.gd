@@ -9,16 +9,16 @@ var HealthLabel
 var DamageLabel
 var CostLabel
 
-var MaxHealth = 5
+var MaxHealth = 2
 var HealthAmount = MaxHealth
-var DamageAmount = 2
+var DamageAmount = 1
 var CostAmount = 1
-var DamageType = "Basic"
+var DamageType = "Instant"
 
-@onready var SCPNumber = "000"
-@onready var CardName = "TestCard"
-@onready var Description = "Yo"
-@onready var ContainmentClass = "Safe"
+@onready var SCPNumber = "049"
+@onready var CardName = "The Plague Doctor"
+@onready var Description = "This card instantly destroys the opposing card.\nWhenever this card destroys an opposing card:\n    One 049-2 is added to your hand."
+@onready var ContainmentClass = "Euclid"
 
 func _ready():
 	self.add_child(SCPNumberScene.instantiate())
@@ -38,11 +38,11 @@ func _ready():
 	CostLabel.update_label(CostAmount, ContainmentClass)
 
 func activate(RootNode, CardPosition, Player):
-	RootNode.basic_common_attack(CardPosition, DamageAmount, DamageType, Player, self)
+	RootNode.basic_instakill_attack(CardPosition, DamageAmount, DamageType, Player, self)
 
 func take_damage(Damage, _DamageType):
 	HealthAmount -= Damage
-	print("Card took ", Damage, " damage.")
+	print("Card \"", CardName, "\" took ", Damage, " damage.")
 	if HealthAmount <= 0:
 		print("Card destroyed!")
 		self.queue_free()

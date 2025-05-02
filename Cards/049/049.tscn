@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://df8pfptdv8m1i"]
+
+[ext_resource type="Script" uid="uid://bvi3yws5q8typ" path="res://Cards/049/049.gd" id="1_lw7r7"]
+[ext_resource type="Texture2D" uid="uid://ern5mgs8ryl6" path="res://Cards/049/SCP049.svg" id="2_crem7"]
+
+[node name="049" type="Node2D"]
+script = ExtResource("1_lw7r7")
+
+[node name="049Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_crem7")

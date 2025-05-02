@@ -9,16 +9,16 @@ var HealthLabel
 var DamageLabel
 var CostLabel
 
-var MaxHealth = 5
+var MaxHealth = 2
 var HealthAmount = MaxHealth
 var DamageAmount = 2
-var CostAmount = 1
+var CostAmount = 0
 var DamageType = "Basic"
 
-@onready var SCPNumber = "000"
-@onready var CardName = "TestCard"
-@onready var Description = "Yo"
-@onready var ContainmentClass = "Safe"
+@onready var SCPNumber = "049-2"
+@onready var CardName = "The Cured"
+@onready var Description = "A corpse reanimated by SCP-049."
+@onready var ContainmentClass = "Euclid"
 
 func _ready():
 	self.add_child(SCPNumberScene.instantiate())
@@ -42,7 +42,7 @@ func activate(RootNode, CardPosition, Player):
 
 func take_damage(Damage, _DamageType):
 	HealthAmount -= Damage
-	print("Card took ", Damage, " damage.")
+	print("Card \"", CardName, "\" took ", Damage, " damage.")
 	if HealthAmount <= 0:
 		print("Card destroyed!")
 		self.queue_free()

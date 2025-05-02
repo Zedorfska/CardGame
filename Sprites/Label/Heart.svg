@@ -2,14 +2,14 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="160"
-   height="160"
-   viewBox="0 0 42.333334 42.333333"
+   width="30"
+   height="30"
+   viewBox="0 0 7.9375002 7.9374998"
    version="1.1"
    id="svg1"
    xml:space="preserve"
    inkscape:version="1.4 (86a8ad7, 2024-10-11)"
-   sodipodi:docname="Tile.svg"
+   sodipodi:docname="Heart.svg"
    inkscape:export-filename="ManaBar.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
@@ -27,9 +27,9 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="true"
-     inkscape:zoom="4"
-     inkscape:cx="78.75"
-     inkscape:cy="63.375"
+     inkscape:zoom="22.627417"
+     inkscape:cx="14.407301"
+     inkscape:cy="13.236155"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="-8"
@@ -73,16 +73,8 @@
        width="6"
        height="6"
        x="0"
-       y="0" /></defs><g
-     inkscape:groupmode="layer"
-     id="layer1"
-     inkscape:label="a" /><path
-     style="display:none;fill:#303841;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill"
-     d="M 5.2916656,-2.6982168e-7 H 31.75 L 37.041664,5.2916661 V 42.333331 H 10.583333 L 5.2916656,37.041665 Z"
-     id="path2"
-     inkscape:label="BG"
-     sodipodi:nodetypes="ccccccc" /><path
+       y="0" /></defs><path
+     style="fill:#eeeeee;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill;opacity:0.154"
+     d="M 0,2.6458333 2.1166665,0 3.9687497,1.3229166 5.8208329,0 7.9374994,2.6458333 3.9687497,7.9374998 Z"
      id="path1"
-     style="fill:#3a4750;fill-opacity:1;stroke-width:2.64583;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill"
-     d="M 5.2916666,-2.6982168e-7 V 37.041667 l 5.2916664,5.291666 H 37.041667 V 5.2916664 L 31.75,-2.6982168e-7 Z M 7.9374995,2.6458332 H 30.427081 l 3.96875,3.9687498 V 39.687498 H 11.906249 l -3.9687495,-3.96875 z"
-     sodipodi:nodetypes="cccccccccccccc" /></svg>
+     sodipodi:nodetypes="ccccccc" /></svg>
