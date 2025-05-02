@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://5wniii50ecqj"]
+[gd_scene load_steps=4 format=3 uid="uid://5wniii50ecqj"]
 
+[ext_resource type="Texture2D" uid="uid://0epq3euk3org" path="res://Cards/Background.svg" id="1_kx10n"]
 [ext_resource type="Script" uid="uid://doikdduv71acb" path="res://Cards/049/049_2.gd" id="1_ly1v1"]
 [ext_resource type="Texture2D" uid="uid://b0mp8i3re1r4c" path="res://Cards/049/SCP049-2.svg" id="2_ts6te"]
 
-[node name="0492" type="Node2D"]
+[node name="0492" type="Sprite2D"]
+texture = ExtResource("1_kx10n")
 script = ExtResource("1_ly1v1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

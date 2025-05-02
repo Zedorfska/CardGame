@@ -1,17 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkrkmda7o52my"]
+[gd_scene load_steps=7 format=3 uid="uid://dkrkmda7o52my"]
 
 [ext_resource type="Script" uid="uid://l7kunx0qw4dc" path="res://Root/Labels/cost_label.gd" id="1_vijok"]
-[ext_resource type="FontFile" uid="uid://bon36khv48t4u" path="res://Fonts/Bauhaus Demi.otf" id="1_xxca4"]
+[ext_resource type="Texture2D" uid="uid://dtbqstticipa6" path="res://Sprites/CardAssets/CardManaDisplay/Mana1.png" id="2_xxca4"]
+[ext_resource type="Texture2D" uid="uid://dif7bc0ch0ipi" path="res://Sprites/CardAssets/CardManaDisplay/Mana2.png" id="3_hfrx0"]
+[ext_resource type="Texture2D" uid="uid://d2h46oux5feuh" path="res://Sprites/CardAssets/CardManaDisplay/Mana3.png" id="4_uhq1y"]
+[ext_resource type="Texture2D" uid="uid://bbprll5g43gpw" path="res://Sprites/CardAssets/CardManaDisplay/Mana4.png" id="5_gq2ho"]
+[ext_resource type="Texture2D" uid="uid://etq8kitsh0iq" path="res://Sprites/CardAssets/CardManaDisplay/Mana5.png" id="6_s45pq"]
 
-[node name="CostLabel" type="Label"]
-offset_left = -8.0
-offset_top = 56.0
-offset_right = 8.0
-offset_bottom = 80.0
-theme_override_colors/font_color = Color(0.933333, 0.933333, 0.933333, 1)
-theme_override_fonts/font = ExtResource("1_xxca4")
-theme_override_font_sizes/font_size = 24
-text = "5"
-horizontal_alignment = 1
-vertical_alignment = 2
+[node name="CostLabel" type="Node2D"]
 script = ExtResource("1_vijok")
+
+[node name="Mana1" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_xxca4")
+
+[node name="Mana2" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("3_hfrx0")
+
+[node name="Mana3" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("4_uhq1y")
+
+[node name="Mana4" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("5_gq2ho")
+
+[node name="Mana5" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("6_s45pq")

@@ -589,26 +589,27 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="BoxContainer2" type="VBoxContainer" parent="Pretty/Control/HorizontalLines/BoxContainer"]
+[node name="LINES" type="VBoxContainer" parent="Pretty/Control/HorizontalLines/BoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.25
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="Pretty/Control/HorizontalLines/BoxContainer/BoxContainer2"]
+[node name="TextureRect" type="TextureRect" parent="Pretty/Control/HorizontalLines/BoxContainer/LINES"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.3
 mouse_filter = 2
 texture = ExtResource("3_50vke")
 
-[node name="BoxContainer" type="BoxContainer" parent="Pretty/Control/HorizontalLines/BoxContainer/BoxContainer2"]
+[node name="BoxContainer" type="BoxContainer" parent="Pretty/Control/HorizontalLines/BoxContainer/LINES"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 40.0
 mouse_filter = 2
 
-[node name="TextureRect2" type="TextureRect" parent="Pretty/Control/HorizontalLines/BoxContainer/BoxContainer2"]
+[node name="TextureRect2" type="TextureRect" parent="Pretty/Control/HorizontalLines/BoxContainer/LINES"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.3

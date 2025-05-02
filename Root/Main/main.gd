@@ -313,38 +313,43 @@ func fill_mana(Player, ManaGain):
 # Types of attacks cards can do
 # Attacks card opposite of it, else the player.
 func basic_common_attack(CardPosition, Damage, DamageType, Player, Card):
-	if Table.get_child(Player).get_child(CardPosition).get_child(0).get_child_count() != 0:
-		Table.get_child(Player).get_child(CardPosition).get_child(0).get_child(0).take_damage(Damage, DamageType)
-	else:
-		player_take_damage(Player, Damage)
 	var Offset = 1
 	if Player == 2:
 		Offset = -1
 	Card.position.y -= 50 * Offset
 	var tween = get_tree().create_tween()
 	tween.tween_property(Card, "position", Vector2.ZERO, 0.25)
+	
+	if Table.get_child(Player).get_child(CardPosition).get_child(0).get_child_count() != 0:
+		Table.get_child(Player).get_child(CardPosition).get_child(0).get_child(0).take_damage(Damage, DamageType)
+	else:
+		player_take_damage(Player, Damage)
 
 func basic_instakill_attack(CardPosition, Damage, DamageType, Player, Card):
-	if Table.get_child(Player).get_child(CardPosition).get_child(0).get_child_count() != 0:
-		Table.get_child(Player).get_child(CardPosition).get_child(0).get_child(0).take_damage(9999, DamageType)
+	var Offset = 1
+	if Player == 2:
+		Offset = -1
+	Card.position.y -= 50 * Offset
+	var tween = get_tree().create_tween()
+	tween.tween_property(Card, "position", Vector2.ZERO, 0.25)
+	
+	var ToGetEnemy = 1
+	if Player == 2:
+		ToGetEnemy = 2
+	if Table.get_child(ToGetEnemy).get_child(CardPosition).get_child(0).get_child_count() != 0:
+		Table.get_child(ToGetEnemy).get_child(CardPosition).get_child(0).get_child(0).take_damage(9999, DamageType)
 		if Card.SCPNumber == "049":
 			var ChildToGet = 0
 			if Player == 1:
-				ChildToGet = 1
+				ChildToGet = 3
 			for HandToBeDealtTo in 6:
-				if Table.get_child(ChildToGet).get_child(HandToBeDealtTo).get_child(0).get_child_count() != 0:
-					Table.get_child(ChildToGet).get_child(HandToBeDealtTo).get_child(0).get_child(0).add_child(SCP049_2.instantiate())
-					var TweenCard = Table.get_child(ChildToGet).get_child(HandToBeDealtTo).get_child(0).get_child(0).get_child(0)
-					TweenCard.position = Table.get_child(ChildToGet).get_child(HandToBeDealtTo).get_child(0).position
+				if Table.get_child(ChildToGet).get_child(HandToBeDealtTo).get_child(0).get_child_count() == 0:
+					Table.get_child(ChildToGet).get_child(HandToBeDealtTo).get_child(0).add_child(SCP049_2.instantiate())
+					var TweenCard = Table.get_child(ChildToGet).get_child(HandToBeDealtTo).get_child(0).get_child(0)
+					TweenCard.global_position = Table.get_child(ToGetEnemy).get_child(CardPosition).get_child(0).global_position
 					await get_tree().create_timer(0.5).timeout
 					var TweenCard049 = get_tree().create_tween()
 					TweenCard049.tween_property(TweenCard, "position", Vector2.ZERO, 0.25)
 					break
 	else:
 		player_take_damage(Player, Damage)
-	var Offset = 1
-	if Player == 2:
-		Offset = -1
-	Card.position.y -= 50 * Offset
-	var tween = get_tree().create_tween()
-	tween.tween_property(Card, "position", Vector2.ZERO, 0.25)

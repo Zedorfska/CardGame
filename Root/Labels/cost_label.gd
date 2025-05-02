@@ -1,10 +1,8 @@
-extends Label
+extends Node2D
 
-func update_label(Cost, SCPClass):
-	self.set_text(str(Cost))
-	if SCPClass == "Safe":
-		self.set("theme_override_colors/font_color", get_tree().root.get_child(0).ColorSafe)
-	elif SCPClass == "Euclid":
-		self.set("theme_override_colors/font_color", get_tree().root.get_child(0).ColorEuclid)
-	elif SCPClass == "Keter":
-		self.set("theme_override_colors/font_color", get_tree().root.get_child(0).ColorKeter)
+func update_label(Cost):
+	for i in 5:
+		if i == Cost - 1:
+			self.get_child(i).visible = true
+		else:
+			self.get_child(i).visible = false
