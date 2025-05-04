@@ -302,6 +302,8 @@ func end_turn():
 		Turn += 1
 		TurnCountLabel.set_text(str("Turn: ", Turn))
 		AbleToPlay = true
+	else:
+		$DenySound.play()
 
 func fill_mana(Player, ManaGain):
 	if Player == 1 or 0:
