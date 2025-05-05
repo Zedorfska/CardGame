@@ -1,4 +1,4 @@
-extends Node2D
+extends "res://Cards/card_functions.gd"
 
 var SCPNumberScene = preload("res://Root/Labels/number_label.tscn")
 var HealthLabelScene = preload("res://Root/Labels/health_label.tscn")
@@ -14,6 +14,7 @@ var HealthAmount = MaxHealth
 var DamageAmount = 7
 var CostAmount = 3
 var DamageType = "Basic"
+var Playtype = "Unit"
 
 var TurnPlayedOn
 var HighestAmountOfCards
@@ -23,17 +24,19 @@ var HighestAmountOfCards
 @onready var Description = "SCP-173 can only move while unobserved:\nThis card takes longer to attack the more cards are on the table."
 @onready var ContainmentClass = "Euclid"
 
+@onready var StatusEffects = $Effects
+
 func _ready():
 	self.add_child(DamageLabelScene.instantiate())
-	DamageLabel = self.get_child(1)
+	DamageLabel = self.get_child(2)
 	DamageLabel.update_label(DamageAmount, ContainmentClass)
 	
 	self.add_child(HealthLabelScene.instantiate())
-	HealthLabel = self.get_child(2)
+	HealthLabel = self.get_child(3)
 	HealthLabel.update_label(HealthAmount, ContainmentClass)
 	
 	self.add_child(CostLabelScene.instantiate())
-	CostLabel = self.get_child(3)
+	CostLabel = self.get_child(4)
 	CostLabel.update_label(CostAmount)
 
 func activate(RootNode, CardPosition, Player):
@@ -47,22 +50,9 @@ func activate(RootNode, CardPosition, Player):
 		RootNode.basic_common_attack(CardPosition, DamageAmount, DamageType, Player, self)
 		TurnPlayedOn = null
 	else:
-		var Position = Vector2.ZERO
-		Position.x -= 10
-		var tween1 = get_tree().create_tween()
-		tween1.tween_property(self, "position", Position, 0.1)
-		await get_tree().create_timer(0.1).timeout
-		Position.x += 20
-		var tween2 = get_tree().create_tween()
-		tween2.tween_property(self, "position", Position, 0.1)
-		await get_tree().create_timer(0.1).timeout
-		Position.x -= 20
-		var tween3 = get_tree().create_tween()
-		tween3.tween_property(self, "position", Position, 0.1)
-		await get_tree().create_timer(0.1).timeout
-		Position.x += 10
-		var tween4 = get_tree().create_tween()
-		tween4.tween_property(self, "position", Position, 0.1)
+		cant_activate_animation(self)
+	await get_tree().create_timer(AsyncActivateToTriggerStatusEffects).timeout
+	trigger_status_effects(self)
 
 func take_damage(Damage, _DamageType):
 	HealthAmount -= Damage

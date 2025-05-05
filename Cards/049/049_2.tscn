@@ -10,3 +10,5 @@ script = ExtResource("1_ly1v1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_ts6te")
+
+[node name="Effects" type="Node2D" parent="."]
