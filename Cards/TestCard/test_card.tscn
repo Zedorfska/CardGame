@@ -11,3 +11,5 @@ script = ExtResource("1_f8du8")
 [node name="TestCardSprite" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("2_f8du8")
+
+[node name="Effects" type="Node2D" parent="."]

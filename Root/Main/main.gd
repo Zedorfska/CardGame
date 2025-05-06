@@ -42,14 +42,16 @@ var GameOverScene = preload("res://Root/Main/game_over.tscn")
 
 var ManaBarScene = preload("res://Root/Labels/mana_bar.tscn")
 
+const CardFunctions = preload("res://Cards/card_functions.gd")
+
 var SafeIcon = preload("res://Sprites/SCPContainmentIcons/Safe.svg")
 var EuclidIcon = preload("res://Sprites/SCPContainmentIcons/Euclid.svg")
 var KeterIcon = preload("res://Sprites/SCPContainmentIcons/Keter.svg")
 
 var TestCard = preload("res://Cards/TestCard/test_card.tscn")
-var SCP049 = preload("res://Cards/049/049.tscn")
-var SCP049_2 = preload("res://Cards/049/049_2.tscn")
+var SCP049 = preload("res://Cards/049/049/049.tscn")
 var SCP173 = preload("res://Cards/173/173.tscn")
+var SCP205 = preload("res://Cards/205/205/205.tscn")
 
 var ListOfCards = [
 	TestCard,
@@ -58,8 +60,8 @@ var ListOfCards = [
 	SCP049,
 	SCP173,
 	SCP173,
-	TestCard,
-	TestCard
+	SCP173,
+	SCP205
 ]
 
 func _ready():
@@ -81,17 +83,17 @@ func _ready():
 	CardDescriptionLabel.set_text("Hover over a card to see description")
 	TurnCountLabel = $CanvasLayer/Control/Root/RightContainer/Right/LabelMargin/TurnCountLabel
 	TurnCountLabel.set_text(str("Turn: ", Turn))
-	Table = $CanvasLayer/Control/Root/Middle
-	Player1Table = $CanvasLayer/Control/Root/Middle/Player1Table
-	Player2Table = $CanvasLayer/Control/Root/Middle/Player2Table
-	Player1Hand = $CanvasLayer/Control/Root/Middle/Player1Hand
-	Player2Hand = $CanvasLayer/Control/Root/Middle/Player2Hand
+	Table = $CanvasLayer/Control/Root/Table
+	Player1Table = $CanvasLayer/Control/Root/Table/Player1Table
+	Player2Table = $CanvasLayer/Control/Root/Table/Player2Table
+	Player1Hand = $CanvasLayer/Control/Root/Table/Player1Hand
+	Player2Hand = $CanvasLayer/Control/Root/Table/Player2Hand
 	
 	Stats = $CanvasLayer/Control/Root/StatsContainer/Stats
 	Name = self.get_parent().Name
 	Stats.get_child(2).get_child(0).set_text(Name)
 	
-	SelectedTile = $CanvasLayer/Control/Root/Middle/Player1Table/Player1Card1/Marker2D
+	SelectedTile = $CanvasLayer/Control/Root/Table/Player1Table/Player1Card1/Marker2D
 	
 	HoverSound = $HoverSound
 	SelectSound = $SelectSound
@@ -102,6 +104,8 @@ func _ready():
 	P2ManaBar = Stats.get_child(0).get_child(2).get_child(0)
 	P1ManaBar.update_label(P1Mana)
 	P2ManaBar.update_label(P2Mana)
+	
+	CardFunctions.send_main_node(self)
 	
 	update_player_health()
 	setup_deck()			# fills the deck!
@@ -136,7 +140,7 @@ func deal_cards_to_player(Player, Amount):
 		for HandToBeDealtTo in 6:
 			if Table.get_child(ChildToGet).get_child(HandToBeDealtTo).get_child(0).get_child_count() == 0:
 				if Deck.get_child_count() != 0:
-					TopCardInDeck = Deck.get_child(0)
+					TopCardInDeck = Deck.get_child(-1)
 					TopCardInDeck.reparent(Table.get_child(ChildToGet).get_child(HandToBeDealtTo).get_child(0), true)
 					var tween = get_tree().create_tween()
 					tween.tween_property(TopCardInDeck, "position", Vector2.ZERO, 0.1)
@@ -262,8 +266,8 @@ func end_turn():
 		for CardPosition in 4:			# Player 1 cards activate in order left to right
 			if Player1Table.get_child(CardPosition).get_child(0).get_child_count() != 0:
 				SelectedCard = Player1Table.get_child(CardPosition).get_child(0).get_child(0)
-				print("Card ", CardPosition + 1, " of P1 activates")
-				SelectedCard.activate(RootNode, CardPosition, 1)
+				#print("Card ", CardPosition + 1, " of P1 activates")
+				SelectedCard.activate(CardPosition, 1)
 				await get_tree().create_timer(0.5).timeout
 	
 		fill_mana(2, ManaGainAmount)	# Player 2 gets their mana and cards
@@ -283,7 +287,7 @@ func end_turn():
 		for CardPosition in 4:			# Player 2 cards activate
 			if Player2Table.get_child(CardPosition).get_child(0).get_child_count() != 0:
 				SelectedCard = Player2Table.get_child(CardPosition).get_child(0).get_child(0)
-				SelectedCard.activate(RootNode, CardPosition, 2)
+				SelectedCard.activate(CardPosition, 2)
 				await get_tree().create_timer(0.5).timeout
 	
 		match Turn:						# After X turns, start giving one more card
@@ -316,47 +320,3 @@ func fill_mana(Player, ManaGain):
 		if P2Mana > 5:
 			P2Mana = 5
 		P2ManaBar.update_label(P2Mana)
-
-# Types of attacks cards can do
-# Attacks card opposite of it, else the player.
-func basic_common_attack(CardPosition, Damage, DamageType, Player, Card):
-	var Offset = 1
-	if Player == 2:
-		Offset = -1
-	Card.position.y -= 50 * Offset
-	var tween = get_tree().create_tween()
-	tween.tween_property(Card, "position", Vector2.ZERO, 0.25)
-	
-	if Table.get_child(Player).get_child(CardPosition).get_child(0).get_child_count() != 0:
-		Table.get_child(Player).get_child(CardPosition).get_child(0).get_child(0).take_damage(Damage, DamageType)
-	else:
-		player_take_damage(Player, Damage)
-
-func basic_instakill_attack(CardPosition, Damage, DamageType, Player, Card):
-	var Offset = 1
-	if Player == 2:
-		Offset = -1
-	Card.position.y -= 50 * Offset
-	var tween = get_tree().create_tween()
-	tween.tween_property(Card, "position", Vector2.ZERO, 0.25)
-	
-	var ToGetEnemy = 1
-	if Player == 2:
-		ToGetEnemy = 2
-	if Table.get_child(ToGetEnemy).get_child(CardPosition).get_child(0).get_child_count() != 0:
-		Table.get_child(ToGetEnemy).get_child(CardPosition).get_child(0).get_child(0).take_damage(9999, DamageType)
-		if Card.SCPNumber == "049":
-			var ChildToGet = 0
-			if Player == 1:
-				ChildToGet = 3
-			for HandToBeDealtTo in 6:
-				if Table.get_child(ChildToGet).get_child(HandToBeDealtTo).get_child(0).get_child_count() == 0:
-					Table.get_child(ChildToGet).get_child(HandToBeDealtTo).get_child(0).add_child(SCP049_2.instantiate())
-					var TweenCard = Table.get_child(ChildToGet).get_child(HandToBeDealtTo).get_child(0).get_child(0)
-					TweenCard.global_position = Table.get_child(ToGetEnemy).get_child(CardPosition).get_child(0).global_position
-					await get_tree().create_timer(0.5).timeout
-					var TweenCard049 = get_tree().create_tween()
-					TweenCard049.tween_property(TweenCard, "position", Vector2.ZERO, 0.25)
-					break
-	else:
-		player_take_damage(Player, Damage)

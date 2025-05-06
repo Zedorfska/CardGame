@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://dah6w3kthhr47"]
+
+[ext_resource type="Texture2D" uid="uid://0epq3euk3org" path="res://Cards/Background.svg" id="1_7vjn2"]
+[ext_resource type="Script" uid="uid://dt6kalo2q2leo" path="res://Cards/205/205-1/205_1.gd" id="2_kq7jh"]
+[ext_resource type="Texture2D" uid="uid://cm1h6xtrtiir8" path="res://Cards/205/205-1/205_1.svg" id="3_3w7kh"]
+[ext_resource type="Texture2D" uid="uid://c83ht6l2l21l3" path="res://Cards/205/205-1/205-1Glow.png" id="4_kq7jh"]
+
+[node name="205_1" type="Sprite2D"]
+texture = ExtResource("1_7vjn2")
+script = ExtResource("2_kq7jh")
+
+[node name="205_1Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_3w7kh")
+
+[node name="205_1Glow" type="Sprite2D" parent="205_1Sprite"]
+visible = false
+texture = ExtResource("4_kq7jh")
+
+[node name="Effects" type="Node2D" parent="."]

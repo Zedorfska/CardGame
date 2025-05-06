@@ -1,6 +1,34 @@
 extends Node
 
+var ChildToGet
+static var MainNode
+static var Table
+var TweenNode
+
+var SCPNumberScene = preload("res://Root/Labels/number_label.tscn")
+var HealthLabelScene = preload("res://Root/Labels/health_label.tscn")
+var DamageLabelScene = preload("res://Root/Labels/damage_label.tscn")
+var CostLabelScene = preload("res://Root/Labels/cost_label.tscn")
+@onready var RootNode = get_tree().root.get_child(0)
+
+var SCPNumberLabel
+var HealthLabel
+var DamageLabel
+var CostLabel
+
 var AsyncActivateToTriggerStatusEffects = 0.75
+
+static func send_main_node(GotMainNode):
+	MainNode = GotMainNode
+	Table = MainNode.get_child(0).get_child(0).get_child(1).get_child(1)
+
+func attack_animation(Self, Player):
+	var Offset = 1
+	if Player == 2:
+		Offset = -1
+	Self.position.y -= 50 * Offset
+	var tween = get_tree().create_tween()
+	tween.tween_property(Self, "position", Vector2.ZERO, 0.25)
 
 func cant_activate_animation(Self):
 	var Position = Vector2.ZERO
@@ -20,7 +48,59 @@ func cant_activate_animation(Self):
 	var tween4 = get_tree().create_tween()
 	tween4.tween_property(Self, "position", Position, 0.1)
 
+func evaded_attack_animation(Self):
+	var tween1 = get_tree().create_tween()
+	tween1.tween_property(Self, "modulate:a", 0.5, 0.25)
+	await get_tree().create_timer(0.25).timeout
+	var tween2 = get_tree().create_tween()
+	tween2.tween_property(Self, "modulate:a", 1, 0.25)
+
+func glow_animation(Self):
+	TweenNode = Self.get_child(0).get_child(0)
+	TweenNode.modulate.a = 0
+	TweenNode.visible = true
+	var TweenNodeModAlpha1 = get_tree().create_tween()
+	TweenNodeModAlpha1.tween_property(TweenNode, "modulate:a", 1, 0.5)
+	await get_tree().create_timer(0.75).timeout
+	var TweenNodeModAlpha2 = get_tree().create_tween()
+	TweenNodeModAlpha2.tween_property(TweenNode, "modulate:a", 0, 0.5)
+	await get_tree().create_timer(0.75).timeout
+	TweenNode.visible = false
+
 func trigger_status_effects(Self):
 	if Self.StatusEffects.get_child_count() != 0:
 		for i in range(Self.StatusEffects.get_child_count()):
 			Self.StatusEffects.get_child(i).activate()
+
+func add_label(Self, LabelToAdd, Order):
+	match LabelToAdd:
+		"Damage":
+			Self.add_child(DamageLabelScene.instantiate())
+			DamageLabel = Self.get_child(Order + 2)
+			DamageLabel.update_label(Self.DamageAmount, Self.ContainmentClass)
+		"Health":
+			Self.add_child(HealthLabelScene.instantiate())
+			HealthLabel = Self.get_child(Order + 2)
+			HealthLabel.update_label(Self.HealthAmount, Self.ContainmentClass)
+		"Cost":
+			Self.add_child(CostLabelScene.instantiate())
+			CostLabel = Self.get_child(Order + 2)
+			CostLabel.update_label(Self.CostAmount)
+
+func take_damage_basic(Self, Damage, DamageType):
+	if DamageType == "Instakill":
+		Self.destroyed()
+		Self.queue_free()
+	else:
+		Self.HealthAmount -= Damage
+		if Self.HealthAmount <= 0:
+			Self.queue_free()
+	Self.HealthLabel.update_label(Self.HealthAmount, Self.ContainmentClass)
+
+func basic_common_attack(CardPosition, Damage, DamageType, Player, Card):
+	attack_animation(Card, Player)
+	
+	if Table.get_child(Player).get_child(CardPosition).get_child(0).get_child_count() != 0:
+		Table.get_child(Player).get_child(CardPosition).get_child(0).get_child(0).take_damage(Damage, DamageType)
+	else:
+		MainNode.player_take_damage(Player, Damage)

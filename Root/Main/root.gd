@@ -17,3 +17,6 @@ func go_to_scene(Scene):
 	for i in self.get_child_count():
 		self.get_child(0).queue_free()
 	self.add_child(Scene.instantiate())
+
+func pass_table():
+	pass

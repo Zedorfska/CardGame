@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bo74j3lwt6rs1"
-path="res://.godot/imported/SCP173.svg-3b2555e87a9e6f53779e3b2e2d782546.ctex"
+uid="uid://c83ht6l2l21l3"
+path="res://.godot/imported/205-1Glow.png-cf56c0874adcd0e02c5d5b7f56fe0e2a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Cards/173/SCP173.svg"
-dest_files=["res://.godot/imported/SCP173.svg-3b2555e87a9e6f53779e3b2e2d782546.ctex"]
+source_file="res://Cards/205/205-1/205-1Glow.png"
+dest_files=["res://.godot/imported/205-1Glow.png-cf56c0874adcd0e02c5d5b7f56fe0e2a.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
