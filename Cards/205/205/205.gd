@@ -36,15 +36,15 @@ func activate(CardPosition, Player):
 	if CardPosition != 0 and Table.get_child(ChildToGet).get_child(CardPosition - 1).get_child(0).get_child_count() == 0:
 		Table.get_child(ChildToGet).get_child(CardPosition - 1).get_child(0).add_child(SCP205_1.instantiate())
 		TweenCard = Table.get_child(ChildToGet).get_child(CardPosition - 1).get_child(0).get_child(0)
-		TweenCard.global_position = self.global_position
+		TweenCard.modulate.a = 0
 		var TweenCard205Move = get_tree().create_tween()
-		TweenCard205Move.tween_property(TweenCard, "position", Vector2.ZERO, 0.25)
+		TweenCard205Move.tween_property(TweenCard, "modulate:a", 1, 0.25)
 	if CardPosition != 3 and Table.get_child(ChildToGet).get_child(CardPosition + 1).get_child(0).get_child_count() == 0:
 		Table.get_child(ChildToGet).get_child(CardPosition + 1).get_child(0).add_child(SCP205_1.instantiate())
 		TweenCard = Table.get_child(ChildToGet).get_child(CardPosition + 1).get_child(0).get_child(0)
-		TweenCard.global_position = self.global_position
+		TweenCard.modulate.a = 0
 		var TweenCard205Move = get_tree().create_tween()
-		TweenCard205Move.tween_property(TweenCard, "position", Vector2.ZERO, 0.25)
+		TweenCard205Move.tween_property(TweenCard, "modulate:a", 1, 0.25)
 		Table.get_child(ChildToGet).get_child(CardPosition + 1).get_child(0).get_child(0).SpawnDelayCanAttack = false
 	
 	await get_tree().create_timer(AsyncActivateToTriggerStatusEffects).timeout

@@ -37,7 +37,7 @@ func fade_out():
 	await get_tree().create_timer(1.1).timeout
 	self.destroy()
 
-func take_damage(_Damage, _DamageType):
+func take_damage(_Damage, _DamageTakenType):
 	evaded_attack_animation(self)
 	pass
 
