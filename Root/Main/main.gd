@@ -240,8 +240,14 @@ func card_selected(CardNumber):
 				SelectedCard.get_child(0).reparent(SelectedTile, true)
 				var tween = get_tree().create_tween()
 				tween.tween_property(SelectedTile.get_child(0), "position", Vector2.ZERO, 0.1)
+				
 				AbleToPlay = false
 				await get_tree().create_timer(0.1).timeout
+				
+				for TestedTile in 4:
+					if SelectedTile == Table.get_child(2).get_child(TestedTile).get_child(0):
+						SelectedTile.get_child(0).played(TestedTile, 1)
+				
 				P1ManaBar.update_label(P1Mana)
 				AbleToPlay = true
 

@@ -1,5 +1,8 @@
 extends Node
 
+var SelfPosition
+var SelfOwner
+
 var ChildToGet
 static var MainNode
 static var Table
@@ -87,14 +90,20 @@ func add_label(Self, LabelToAdd, Order):
 			CostLabel = Self.get_child(Order + 2)
 			CostLabel.update_label(Self.CostAmount)
 
+func update_self_position(GotPosition):
+	SelfPosition = GotPosition
+
+func update_self_owner(GotOwner):
+	SelfOwner = GotOwner
+
 func take_damage_basic(Self, Damage, DamageType):
-	if DamageType == "Instakill":
-		Self.destroyed()
-		Self.queue_free()
+	print("Damage Type: ", DamageType)
+	if DamageType == "InstaKill":
+		Self.destroy()
 	else:
 		Self.HealthAmount -= Damage
 		if Self.HealthAmount <= 0:
-			Self.queue_free()
+			Self.destroy()
 	Self.HealthLabel.update_label(Self.HealthAmount, Self.ContainmentClass)
 
 func basic_common_attack(CardPosition, Damage, DamageType, Player, Card):

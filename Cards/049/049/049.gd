@@ -9,7 +9,7 @@ var MaxHealth = 2
 var HealthAmount = MaxHealth
 var DamageAmount = 1
 var CostAmount = 2
-var DamageType = "Instant"
+var DamageType = "InstaKill"
 var Playtype = "Unit"
 
 var SCPNumber = "049"
@@ -24,13 +24,17 @@ func _ready():
 	add_label(self, "Health", 1)
 	add_label(self, "Cost", 2)
 
+func played(GotPosition, GotOwner):
+	update_self_position(GotPosition)
+	update_self_owner(GotOwner)
+
 func activate(CardPosition, Player):
 	if Table.get_child(Player).get_child(CardPosition).get_child(0).get_child_count() != 0:
 		EnemyExistsPreAttack = true
 	else:
 		EnemyExistsPreAttack = false
 	
-	await basic_common_attack(CardPosition, DamageAmount, "Instakill", Player, self)
+	await basic_common_attack(CardPosition, DamageAmount, DamageType, Player, self)
 	await get_tree().create_timer(0.1).timeout
 	
 	if Table.get_child(Player).get_child(CardPosition).get_child(0).get_child_count() == 0:
@@ -59,8 +63,8 @@ func activate(CardPosition, Player):
 	await get_tree().create_timer(AsyncActivateToTriggerStatusEffects).timeout
 	trigger_status_effects(self)
 
-func take_damage(Damage, _DamageType):
-	take_damage_basic(self, Damage, _DamageType)
+func take_damage(Damage, DamageTakenType):
+	take_damage_basic(self, Damage, DamageTakenType)
 
-func destroyed():
-	pass
+func destroy():
+	self.queue_free()

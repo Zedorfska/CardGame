@@ -22,6 +22,10 @@ func _ready():
 	add_label(self, "Health", 0)
 	add_label(self, "Cost", 1)
 
+func played(GotPosition, GotOwner):
+	update_self_position(GotPosition)
+	update_self_owner(GotOwner)
+
 func activate(CardPosition, Player):
 	glow_animation(self)
 	
@@ -46,8 +50,18 @@ func activate(CardPosition, Player):
 	await get_tree().create_timer(AsyncActivateToTriggerStatusEffects).timeout
 	trigger_status_effects(self)
 
-func take_damage(Damage, _DamageType):
-	take_damage_basic(self, Damage, _DamageType)
+func take_damage(Damage, DamageTakenType):
+	take_damage_basic(self, Damage, DamageTakenType)
 
-func destroyed():
-	pass
+func destroy():
+	print("205 destroyed")
+	ChildToGet = 1
+	if SelfOwner == 1:
+		ChildToGet = 2
+	if SelfPosition != 0 and Table.get_child(ChildToGet).get_child(SelfPosition - 1).get_child(0).get_child_count() != 0:
+		if "205_1" in str(Table.get_child(ChildToGet).get_child(SelfPosition - 1).get_child(0).get_child(0)):
+			Table.get_child(ChildToGet).get_child(SelfPosition - 1).get_child(0).get_child(0).fade_out()
+	if SelfPosition != 3 and Table.get_child(ChildToGet).get_child(SelfPosition + 1).get_child(0).get_child_count() != 0:
+		if "205_1" in str(Table.get_child(ChildToGet).get_child(SelfPosition + 1).get_child(0).get_child(0)):
+			Table.get_child(ChildToGet).get_child(SelfPosition + 1).get_child(0).get_child(0).fade_out()
+	self.queue_free()
