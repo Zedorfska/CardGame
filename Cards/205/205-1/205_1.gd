@@ -17,7 +17,7 @@ var ContainmentClass = "Euclid"
 @onready var StatusEffects = $Effects
 
 func _ready():
-	add_label(self, "Damage", 0)
+	add_label(self, "Damage")
 
 func played(GotPosition, GotOwner):
 	update_self_position(GotPosition)

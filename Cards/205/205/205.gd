@@ -12,15 +12,15 @@ var DamageType: String = "Basic"
 var Playtype: String = "Unit"
 
 var SCPNumber: String = "205"
-var CardName: String = "The Shadow Lamps"
-var Description: String = "Anomalous floodlight that summons two living shadows next to it."
-var ContainmentClass: String = "Euclid"
+var CardName: String = "ThelfhhLamps"
+var Description: String = "Anljrfvb it."
+var ContainmentClass: String = "Safe"
 
 @onready var StatusEffects = $Effects
 
 func _ready():
-	add_label(self, "Health", 0)
-	add_label(self, "Cost", 1)
+	add_label(self, "Health")
+	add_label(self, "Cost")
 
 func played(GotPosition, GotOwner):
 	update_self_position(GotPosition)

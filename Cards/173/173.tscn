@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://eghe4sc3nqdl"]
+[gd_scene load_steps=5 format=3 uid="uid://eghe4sc3nqdl"]
 
 [ext_resource type="Texture2D" uid="uid://0epq3euk3org" path="res://Cards/Background.svg" id="1_s3ifx"]
 [ext_resource type="Texture2D" uid="uid://bo74j3lwt6rs1" path="res://Cards/173/173.svg" id="2_k58pr"]
 [ext_resource type="Script" uid="uid://8eudybs6tnsh" path="res://Cards/173/173.gd" id="2_xntd4"]
+[ext_resource type="FontFile" uid="uid://bon36khv48t4u" path="res://Fonts/Bauhaus Demi.otf" id="4_xntd4"]
 
 [node name="173" type="Sprite2D"]
 texture = ExtResource("1_s3ifx")
@@ -12,3 +13,19 @@ script = ExtResource("2_xntd4")
 texture = ExtResource("2_k58pr")
 
 [node name="Effects" type="Node2D" parent="."]
+
+[node name="TurnsToAttackLabel" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.0
+offset_top = -144.0
+offset_right = -8.0
+offset_bottom = 16.0
+theme_override_fonts/font = ExtResource("4_xntd4")
+theme_override_font_sizes/font_size = 150
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1

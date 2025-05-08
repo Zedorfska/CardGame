@@ -8,6 +8,8 @@ static var MainNode
 static var Table
 var TweenNode
 
+var SCP173functions = preload("res://Cards/173/173.gd")
+
 var SCPNumberScene = preload("res://Root/Labels/number_label.tscn")
 var HealthLabelScene = preload("res://Root/Labels/health_label.tscn")
 var DamageLabelScene = preload("res://Root/Labels/damage_label.tscn")
@@ -24,6 +26,12 @@ var AsyncActivateToTriggerStatusEffects = 0.75
 static func send_main_node(GotMainNode):
 	MainNode = GotMainNode
 	Table = MainNode.get_child(0).get_child(0).get_child(1).get_child(1)
+
+func amount_of_cards_on_table_changed():
+	SCP173functions.update_turns_to_attack_number()
+
+static func turn_passed():
+	pass
 
 func attack_animation(Self, Player):
 	var Offset = 1
@@ -75,19 +83,20 @@ func trigger_status_effects(Self):
 		for i in range(Self.StatusEffects.get_child_count()):
 			Self.StatusEffects.get_child(i).activate()
 
-func add_label(Self, LabelToAdd, Order):
+func add_label(Self, LabelToAdd):
+	var AmountOfChildren = Self.get_child_count()
 	match LabelToAdd:
 		"Damage":
 			Self.add_child(DamageLabelScene.instantiate())
-			DamageLabel = Self.get_child(Order + 2)
+			DamageLabel = Self.get_child(AmountOfChildren)
 			DamageLabel.update_label(Self.DamageAmount, Self.ContainmentClass)
 		"Health":
 			Self.add_child(HealthLabelScene.instantiate())
-			HealthLabel = Self.get_child(Order + 2)
+			HealthLabel = Self.get_child(AmountOfChildren)
 			HealthLabel.update_label(Self.HealthAmount, Self.ContainmentClass)
 		"Cost":
 			Self.add_child(CostLabelScene.instantiate())
-			CostLabel = Self.get_child(Order + 2)
+			CostLabel = Self.get_child(AmountOfChildren)
 			CostLabel.update_label(Self.CostAmount)
 
 func update_self_position(GotPosition):

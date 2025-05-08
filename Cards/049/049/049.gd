@@ -20,9 +20,9 @@ var ContainmentClass = "Euclid"
 @onready var StatusEffects = $Effects
 
 func _ready():
-	add_label(self, "Damage", 0)
-	add_label(self, "Health", 1)
-	add_label(self, "Cost", 2)
+	add_label(self, "Damage")
+	add_label(self, "Health")
+	add_label(self, "Cost")
 
 func played(GotPosition, GotOwner):
 	update_self_position(GotPosition)
@@ -35,7 +35,7 @@ func activate(CardPosition, Player):
 		EnemyExistsPreAttack = false
 	
 	await basic_common_attack(CardPosition, DamageAmount, DamageType, Player, self)
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.1).timeout #TODO: 
 	
 	if Table.get_child(Player).get_child(CardPosition).get_child(0).get_child_count() == 0:
 		EnemyExistsPostAttack = false

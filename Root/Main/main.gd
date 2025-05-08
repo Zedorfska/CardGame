@@ -52,11 +52,12 @@ var TestCard = preload("res://Cards/TestCard/test_card.tscn")
 var SCP049 = preload("res://Cards/049/049/049.tscn")
 var SCP173 = preload("res://Cards/173/173.tscn")
 var SCP205 = preload("res://Cards/205/205/205.tscn")
+var SCP207 = preload("res://Cards/207/207.tscn")
 
 var ListOfCards = [
+	SCP207,
+	SCP049,
 	TestCard,
-	SCP049,
-	SCP049,
 	SCP049,
 	SCP173,
 	SCP173,
@@ -242,12 +243,12 @@ func card_selected(CardNumber):
 				tween.tween_property(SelectedTile.get_child(0), "position", Vector2.ZERO, 0.1)
 				
 				AbleToPlay = false
-				await get_tree().create_timer(0.1).timeout
 				
 				for TestedTile in 4:
 					if SelectedTile == Table.get_child(2).get_child(TestedTile).get_child(0):
 						SelectedTile.get_child(0).played(TestedTile, 1)
 				
+				await get_tree().create_timer(0.1).timeout
 				P1ManaBar.update_label(P1Mana)
 				AbleToPlay = true
 
@@ -311,6 +312,7 @@ func end_turn():
 		await get_tree().create_timer(0.25).timeout
 		Turn += 1
 		TurnCountLabel.set_text(str("Turn: ", Turn))
+		CardFunctions.turn_passed()
 		AbleToPlay = true
 	else:
 		$DenySound.play()

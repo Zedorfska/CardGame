@@ -15,9 +15,9 @@ var ContainmentClass = "Safe"
 @onready var StatusEffects = $Effects
 
 func _ready():
-	add_label(self, "Damage", 0)
-	add_label(self, "Health", 1)
-	add_label(self, "Cost", 2)
+	add_label(self, "Damage")
+	add_label(self, "Health")
+	add_label(self, "Cost")
 
 func played(GotPosition, GotOwner):
 	update_self_position(GotPosition)
