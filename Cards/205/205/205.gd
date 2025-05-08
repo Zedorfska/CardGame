@@ -12,19 +12,15 @@ var DamageType: String = "Basic"
 var Playtype: String = "Unit"
 
 var SCPNumber: String = "205"
-var CardName: String = "ThelfhhLamps"
-var Description: String = "Anljrfvb it."
-var ContainmentClass: String = "Safe"
+var CardName: String = "The Floodlight"
+var Description: String = "Casts living shadows next to it.\nLiving shadows are defined as 2/X."
+var ContainmentClass: String = "Euclid"
 
 @onready var StatusEffects = $Effects
 
 func _ready():
 	add_label(self, "Health")
 	add_label(self, "Cost")
-
-func played(GotPosition, GotOwner):
-	update_self_position(GotPosition)
-	update_self_owner(GotOwner)
 
 func activate(CardPosition, Player):
 	glow_animation(self)
@@ -50,18 +46,14 @@ func activate(CardPosition, Player):
 	await get_tree().create_timer(AsyncActivateToTriggerStatusEffects).timeout
 	trigger_status_effects(self)
 
-func take_damage(Damage, DamageTakenType):
-	take_damage_basic(self, Damage, DamageTakenType)
-
 func destroy():
-	print("205 destroyed")
 	ChildToGet = 1
 	if SelfOwner == 1:
 		ChildToGet = 2
 	if SelfPosition != 0 and Table.get_child(ChildToGet).get_child(SelfPosition - 1).get_child(0).get_child_count() != 0:
 		if "205_1" in str(Table.get_child(ChildToGet).get_child(SelfPosition - 1).get_child(0).get_child(0)):
-			Table.get_child(ChildToGet).get_child(SelfPosition - 1).get_child(0).get_child(0).fade_out()
+			Table.get_child(ChildToGet).get_child(SelfPosition - 1).get_child(0).get_child(0).destroy()
 	if SelfPosition != 3 and Table.get_child(ChildToGet).get_child(SelfPosition + 1).get_child(0).get_child_count() != 0:
 		if "205_1" in str(Table.get_child(ChildToGet).get_child(SelfPosition + 1).get_child(0).get_child(0)):
-			Table.get_child(ChildToGet).get_child(SelfPosition + 1).get_child(0).get_child(0).fade_out()
-	self.queue_free()
+			Table.get_child(ChildToGet).get_child(SelfPosition + 1).get_child(0).get_child(0).destroy()
+	super.destroy()

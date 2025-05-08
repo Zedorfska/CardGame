@@ -2,14 +2,13 @@
 
 [ext_resource type="Script" uid="uid://c4bjmws7jele6" path="res://Cards/TestCard/test_card.gd" id="1_f8du8"]
 [ext_resource type="Texture2D" uid="uid://0epq3euk3org" path="res://Cards/Background.svg" id="1_jkomm"]
-[ext_resource type="Texture2D" uid="uid://bswqkhdaglscd" path="res://Sprites/TestCard.svg" id="2_f8du8"]
+[ext_resource type="Texture2D" uid="uid://b5tdywvjrdn4g" path="res://Cards/TestCard/TestCard.svg" id="3_jkomm"]
 
 [node name="TestCard" type="Sprite2D"]
 texture = ExtResource("1_jkomm")
 script = ExtResource("1_f8du8")
 
 [node name="TestCardSprite" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("2_f8du8")
+texture = ExtResource("3_jkomm")
 
 [node name="Effects" type="Node2D" parent="."]

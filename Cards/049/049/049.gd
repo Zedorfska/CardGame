@@ -24,10 +24,6 @@ func _ready():
 	add_label(self, "Health")
 	add_label(self, "Cost")
 
-func played(GotPosition, GotOwner):
-	update_self_position(GotPosition)
-	update_self_owner(GotOwner)
-
 func activate(CardPosition, Player):
 	if Table.get_child(Player).get_child(CardPosition).get_child(0).get_child_count() != 0:
 		EnemyExistsPreAttack = true
@@ -35,7 +31,7 @@ func activate(CardPosition, Player):
 		EnemyExistsPreAttack = false
 	
 	await basic_common_attack(CardPosition, DamageAmount, DamageType, Player, self)
-	await get_tree().create_timer(0.1).timeout #TODO: 
+	await get_tree().create_timer(0.1).timeout #TODO: needed rn due to queue_free() on the card being destroyed
 	
 	if Table.get_child(Player).get_child(CardPosition).get_child(0).get_child_count() == 0:
 		EnemyExistsPostAttack = false
@@ -62,9 +58,3 @@ func activate(CardPosition, Player):
 	
 	await get_tree().create_timer(AsyncActivateToTriggerStatusEffects).timeout
 	trigger_status_effects(self)
-
-func take_damage(Damage, DamageTakenType):
-	take_damage_basic(self, Damage, DamageTakenType)
-
-func destroy():
-	self.queue_free()

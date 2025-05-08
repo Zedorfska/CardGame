@@ -1,4 +1,4 @@
-extends Node
+extends "res://Cards/global_signals.gd"
 
 var SelfPosition
 var SelfOwner
@@ -7,8 +7,6 @@ var ChildToGet
 static var MainNode
 static var Table
 var TweenNode
-
-var SCP173functions = preload("res://Cards/173/173.gd")
 
 var SCPNumberScene = preload("res://Root/Labels/number_label.tscn")
 var HealthLabelScene = preload("res://Root/Labels/health_label.tscn")
@@ -26,9 +24,6 @@ var AsyncActivateToTriggerStatusEffects = 0.75
 static func send_main_node(GotMainNode):
 	MainNode = GotMainNode
 	Table = MainNode.get_child(0).get_child(0).get_child(1).get_child(1)
-
-func amount_of_cards_on_table_changed():
-	SCP173functions.update_turns_to_attack_number()
 
 static func turn_passed():
 	pass
@@ -106,14 +101,14 @@ func update_self_owner(GotOwner):
 	SelfOwner = GotOwner
 
 func take_damage_basic(Self, Damage, DamageType):
-	print("Damage Type: ", DamageType)
-	if DamageType == "InstaKill":
-		Self.destroy()
-	else:
-		Self.HealthAmount -= Damage
-		if Self.HealthAmount <= 0:
+	if "HealthAmount" in Self:	# Failsafe in case card doesnt have HealthAmount for some reason
+		if DamageType == "InstaKill":
 			Self.destroy()
-	Self.HealthLabel.update_label(Self.HealthAmount, Self.ContainmentClass)
+		else:
+			Self.HealthAmount -= Damage
+			if Self.HealthAmount <= 0:
+				Self.destroy()
+		Self.HealthLabel.update_label(Self.HealthAmount, Self.ContainmentClass)
 
 func basic_common_attack(CardPosition, Damage, DamageType, Player, Card):
 	attack_animation(Card, Player)
@@ -122,3 +117,17 @@ func basic_common_attack(CardPosition, Damage, DamageType, Player, Card):
 		Table.get_child(Player).get_child(CardPosition).get_child(0).get_child(0).take_damage(Damage, DamageType)
 	else:
 		MainNode.player_take_damage(Player, Damage)
+
+# Default card actions
+func played(GotPosition, GotOwner):
+	print("Card played")
+	amount_of_cards_on_table_changed()
+	update_self_position(GotPosition)
+	update_self_owner(GotOwner)
+
+func take_damage(Damage, DamageTakenType):
+	take_damage_basic(self, Damage, DamageTakenType)
+
+func destroy():
+	amount_of_cards_on_table_changed()
+	self.queue_free()

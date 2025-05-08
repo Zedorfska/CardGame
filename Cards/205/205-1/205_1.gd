@@ -19,10 +19,6 @@ var ContainmentClass = "Euclid"
 func _ready():
 	add_label(self, "Damage")
 
-func played(GotPosition, GotOwner):
-	update_self_position(GotPosition)
-	update_self_owner(GotOwner)
-
 func activate(CardPosition, Player):
 	if SpawnDelayCanAttack == true:
 		basic_common_attack(CardPosition, DamageAmount, DamageType, Player, self)
@@ -31,15 +27,11 @@ func activate(CardPosition, Player):
 	else:
 		SpawnDelayCanAttack = true
 
-func fade_out():
+func destroy():
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "modulate:a", 0, 1)
 	await get_tree().create_timer(1.1).timeout
-	self.destroy()
+	super.destroy()
 
 func take_damage(_Damage, _DamageTakenType):
 	evaded_attack_animation(self)
-	pass
-
-func destroy():
-	self.queue_free()

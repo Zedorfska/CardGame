@@ -9,27 +9,26 @@ var Playtype = "Unit"
 
 var SCPNumber = "173"
 var CardName = "The Sculpture"
-static var Description = "SCP-173 can only move while unobserved:\nThis card takes longer to attack the more cards are on the table."
+var Description = "SCP-173 can only move while unobserved:\nThis card takes longer to attack the more cards are on the table."
 var ContainmentClass = "Euclid"
 
 @onready var StatusEffects = $Effects
 
-static var AmountOfCards
-static var TurnPlayedOn
-static var CurrentTurn
-static var TurnsToAttackLabel
+var AmountOfCards
+var TurnPlayedOn
+var CurrentTurn
+var TurnsToAttackLabel
 
 func _ready():
 	add_label(self, "Damage")
 	add_label(self, "Health")
 	add_label(self, "Cost")
 	TurnsToAttackLabel = $TurnsToAttackLabel
+	connect("amount_of_cards_on_table_changed_signal", update_turns_to_attack_number)
 
 func played(GotPosition, GotOwner):
 	TurnPlayedOn = MainNode.Turn
-	amount_of_cards_on_table_changed()
-	update_self_position(GotPosition)
-	update_self_owner(GotOwner)
+	super.played(GotPosition, GotOwner)
 
 func activate(CardPosition, Player):
 	AmountOfCards = MainNode.get_amount_of_active_cards()
@@ -43,17 +42,12 @@ func activate(CardPosition, Player):
 	await get_tree().create_timer(AsyncActivateToTriggerStatusEffects).timeout
 	trigger_status_effects(self)
 
-func take_damage(Damage, DamageTakenType):
-	take_damage_basic(self, Damage, DamageTakenType)
-
-func destroy():
-	amount_of_cards_on_table_changed()
-	self.queue_free()
-
-static func update_turns_to_attack_number():
-	CurrentTurn = MainNode.Turn
-	AmountOfCards = MainNode.get_amount_of_active_cards()
-	var AmountOfTurnsExisted = CurrentTurn - TurnPlayedOn
-	var TurnsToAttack = AmountOfCards - AmountOfTurnsExisted
-	TurnsToAttackLabel.set_text(str(TurnsToAttack))
-	Description = str("SCP-173 can only move while unobserved:\nThis card takes longer to attack the more cards are on the table.\nIt will attack in ", TurnsToAttack, " turns.")
+func update_turns_to_attack_number():
+	print("Amount of cards signal detected")
+	if TurnPlayedOn != null:
+		CurrentTurn = MainNode.Turn
+		AmountOfCards = MainNode.get_amount_of_active_cards()
+		var AmountOfTurnsExisted = CurrentTurn - TurnPlayedOn
+		var TurnsToAttack = AmountOfCards - AmountOfTurnsExisted
+		TurnsToAttackLabel.set_text(str(TurnsToAttack))
+		Description = str("SCP-173 can only move while unobserved:\nThis card takes longer to attack the more cards are on the table.\nIt will attack in ", TurnsToAttack, " turns.")

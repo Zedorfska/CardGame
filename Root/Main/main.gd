@@ -31,9 +31,6 @@ var SelectedTile
 var SelectedCard
 var RandomTile
 var RandomCard
-var Get
-var CurrentClearedTable
-var RootNode
 
 var HoverSound
 var SelectSound
@@ -55,18 +52,17 @@ var SCP205 = preload("res://Cards/205/205/205.tscn")
 var SCP207 = preload("res://Cards/207/207.tscn")
 
 var ListOfCards = [
-	SCP207,
-	SCP049,
-	TestCard,
-	SCP049,
-	SCP173,
-	SCP173,
-	SCP173,
-	SCP205
+	SCP207.instantiate(),
+	SCP049.instantiate(),
+	TestCard.instantiate(),
+	SCP049.instantiate(),
+	SCP173.instantiate(),
+	SCP173.instantiate(),
+	SCP173.instantiate(),
+	SCP205.instantiate()
 ]
 
 func _ready():
-	RootNode = $"."
 	Player1HP = 20
 	Player2HP = 20
 	P1Mana = 1
@@ -131,7 +127,7 @@ func get_amount_of_active_cards():
 
 func setup_deck():
 	for Card in range(ListOfCards.size()):
-		Deck.add_child(ListOfCards[Card].instantiate())
+		Deck.add_child(ListOfCards[Card])
 
 func deal_cards_to_player(Player, Amount):
 	var ChildToGet = 0
@@ -166,6 +162,11 @@ func player2_play_random_card():
 		P2Mana -= RandomCard.get_child(0).CostAmount
 		P2ManaBar.update_label(P2Mana)
 		RandomCard.get_child(0).reparent(RandomTile, true)
+		
+		for TestedTile in 4:
+			if RandomTile == Table.get_child(1).get_child(TestedTile).get_child(0):
+				RandomTile.get_child(0).played(TestedTile, 2)
+		
 		var tween = get_tree().create_tween()
 		tween.tween_property(RandomTile.get_child(0), "position", Vector2.ZERO, 0.1)
 
