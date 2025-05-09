@@ -8,6 +8,8 @@ static var MainNode
 static var Table
 var TweenNode
 
+var CardsPath = "res://Cards/"
+
 var SCPNumberScene = preload("res://Root/Labels/number_label.tscn")
 var HealthLabelScene = preload("res://Root/Labels/health_label.tscn")
 var DamageLabelScene = preload("res://Root/Labels/damage_label.tscn")

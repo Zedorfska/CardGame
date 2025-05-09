@@ -1,5 +1,8 @@
 extends "res://Cards/card_functions.gd"
 
+var SpriteDefault = CardsPath
+var SpriteLightsOut = CardsPath
+
 var TurnsToAttackLabelOpacity
 
 var MaxHealth = 8
@@ -35,11 +38,11 @@ func played(GotPosition, GotOwner):
 func activate(CardPosition, Player):
 	AmountOfCards = MainNode.get_amount_of_active_cards()
 	CurrentTurn = MainNode.Turn
-	update_turns_to_attack_number()
 	if CurrentTurn - TurnPlayedOn >= AmountOfCards:
 		basic_common_attack(CardPosition, DamageAmount, DamageType, Player, self)
 		TurnPlayedOn = null
 	else:
+		update_turns_to_attack_number()
 		cant_activate_animation(self)
 	
 	await get_tree().create_timer(AsyncActivateToTriggerStatusEffects).timeout
@@ -53,7 +56,7 @@ func update_turns_to_attack_number():
 		print("Cards on table: ", MainNode.get_amount_of_active_cards())
 		var AmountOfTurnsExisted = CurrentTurn - TurnPlayedOn
 		print("Existed for: ", AmountOfTurnsExisted)
-		var TurnsToAttack = AmountOfCards - AmountOfTurnsExisted
+		var TurnsToAttack = AmountOfCards - AmountOfTurnsExisted - 1
 		print("173 will activate in: ", TurnsToAttack)
 		TurnsToAttackLabel.set_text(str(TurnsToAttack))
 		TurnsToAttackLabel.modulate.a = 1
