@@ -1,4 +1,4 @@
-extends "res://Cards/global_signals.gd"
+extends Node
 
 var SelfPosition
 var SelfOwner
@@ -24,6 +24,9 @@ var AsyncActivateToTriggerStatusEffects = 0.75
 static func send_main_node(GotMainNode):
 	MainNode = GotMainNode
 	Table = MainNode.get_child(0).get_child(0).get_child(1).get_child(1)
+
+func amount_of_cards_on_table_changed():
+	SignalManager.amount_of_cards_on_table_changed_signal.emit()
 
 static func turn_passed():
 	pass
@@ -120,7 +123,6 @@ func basic_common_attack(CardPosition, Damage, DamageType, Player, Card):
 
 # Default card actions
 func played(GotPosition, GotOwner):
-	print("Card played")
 	amount_of_cards_on_table_changed()
 	update_self_position(GotPosition)
 	update_self_owner(GotOwner)

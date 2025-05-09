@@ -24,7 +24,7 @@ func _ready():
 	add_label(self, "Health")
 	add_label(self, "Cost")
 	TurnsToAttackLabel = $TurnsToAttackLabel
-	connect("amount_of_cards_on_table_changed_signal", update_turns_to_attack_number)
+	SignalManager.amount_of_cards_on_table_changed_signal.connect(update_turns_to_attack_number)
 
 func played(GotPosition, GotOwner):
 	TurnPlayedOn = MainNode.Turn
@@ -43,11 +43,13 @@ func activate(CardPosition, Player):
 	trigger_status_effects(self)
 
 func update_turns_to_attack_number():
-	print("Amount of cards signal detected")
 	if TurnPlayedOn != null:
 		CurrentTurn = MainNode.Turn
 		AmountOfCards = MainNode.get_amount_of_active_cards()
+		print("Cards on table: ", MainNode.get_amount_of_active_cards())
 		var AmountOfTurnsExisted = CurrentTurn - TurnPlayedOn
+		print("Existed for: ", AmountOfTurnsExisted)
 		var TurnsToAttack = AmountOfCards - AmountOfTurnsExisted
+		print("173 will activate in: ", TurnsToAttack)
 		TurnsToAttackLabel.set_text(str(TurnsToAttack))
 		Description = str("SCP-173 can only move while unobserved:\nThis card takes longer to attack the more cards are on the table.\nIt will attack in ", TurnsToAttack, " turns.")

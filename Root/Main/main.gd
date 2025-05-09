@@ -56,10 +56,8 @@ var ListOfCards = [
 	SCP049.instantiate(),
 	TestCard.instantiate(),
 	SCP049.instantiate(),
-	SCP173.instantiate(),
-	SCP173.instantiate(),
-	SCP173.instantiate(),
-	SCP205.instantiate()
+	SCP205.instantiate(),
+	SCP173.instantiate()
 ]
 
 func _ready():
