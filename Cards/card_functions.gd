@@ -19,7 +19,8 @@ var HealthLabel
 var DamageLabel
 var CostLabel
 
-var AsyncActivateToTriggerStatusEffects = 0.75
+var AsyncActivateToTriggerStatusEffects = 0.25
+var AsyncTriggerStatusEffectsToLabelUpdate = 0.10
 
 static func send_main_node(GotMainNode):
 	MainNode = GotMainNode
@@ -131,5 +132,6 @@ func take_damage(Damage, DamageTakenType):
 	take_damage_basic(self, Damage, DamageTakenType)
 
 func destroy():
-	amount_of_cards_on_table_changed()
 	self.queue_free()
+	self.get_parent().remove_child(self)
+	amount_of_cards_on_table_changed()

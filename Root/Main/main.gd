@@ -269,13 +269,19 @@ func update_player_health():
 func end_turn():
 	if AbleToPlay == true:
 		AbleToPlay = false
+		
+		Turn += 1
+		
 		for CardPosition in 4:			# Player 1 cards activate in order left to right
 			if Player1Table.get_child(CardPosition).get_child(0).get_child_count() != 0:
 				SelectedCard = Player1Table.get_child(CardPosition).get_child(0).get_child(0)
 				#print("Card ", CardPosition + 1, " of P1 activates")
 				SelectedCard.activate(CardPosition, 1)
 				await get_tree().create_timer(0.5).timeout
-	
+		
+		TurnCountLabel.set_text(str("Turn: ", Turn))
+		CardFunctions.turn_passed()
+		
 		fill_mana(2, ManaGainAmount)	# Player 2 gets their mana and cards
 		await get_tree().create_timer(0.25).timeout
 		deal_cards_to_player(2, CardGainAmount)
@@ -309,9 +315,6 @@ func end_turn():
 		if ManaGainAmount < 5:
 			ManaGainAmount += 1
 		await get_tree().create_timer(0.25).timeout
-		Turn += 1
-		TurnCountLabel.set_text(str("Turn: ", Turn))
-		CardFunctions.turn_passed()
 		AbleToPlay = true
 	else:
 		$DenySound.play()

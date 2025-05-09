@@ -42,6 +42,8 @@ func activate(CardPosition, Player):
 		var TweenCard205Move = get_tree().create_tween()
 		TweenCard205Move.tween_property(TweenCard, "modulate:a", 1, 0.25)
 		Table.get_child(ChildToGet).get_child(CardPosition + 1).get_child(0).get_child(0).SpawnDelayCanAttack = false
+		
+		amount_of_cards_on_table_changed()
 	
 	await get_tree().create_timer(AsyncActivateToTriggerStatusEffects).timeout
 	trigger_status_effects(self)

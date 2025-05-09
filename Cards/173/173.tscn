@@ -15,6 +15,7 @@ texture = ExtResource("2_k58pr")
 [node name="Effects" type="Node2D" parent="."]
 
 [node name="TurnsToAttackLabel" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
