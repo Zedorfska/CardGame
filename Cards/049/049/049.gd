@@ -10,7 +10,7 @@ var HealthAmount = MaxHealth
 var DamageAmount = 1
 var CostAmount = 2
 var DamageType = "InstaKill"
-var Playtype = "Unit"
+var CardType = "Unit"
 
 var SCPNumber = "049"
 var CardName = "The Plague Doctor"

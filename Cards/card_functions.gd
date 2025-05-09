@@ -3,6 +3,8 @@ extends Node
 var SelfPosition
 var SelfOwner
 
+var TurnPlayedOn
+
 var ChildToGet
 static var MainNode
 static var Table
@@ -126,6 +128,7 @@ func basic_common_attack(CardPosition, Damage, DamageType, Player, Card):
 
 # Default card actions
 func played(GotPosition, GotOwner):
+	TurnPlayedOn = MainNode.Turn
 	amount_of_cards_on_table_changed()
 	update_self_position(GotPosition)
 	update_self_owner(GotOwner)

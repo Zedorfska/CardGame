@@ -41,9 +41,9 @@ var ManaBarScene = preload("res://Root/Labels/mana_bar.tscn")
 
 const CardFunctions = preload("res://Cards/card_functions.gd")
 
-var SafeIcon = preload("res://Sprites/SCPContainmentIcons/Safe.svg")
-var EuclidIcon = preload("res://Sprites/SCPContainmentIcons/Euclid.svg")
-var KeterIcon = preload("res://Sprites/SCPContainmentIcons/Keter.svg")
+var SafeIcon = load("res://Sprites/SCPContainmentIcons/Safe.svg")
+var EuclidIcon = load("res://Sprites/SCPContainmentIcons/Euclid.svg")
+var KeterIcon = load("res://Sprites/SCPContainmentIcons/Keter.svg")
 
 var TestCard = preload("res://Cards/TestCard/test_card.tscn")
 var SCP049 = preload("res://Cards/049/049/049.tscn")
@@ -234,14 +234,15 @@ func tile_selected(TileNumber):
 func card_selected(CardNumber):
 	if AbleToPlay == true:
 		SelectedCard = Player1Hand.get_child(CardNumber).get_child(0)
-		if SelectedCard.get_child_count() != 0 and SelectedTile.get_child_count() == 0:
-			if SelectedCard.get_child(0).CostAmount <= P1Mana:
-				P1Mana -= SelectedCard.get_child(0).CostAmount
-				SelectedCard.get_child(0).reparent(SelectedTile, true)
-				var tween = get_tree().create_tween()
-				tween.tween_property(SelectedTile.get_child(0), "position", Vector2.ZERO, 0.1)
-				
-				AbleToPlay = false
+		if SelectedCard.CardType == "Unit":
+			if SelectedCard.get_child_count() != 0 and SelectedTile.get_child_count() == 0:
+				if SelectedCard.get_child(0).CostAmount <= P1Mana:
+					P1Mana -= SelectedCard.get_child(0).CostAmount
+					SelectedCard.get_child(0).reparent(SelectedTile, true)
+					var tween = get_tree().create_tween()
+					tween.tween_property(SelectedTile.get_child(0), "position", Vector2.ZERO, 0.1)
+					
+					AbleToPlay = false
 				
 				for TestedTile in 4:
 					if SelectedTile == Table.get_child(2).get_child(TestedTile).get_child(0):

@@ -9,7 +9,7 @@ var HealthAmount: int = MaxHealth
 var DamageAmount: int = 0
 var CostAmount: int = 3
 var DamageType: String = "Basic"
-var Playtype: String = "Unit"
+var CardType: String = "Unit"
 
 var SCPNumber: String = "205"
 var CardName: String = "The Floodlight"

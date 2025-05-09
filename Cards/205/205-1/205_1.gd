@@ -7,7 +7,7 @@ var HealthAmount = MaxHealth
 var DamageAmount = 2
 var CostAmount = 0
 var DamageType = "Basic"
-var Playtype = "Unit"
+var CardType = "Unit"
 
 var SCPNumber = "205-1"
 var CardName = "Shadow Puppet"

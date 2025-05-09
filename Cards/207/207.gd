@@ -1,7 +1,7 @@
 extends "res://Cards/card_functions.gd"
 
 var CostAmount = 2
-var Playtype = "Effect"
+var CardType = "Effect"
 
 var SCPNumber = "207"
 var CardName = "Bottle"
