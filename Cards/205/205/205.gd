@@ -52,10 +52,10 @@ func destroy():
 	ChildToGet = 1
 	if SelfOwner == 1:
 		ChildToGet = 2
-	if SelfPosition != 0 and Table.get_child(ChildToGet).get_child(SelfPosition - 1).get_child(0).get_child_count() != 0:
-		if "205_1" in str(Table.get_child(ChildToGet).get_child(SelfPosition - 1).get_child(0).get_child(0)):
-			Table.get_child(ChildToGet).get_child(SelfPosition - 1).get_child(0).get_child(0).destroy()
-	if SelfPosition != 3 and Table.get_child(ChildToGet).get_child(SelfPosition + 1).get_child(0).get_child_count() != 0:
-		if "205_1" in str(Table.get_child(ChildToGet).get_child(SelfPosition + 1).get_child(0).get_child(0)):
-			Table.get_child(ChildToGet).get_child(SelfPosition + 1).get_child(0).get_child(0).destroy()
+	print("205 is at position ", SelfPosition)
+	for Tile in 4:
+		if Table.get_child(ChildToGet).get_child(Tile).get_child(0).get_child_count() != 0:
+			if "205_1" in str(Table.get_child(ChildToGet).get_child(Tile).get_child(0).get_child(0)):
+				Table.get_child(ChildToGet).get_child(Tile).get_child(0).get_child(0).destroy()
+	
 	super.destroy()

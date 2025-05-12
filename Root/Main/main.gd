@@ -29,8 +29,8 @@ var TopCardInDeck
 var Deck
 var SelectedTile
 var SelectedCard
-var RandomTile
-var RandomCard
+var SelectedTileNumber
+var P2SelectedTileNumber
 
 var HoverSound
 var SelectSound
@@ -126,6 +126,7 @@ func get_amount_of_active_cards():
 func setup_deck():
 	for Card in range(ListOfCards.size()):
 		Deck.add_child(ListOfCards[Card])
+		#TODO: Randomise deck
 
 func deal_cards_to_player(Player, Amount):
 	var ChildToGet = 0
@@ -142,31 +143,93 @@ func deal_cards_to_player(Player, Amount):
 					await get_tree().create_timer(0.1).timeout
 				break
 
+func play_card(Player, Card, Tile):
+	if Card == null:
+		return
+	
+	var PlayerMana
+	match Player:
+		1:
+			PlayerMana = P1Mana
+		2:
+			PlayerMana = P2Mana
+	if Card.CostAmount > PlayerMana:
+		return
+	
+	match Card.CardType:
+		"Unit":
+			if check_if_tile_empty(Tile) == true:
+				PlayerMana -= Card.CostAmount
+				Card.reparent(Tile, true)
+				var tween = get_tree().create_tween()
+				tween.tween_property(Card, "position", Vector2.ZERO, 0.1)
+				await get_tree().create_timer(0.1).timeout
+				match Player:
+					1:
+						Card.played(Player, SelectedTileNumber)
+					2:
+						Card.played(Player, P2SelectedTileNumber)
+		"Effect":
+			pass
+		"Spell":
+			pass
+	
+	match Player:
+		1:
+			P1Mana = PlayerMana
+			P1ManaBar.update_label(P1Mana)
+		2:
+			P2Mana = PlayerMana
+			P2ManaBar.update_label(P2Mana)
+
+func check_if_tile_empty(Tile):
+	if Tile.get_child_count() == 0:
+		return true
+	return false
+
 func player2_play_random_card():
-	var ValidTileList = []											# Create list of valid tiles
+	var FullTileList = []
+	var EmptyTileList = []
 	var ValidCardList = []
-	for Tile in 4:													# Go through tiles
+	
+	for Tile in 4:									# Go through tiles
 		var CheckValidTile = Player2Table.get_child(Tile).get_child(0)
-		if CheckValidTile.get_child_count() == 0:					# If this tile is empty:
-			ValidTileList.append(CheckValidTile)					#	Append it to the list of tiles
-	for Card in 6:													# Go through cards
+		if CheckValidTile.get_child_count() == 0:	# Append empty and full tiles
+			EmptyTileList.append(CheckValidTile)
+		else:
+			FullTileList.append(CheckValidTile)
+	
+	for Card in 6:									# Go through cards
 		var CheckValidCard = Player2Hand.get_child(Card).get_child(0)
-		if CheckValidCard.get_child_count() != 0:					# If there is a card here:
-			if CheckValidCard.get_child(0).CostAmount <= P2Mana:	# If there is enough mana to play it
-				ValidCardList.append(CheckValidCard)					#	Append it to the list of cards
-	if ValidTileList.is_empty() == false and ValidCardList.is_empty() == false:	# Check if lists empty
-		RandomCard = ValidCardList.pick_random()
-		RandomTile = ValidTileList.pick_random()
-		P2Mana -= RandomCard.get_child(0).CostAmount
-		P2ManaBar.update_label(P2Mana)
-		RandomCard.get_child(0).reparent(RandomTile, true)
-		
-		for TestedTile in 4:
-			if RandomTile == Table.get_child(1).get_child(TestedTile).get_child(0):
-				RandomTile.get_child(0).played(TestedTile, 2)
-		
-		var tween = get_tree().create_tween()
-		tween.tween_property(RandomTile.get_child(0), "position", Vector2.ZERO, 0.1)
+		if CheckValidCard.get_child_count() != 0:
+			if CheckValidCard.get_child(0).CostAmount <= P2Mana:	# Append ones that have enough mana to be played
+				ValidCardList.append(CheckValidCard.get_child(0))
+			ValidCardList.shuffle()
+	
+	var RandomCard
+	var RandomTile
+	if ValidCardList.size() != 0:
+		for Card in range(ValidCardList.size()):
+			RandomCard = ValidCardList[Card]
+			var RandomCardParent = RandomCard.get_parent()
+			match RandomCard.CardType:
+				"Unit":
+					if EmptyTileList.size() != 0:
+						RandomTile = EmptyTileList.pick_random()
+						RandomCard.reparent(RandomTile, true)
+						for i in 4:	# Holy shit
+							if Player2Table.get_child(i).get_child(0).get_child_count() != 0:
+								if Player2Table.get_child(i).get_child(0).get_child(0) == RandomCard:
+									RandomCard.reparent(RandomCardParent, true)
+									P2SelectedTileNumber = i
+									play_card(2, RandomCard, RandomTile)
+									return
+				"Effect":
+					pass
+				"Spell":
+					pass
+	else:
+		return
 
 func update_displayed_card(HoveredCard):
 	if HoveredCard == null:
@@ -227,30 +290,18 @@ func tile_selected(TileNumber):
 			else:
 				SelectedTileSelector.visible = false
 		SelectedTile = Player1Table.get_child(TileNumber).get_child(0)
+		SelectedTileNumber = TileNumber
 		SelectSound.play()
 	else:
 		$DenySound.play()
 
 func card_selected(CardNumber):
 	if AbleToPlay == true:
-		SelectedCard = Player1Hand.get_child(CardNumber).get_child(0)
-		if SelectedCard.CardType == "Unit":
-			if SelectedCard.get_child_count() != 0 and SelectedTile.get_child_count() == 0:
-				if SelectedCard.get_child(0).CostAmount <= P1Mana:
-					P1Mana -= SelectedCard.get_child(0).CostAmount
-					SelectedCard.get_child(0).reparent(SelectedTile, true)
-					var tween = get_tree().create_tween()
-					tween.tween_property(SelectedTile.get_child(0), "position", Vector2.ZERO, 0.1)
-					
-					AbleToPlay = false
-				
-				for TestedTile in 4:
-					if SelectedTile == Table.get_child(2).get_child(TestedTile).get_child(0):
-						SelectedTile.get_child(0).played(TestedTile, 1)
-				
-				await get_tree().create_timer(0.1).timeout
-				P1ManaBar.update_label(P1Mana)
-				AbleToPlay = true
+		if Player1Hand.get_child(CardNumber).get_child(0).get_child_count() != 0:
+			SelectedCard = Player1Hand.get_child(CardNumber).get_child(0).get_child(0)
+		else:
+			SelectedCard = null
+		play_card(1, SelectedCard, SelectedTile)
 
 func player_take_damage(Player, Damage):
 	if Player == 2:

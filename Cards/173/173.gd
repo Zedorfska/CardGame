@@ -8,17 +8,17 @@ var SpriteLightsOut = CardsPath
 
 var TurnsToAttackLabelOpacity
 
-var MaxHealth = 8
-var HealthAmount = MaxHealth
-var DamageAmount = 7
-var CostAmount = 0
-var DamageType = "Basic"
-var CardType = "Unit"
+var MaxHealth: int = 8
+var HealthAmount: int = MaxHealth
+var DamageAmount: int = 7
+var CostAmount: int = 3
+var DamageType: String = "Basic"
+var CardType: String = "Unit"
 
-var SCPNumber = "173"
-var CardName = "The Sculpture"
-var Description = "SCP-173 can only move while unobserved:\nThis card takes longer to attack the more cards are on the table."
-var ContainmentClass = "Euclid"
+var SCPNumber: String = "173"
+var CardName: String = "The Sculpture"
+var Description: String = "SCP-173 can only move while unobserved:\nThis card takes longer to attack the more cards are on the table."
+var ContainmentClass: String = "Euclid"
 
 @onready var StatusEffects = $Effects
 
@@ -69,3 +69,7 @@ func update_turns_to_attack_number():	#TODO: Make attack inevitable when TurnsTo
 			TurnsToAttackLabelOpacity = get_tree().create_tween()
 			TurnsToAttackLabelOpacity.tween_property(TurnsToAttackLabel, "modulate:a", 0, 1)
 		Description = str("SCP-173 can only move while unobserved:\nThis card takes longer to attack the more cards are on the table.\nIt will attack in ", TurnsToAttack, " turns.")
+
+func destroy():
+	TurnsToAttackLabelOpacity.stop()
+	super.destroy()

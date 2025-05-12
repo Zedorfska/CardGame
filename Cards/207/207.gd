@@ -1,15 +1,28 @@
 extends "res://Cards/card_functions.gd"
 
-var CostAmount = 2
-var CardType = "Effect"
+var ParentCard
+var AmountOfTimesTriggered: int = 0
 
-var SCPNumber = "207"
-var CardName = "Bottle"
-var Description = "Enhances a card, but starts damaging it over time."
-var ContainmentClass = "Safe"
+var CostAmount: int = 2
+var CardType: String = "Effect"
 
-func _ready():
+var SCPNumber: String = "207"
+var CardName: String = "Bottle"
+var Description: String = "Enhances a card, but starts damaging it over time."
+var ContainmentClass: String = "Safe"
+
+func _ready():	#TODO: next
 	add_label(self, "Cost")
 
+func played(GotPosition, GotOwner):
+	super.played(GotPosition, GotOwner)
+	ParentCard = self.get_parent().get_parent()
+
 func activate(_CardPosition, _Player):
-	pass
+	ParentCard.take_damage(1, "Basic")
+	ParentCard.DamageAmount += 1
+	AmountOfTimesTriggered += 1
+
+func destroy():
+	ParentCard.DamageAmount -= AmountOfTimesTriggered
+	super.destroy()

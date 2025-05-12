@@ -1,16 +1,16 @@
 extends "res://Cards/card_functions.gd"
 
-var MaxHealth = 2
-var HealthAmount = MaxHealth
-var DamageAmount = 2
-var CostAmount = 0
-var DamageType = "Basic"
-var CardType = "Unit"
+var MaxHealth: int = 2
+var HealthAmount: int = MaxHealth
+var DamageAmount: int = 2
+var CostAmount: int = 0
+var DamageType: String = "Basic"
+var CardType: String = "Unit"
 
-var SCPNumber = "049-2"
-var CardName = "The Cured"
-var Description = "A corpse reanimated by SCP-049."
-var ContainmentClass = "Euclid"
+var SCPNumber: String = "049-2"
+var CardName: String = "The Cured"
+var Description: String = "A corpse reanimated by SCP-049."
+var ContainmentClass: String = "Euclid"
 
 @onready var StatusEffects = $Effects
 

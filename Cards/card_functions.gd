@@ -3,6 +3,7 @@ extends Node
 var SelfPosition
 var SelfOwner
 
+var PassDamage
 var TurnPlayedOn
 
 var ChildToGet
@@ -122,12 +123,15 @@ func basic_common_attack(CardPosition, Damage, DamageType, Player, Card):
 	attack_animation(Card, Player)
 	
 	if Table.get_child(Player).get_child(CardPosition).get_child(0).get_child_count() != 0:
-		Table.get_child(Player).get_child(CardPosition).get_child(0).get_child(0).take_damage(Damage, DamageType)
+		if Table.get_child(Player).get_child(CardPosition).get_child(0).get_child(0).PassDamage != true:
+			Table.get_child(Player).get_child(CardPosition).get_child(0).get_child(0).take_damage(Damage, DamageType)
+		else:
+			MainNode.player_take_damage(Player, Damage)
 	else:
 		MainNode.player_take_damage(Player, Damage)
 
 # Default card actions
-func played(GotPosition, GotOwner):
+func played(GotOwner, GotPosition):
 	TurnPlayedOn = MainNode.Turn
 	amount_of_cards_on_table_changed()
 	update_self_position(GotPosition)

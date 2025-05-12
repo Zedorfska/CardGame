@@ -5,7 +5,7 @@ var HealthAmount = MaxHealth
 var DamageAmount = 2
 var CostAmount = 1
 var DamageType = "Basic"
-var Playtype = "Unit"
+var CardType = "Unit"
 
 var SCPNumber = "000"
 var CardName = "TestCard"

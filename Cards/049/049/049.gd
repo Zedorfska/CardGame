@@ -5,11 +5,11 @@ var EnemyExistsPostAttack
 
 var SCP049_2 = preload("res://Cards/049/049-2/049_2.tscn")
 
-var MaxHealth = 2
-var HealthAmount = MaxHealth
-var DamageAmount = 1
-var CostAmount = 2
-var DamageType = "InstaKill"
+var MaxHealth: int = 2
+var HealthAmount: int = MaxHealth
+var DamageAmount: int = 1
+var CostAmount: int = 2
+var DamageType: String = "InstaKill"
 var CardType = "Unit"
 
 var SCPNumber = "049"
