@@ -34,8 +34,8 @@ func _ready():
 	TurnsToAttackLabel = $TurnsToAttackLabel
 	SignalManager.amount_of_cards_on_table_changed_signal.connect(update_turns_to_attack_number)
 
-func played(GotPosition, GotOwner):
-	super.played(GotPosition, GotOwner)
+func played(Card, GotPosition, GotOwner):
+	super.played(Card, GotPosition, GotOwner)
 	TurnLastActivate = TurnPlayedOn
 	update_turns_to_attack_number()
 

@@ -1,6 +1,5 @@
 extends "res://Cards/card_functions.gd"
 
-var ParentCard
 var AmountOfTimesTriggered: int = 0
 
 var CostAmount: int = 2
@@ -14,12 +13,9 @@ var ContainmentClass: String = "Safe"
 func _ready():	#TODO: next
 	add_label(self, "Cost")
 
-func played(GotPosition, GotOwner):
-	super.played(GotPosition, GotOwner)
-	ParentCard = self.get_parent().get_parent()
-
 func activate(_CardPosition, _Player):
 	ParentCard.take_damage(1, "Basic")
+	print(ParentCard, " has 207")
 	ParentCard.DamageAmount += 1
 	AmountOfTimesTriggered += 1
 

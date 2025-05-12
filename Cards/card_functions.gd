@@ -6,6 +6,8 @@ var SelfOwner
 var PassDamage
 var TurnPlayedOn
 
+var ParentCard
+
 var ChildToGet
 static var MainNode
 static var Table
@@ -131,11 +133,13 @@ func basic_common_attack(CardPosition, Damage, DamageType, Player, Card):
 		MainNode.player_take_damage(Player, Damage)
 
 # Default card actions
-func played(GotOwner, GotPosition):
+func played(Card, GotOwner, GotPosition):
 	TurnPlayedOn = MainNode.Turn
 	amount_of_cards_on_table_changed()
 	update_self_position(GotPosition)
 	update_self_owner(GotOwner)
+	if Card.CardType == "Effect":
+		ParentCard = self.get_parent().get_parent()
 
 func take_damage(Damage, DamageTakenType):
 	take_damage_basic(self, Damage, DamageTakenType)

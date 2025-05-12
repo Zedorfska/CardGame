@@ -166,9 +166,9 @@ func play_card(Player, Card, Tile):
 				await get_tree().create_timer(0.1).timeout
 				match Player:
 					1:
-						Card.played(Player, SelectedTileNumber)
+						Card.played(Card, Player, SelectedTileNumber)
 					2:
-						Card.played(Player, P2SelectedTileNumber)
+						Card.played(Card, Player, P2SelectedTileNumber)
 		"Effect":
 			pass
 		"Spell":
