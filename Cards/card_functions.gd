@@ -65,6 +65,19 @@ func cant_activate_animation(Self):
 	var tween4 = get_tree().create_tween()
 	tween4.tween_property(Self, "position", Position, 0.1)
 
+func rotation_shake_animation(Self):
+	var tween1 = get_tree().create_tween()
+	tween1.tween_property(Self, "rotation", 0.25, 0.1)
+	await get_tree().create_timer(0.1).timeout
+	var tween2 = get_tree().create_tween()
+	tween2.tween_property(Self, "rotation", -0.25, 0.1)
+	await get_tree().create_timer(0.1).timeout
+	var tween3 = get_tree().create_tween()
+	tween3.tween_property(Self, "rotation", 0.25, 0.1)
+	await get_tree().create_timer(0.1).timeout
+	var tween4 = get_tree().create_tween()
+	tween4.tween_property(Self, "rotation", 0, 0.1)
+
 func evaded_attack_animation(Self):
 	var tween1 = get_tree().create_tween()
 	tween1.tween_property(Self, "modulate:a", 0.5, 0.25)

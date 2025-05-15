@@ -5,7 +5,6 @@ var SpawnDelayCanAttack = true
 var MaxHealth: int = 1
 var HealthAmount: int = MaxHealth
 var DamageAmount: int = 2
-var CostAmount: int = 0
 var DamageType: String = "Basic"
 var CardType: String = "Unit"
 
@@ -22,6 +21,7 @@ func _ready():
 func activate(CardPosition, Player):
 	if SpawnDelayCanAttack == true:
 		basic_common_attack(CardPosition, DamageAmount, DamageType, Player, self)
+		
 		await get_tree().create_timer(AsyncActivateToTriggerStatusEffects).timeout
 		trigger_status_effects(self)
 	else:

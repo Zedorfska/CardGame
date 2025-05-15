@@ -21,3 +21,6 @@ func _ready():
 
 func activate(CardPosition, Player):
 	basic_common_attack(CardPosition, DamageAmount, DamageType, Player, self)
+	
+	await get_tree().create_timer(AsyncActivateToTriggerStatusEffects).timeout
+	trigger_status_effects(self)

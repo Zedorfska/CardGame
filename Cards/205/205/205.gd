@@ -6,9 +6,7 @@ var SCP205_1 = preload("res://Cards/205/205-1/205_1.tscn")
 
 var MaxHealth: int = 2
 var HealthAmount: int = MaxHealth
-var DamageAmount: int = 0
 var CostAmount: int = 3
-var DamageType: String = "Basic"
 var CardType: String = "Unit"
 
 var SCPNumber: String = "205"
@@ -52,7 +50,6 @@ func destroy():
 	ChildToGet = 1
 	if SelfOwner == 1:
 		ChildToGet = 2
-	print("205 is at position ", SelfPosition)
 	for Tile in 4:
 		if Table.get_child(ChildToGet).get_child(Tile).get_child(0).get_child_count() != 0:
 			if "205_1" in str(Table.get_child(ChildToGet).get_child(Tile).get_child(0).get_child(0)):

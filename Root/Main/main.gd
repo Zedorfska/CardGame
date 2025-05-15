@@ -170,7 +170,17 @@ func play_card(Player, Card, Tile):
 					2:
 						Card.played(Card, Player, P2SelectedTileNumber)
 		"Effect":
-			pass
+			if check_if_tile_empty(Tile) == false:
+				PlayerMana -= Card.CostAmount
+				Card.reparent(Tile.get_child(0).get_child(1), true)
+				var tween = get_tree().create_tween()
+				tween.tween_property(Card, "position", Vector2.ZERO, 0.1)
+				await get_tree().create_timer(0.1).timeout
+				match Player:
+					1:
+						Card.played(Card, Player, SelectedTileNumber)
+					2:
+						Card.played(Card, Player, P2SelectedTileNumber)
 		"Spell":
 			pass
 	
@@ -217,7 +227,7 @@ func player2_play_random_card():
 					if EmptyTileList.size() != 0:
 						RandomTile = EmptyTileList.pick_random()
 						RandomCard.reparent(RandomTile, true)
-						for i in 4:	# Holy shit
+						for i in 4:
 							if Player2Table.get_child(i).get_child(0).get_child_count() != 0:
 								if Player2Table.get_child(i).get_child(0).get_child(0) == RandomCard:
 									RandomCard.reparent(RandomCardParent, true)
@@ -225,7 +235,17 @@ func player2_play_random_card():
 									play_card(2, RandomCard, RandomTile)
 									return
 				"Effect":
-					pass
+					if FullTileList.size() != 0:
+						RandomTile = FullTileList.pick_random()
+						RandomCard.reparent(RandomTile.get_child(0).get_child(1), true)
+						for i in 4:
+							if Player2Table.get_child(i).get_child(0).get_child_count() != 0:
+								for j in range(Player2Table.get_child(i).get_child(0).get_child(0).get_child(1).get_child_count()):
+									if Player2Table.get_child(i).get_child(0).get_child(0).get_child(1).get_child(j) == RandomCard:
+										RandomCard.reparent(RandomCardParent, true)
+										P2SelectedTileNumber = i
+										play_card(2, RandomCard, RandomTile)
+										return
 				"Spell":
 					pass
 	else:
@@ -341,10 +361,13 @@ func end_turn():
 		
 		player2_play_random_card()		# Player 2 makes moves
 		if 0.75 > randf():
+			await get_tree().create_timer(0.1).timeout
 			player2_play_random_card()
 			if 0.5 > randf():
+				await get_tree().create_timer(0.1).timeout
 				player2_play_random_card()
 				if 0.25 > randf():
+					await get_tree().create_timer(0.1).timeout
 					player2_play_random_card()
 		await get_tree().create_timer(0.25).timeout
 	

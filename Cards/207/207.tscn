@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://bg35xamfxto28"]
 
-[ext_resource type="Texture2D" uid="uid://0epq3euk3org" path="res://Cards/Background.svg" id="1_hj6q0"]
+[ext_resource type="Texture2D" uid="uid://dl810oix65nxr" path="res://Cards/BackgroundNolabels.svg" id="1_3w3u8"]
 [ext_resource type="Script" uid="uid://dmqhomeecucw6" path="res://Cards/207/207.gd" id="2_3w3u8"]
 [ext_resource type="Texture2D" uid="uid://c5js3rr8ujj6w" path="res://Cards/207/207.svg" id="2_qpjop"]
 
 [node name="207" type="Sprite2D"]
-texture = ExtResource("1_hj6q0")
+texture = ExtResource("1_3w3u8")
 script = ExtResource("2_3w3u8")
 
 [node name="207Sprite" type="Sprite2D" parent="."]
