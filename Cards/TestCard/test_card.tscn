@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7qlty5xiulw1"]
+[gd_scene load_steps=5 format=3 uid="uid://c7qlty5xiulw1"]
 
 [ext_resource type="Script" uid="uid://c4bjmws7jele6" path="res://Cards/TestCard/test_card.gd" id="1_f8du8"]
 [ext_resource type="Texture2D" uid="uid://0epq3euk3org" path="res://Cards/Background.svg" id="1_jkomm"]
 [ext_resource type="Texture2D" uid="uid://b5tdywvjrdn4g" path="res://Cards/TestCard/TestCard.svg" id="3_jkomm"]
+[ext_resource type="PackedScene" uid="uid://be8uxh4gnb7iw" path="res://Cards/Effects/effects.tscn" id="4_4syfk"]
 
 [node name="TestCard" type="Sprite2D"]
 texture = ExtResource("1_jkomm")
@@ -11,4 +12,5 @@ script = ExtResource("1_f8du8")
 [node name="TestCardSprite" type="Sprite2D" parent="."]
 texture = ExtResource("3_jkomm")
 
-[node name="Effects" type="Node2D" parent="."]
+[node name="Effects" parent="." instance=ExtResource("4_4syfk")]
+anchors_preset = 0

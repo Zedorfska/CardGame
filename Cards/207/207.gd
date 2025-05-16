@@ -15,11 +15,8 @@ func _ready():
 	CostLabel.position.y = 15
 
 func played(Card, GotPosition, GotOwner):
-	await get_tree().create_timer(0.25).timeout
 	var tween1 = get_tree().create_tween()
 	tween1.tween_property(self, "scale", Vector2(0.25,  0.25), 0.1)
-	var tween2 = get_tree().create_tween()
-	tween2.tween_property(self, "position", Vector2(0, 60), 0.1)
 	super.played(Card, GotPosition, GotOwner)
 
 func activate():

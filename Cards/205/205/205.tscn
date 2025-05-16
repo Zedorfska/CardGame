@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfti5ymntvm85"]
+[gd_scene load_steps=6 format=3 uid="uid://bfti5ymntvm85"]
 
 [ext_resource type="Texture2D" uid="uid://0epq3euk3org" path="res://Cards/Background.svg" id="1_1pis7"]
 [ext_resource type="Script" uid="uid://bvyfp83kq7wnr" path="res://Cards/205/205/205.gd" id="1_akrn2"]
 [ext_resource type="Texture2D" uid="uid://q25pyxtwjq10" path="res://Cards/205/205/205.svg" id="3_o5svf"]
 [ext_resource type="Texture2D" uid="uid://bxbnx0lxgw7qw" path="res://Cards/205/205/205Glow.png" id="4_xau5p"]
+[ext_resource type="PackedScene" uid="uid://be8uxh4gnb7iw" path="res://Cards/Effects/effects.tscn" id="5_qohw1"]
 
 [node name="205" type="Sprite2D"]
 texture = ExtResource("1_1pis7")
@@ -16,4 +17,5 @@ texture = ExtResource("3_o5svf")
 visible = false
 texture = ExtResource("4_xau5p")
 
-[node name="Effects" type="Node2D" parent="."]
+[node name="Effects" parent="." instance=ExtResource("5_qohw1")]
+anchors_preset = 0

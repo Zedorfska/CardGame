@@ -471,6 +471,19 @@ grow_vertical = 2
 size_flags_horizontal = 3
 text = "END TURN"
 
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control/CenterContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/CenterContainer/CenterContainer"]
+
 [node name="Pretty" type="CanvasLayer" parent="."]
 visible = false
 

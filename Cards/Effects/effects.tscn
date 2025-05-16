@@ -3,16 +3,10 @@
 [node name="Effects" type="Control"]
 layout_mode = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="EffectsContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = -48.0
-offset_top = 48.0
-offset_right = 48.0
-offset_bottom = 48.0
+offset_left = -32.0
+offset_top = 60.0
+offset_right = 32.0
+offset_bottom = 60.0
 alignment = 1
-
-[node name="ContainerInstanceToBeCopied" type="CenterContainer" parent="."]
-layout_mode = 2
-offset_top = 48.0
-offset_bottom = 48.0
-size_flags_horizontal = 6

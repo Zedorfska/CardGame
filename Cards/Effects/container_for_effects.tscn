@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://bifml8cf8cam7"]
+
+[node name="ContainerForEffects" type="CenterContainer"]
+size_flags_horizontal = 6

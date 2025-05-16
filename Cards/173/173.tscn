@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://eghe4sc3nqdl"]
+[gd_scene load_steps=6 format=3 uid="uid://eghe4sc3nqdl"]
 
 [ext_resource type="Texture2D" uid="uid://0epq3euk3org" path="res://Cards/Background.svg" id="1_s3ifx"]
 [ext_resource type="Texture2D" uid="uid://bo74j3lwt6rs1" path="res://Cards/173/173.svg" id="2_k58pr"]
 [ext_resource type="Script" uid="uid://8eudybs6tnsh" path="res://Cards/173/173.gd" id="2_xntd4"]
+[ext_resource type="PackedScene" uid="uid://be8uxh4gnb7iw" path="res://Cards/Effects/effects.tscn" id="4_oqaxf"]
 [ext_resource type="FontFile" uid="uid://bon36khv48t4u" path="res://Fonts/Bauhaus Demi.otf" id="4_xntd4"]
 
 [node name="173" type="Sprite2D"]
@@ -12,7 +13,8 @@ script = ExtResource("2_xntd4")
 [node name="173Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_k58pr")
 
-[node name="Effects" type="Node2D" parent="."]
+[node name="Effects" parent="." instance=ExtResource("4_oqaxf")]
+anchors_preset = 0
 
 [node name="TurnsToAttackLabel" type="Label" parent="."]
 modulate = Color(1, 1, 1, 0)

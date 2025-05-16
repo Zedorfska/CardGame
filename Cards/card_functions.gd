@@ -78,6 +78,11 @@ func rotation_shake_animation(Self):
 	var tween4 = get_tree().create_tween()
 	tween4.tween_property(Self, "rotation", 0, 0.1)
 
+func fade_out_animation(Self, Length):
+	var tween = get_tree().create_tween()
+	tween.tween_property(Self, "modulate:a", 0, Length)
+	await get_tree().create_timer(1).timeout
+
 func evaded_attack_animation(Self):
 	var tween1 = get_tree().create_tween()
 	tween1.tween_property(Self, "modulate:a", 0.5, 0.25)
@@ -99,8 +104,9 @@ func glow_animation(Self):
 
 func trigger_status_effects(Self):
 	if Self.StatusEffects.get_child_count() != 0:
-		for i in range(Self.StatusEffects.get_child_count()):
-			Self.StatusEffects.get_child(i).activate()
+		for i in range(Self.StatusEffects.get_child(0).get_child_count()):
+			Self.StatusEffects.get_child(0).get_child(i).get_child(0).activate()
+			await get_tree().create_timer(0.25).timeout
 
 func add_label(Self, LabelToAdd):
 	var AmountOfChildren = Self.get_child_count()
@@ -152,12 +158,19 @@ func played(Card, GotOwner, GotPosition):
 	update_self_position(GotPosition)
 	update_self_owner(GotOwner)
 	if Card.CardType == "Effect":
-		ParentCard = self.get_parent().get_parent()
+		ParentCard = self.get_parent().get_parent().get_parent().get_parent()
 
 func take_damage(Damage, DamageTakenType):
 	take_damage_basic(self, Damage, DamageTakenType)
 
 func destroy():
-	self.queue_free()
-	self.get_parent().remove_child(self)
-	amount_of_cards_on_table_changed()
+	match self.CardType:
+		"Unit":
+			self.queue_free()
+			self.get_parent().remove_child(self)
+			amount_of_cards_on_table_changed()
+		"Effect":
+			self.get_parent().queue_free()
+			self.get_parent().get_parent().remove_child(self)
+		"Spell":
+			self.queue_free()

@@ -13,6 +13,7 @@ var P1Mana
 var P2Mana
 var P1ManaBar
 var P2ManaBar
+var CenterSpellDisplay
 var CardDisplay
 var ContainmentClassIcon
 var CardDescriptionLabel
@@ -38,6 +39,7 @@ var SelectSound
 var GameOverScene = preload("res://Root/Main/game_over.tscn")
 
 var ManaBarScene = preload("res://Root/Labels/mana_bar.tscn")
+var EffectsContainerScene = preload("res://Cards/Effects/container_for_effects.tscn")
 
 const CardFunctions = preload("res://Cards/card_functions.gd")
 
@@ -46,18 +48,20 @@ var EuclidIcon = load("res://Sprites/SCPContainmentIcons/Euclid.svg")
 var KeterIcon = load("res://Sprites/SCPContainmentIcons/Keter.svg")
 
 var TestCard = preload("res://Cards/TestCard/test_card.tscn")
+var SCP018 = preload("res://Cards/018/018.tscn")
 var SCP049 = preload("res://Cards/049/049/049.tscn")
 var SCP173 = preload("res://Cards/173/173.tscn")
 var SCP205 = preload("res://Cards/205/205/205.tscn")
 var SCP207 = preload("res://Cards/207/207.tscn")
 
 var ListOfCards = [
-	SCP207.instantiate(),
+	SCP018.instantiate(),
 	SCP049.instantiate(),
-	TestCard.instantiate(),
-	SCP049.instantiate(),
+	SCP173.instantiate(),
 	SCP205.instantiate(),
-	SCP173.instantiate()
+	SCP207.instantiate(),
+	TestCard.instantiate(),
+	SCP018.instantiate(),
 ]
 
 func _ready():
@@ -71,6 +75,7 @@ func _ready():
 	Turn = 0
 	AbleToPlay = true
 	
+	CenterSpellDisplay = $CanvasLayer/Control/CenterContainer/CenterContainer/Marker2D
 	CardDisplay = $CanvasLayer/Control/Root/RightContainer/Right/HoverCardDisplay/CardDisplayMarker/Sprite2D
 	ContainmentClassIcon = $CanvasLayer/Control/Root/RightContainer/Right/HoverCardDisplay/ContainmentClassIcon
 	CardNameLabel = $CanvasLayer/Control/Root/RightContainer/Right/LabelMargin/CardNameLabel
@@ -172,17 +177,23 @@ func play_card(Player, Card, Tile):
 		"Effect":
 			if check_if_tile_empty(Tile) == false:
 				PlayerMana -= Card.CostAmount
-				Card.reparent(Tile.get_child(0).get_child(1), true)
+				Tile.get_child(0).StatusEffects.get_child(0).add_child(EffectsContainerScene.instantiate())
+				Card.reparent(Tile.get_child(0).StatusEffects.get_child(0).get_child(-1), true)
 				var tween = get_tree().create_tween()
 				tween.tween_property(Card, "position", Vector2.ZERO, 0.1)
-				await get_tree().create_timer(0.1).timeout
+				#await get_tree().create_timer(0.1).timeout
 				match Player:
 					1:
 						Card.played(Card, Player, SelectedTileNumber)
 					2:
 						Card.played(Card, Player, P2SelectedTileNumber)
 		"Spell":
-			pass
+			PlayerMana -= Card.CostAmount
+			Card.reparent(CenterSpellDisplay, true)
+			var tween = get_tree().create_tween()
+			tween.tween_property(Card, "position", Vector2.ZERO, 0.1)
+			await get_tree().create_timer(0.1).timeout
+			Card.played(Card, Player, null)
 	
 	match Player:
 		1:
@@ -247,7 +258,9 @@ func player2_play_random_card():
 										play_card(2, RandomCard, RandomTile)
 										return
 				"Spell":
-					pass
+					if FullTileList.size() > 0:
+						await play_card(2, RandomCard, null)	#TODO - need to wait for these but I cant figure it out rn
+						return
 	else:
 		return
 

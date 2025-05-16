@@ -29,9 +29,7 @@ func activate(CardPosition, Player):
 
 func destroy():
 	PassDamage = true
-	var tween = get_tree().create_tween()
-	tween.tween_property(self, "modulate:a", 0, 1)
-	await get_tree().create_timer(1).timeout
+	await fade_out_animation(self, 1)
 	super.destroy()
 
 func take_damage(_Damage, _DamageTakenType):
