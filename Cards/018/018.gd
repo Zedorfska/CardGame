@@ -1,12 +1,14 @@
 extends "res://Cards/card_functions.gd"
 
-var DamageAmount: int = 3
+var SpellDuration: int = 3
+
+var DamageAmount: int = 1
 var CostAmount: int = 2
 var CardType: String = "Spell"
 
 var SCPNumber: String = "018"
 var CardName: String = "Ball"
-var Description: String = "A physics-defying bouncy ball that gains energy when bouncing, rather than losing it.\nWhen played it damages 3 random cards for 3 points." #TODO - this can change but for some reason I cant fucking make it read the var
+var Description: String = "A physics-defying bouncy ball that gains energy when bouncing, rather than losing it.\nWhen played it damages 3 random cards for 1 point." #TODO - this can change but for some reason I cant fucking make it read the var
 var ContainmentClass: String = "Euclid"
 
 func _ready():
@@ -40,4 +42,4 @@ func played(_Card, _GotPosition, _GotOwner):
 	
 	await fade_out_animation(self, 0.5)
 	self.destroy()
-	MainNode.AbleToPlay = false
+	MainNode.AbleToPlay = true

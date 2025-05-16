@@ -244,7 +244,7 @@ func player2_play_random_card():
 									RandomCard.reparent(RandomCardParent, true)
 									P2SelectedTileNumber = i
 									play_card(2, RandomCard, RandomTile)
-									return
+									return RandomCard
 				"Effect":
 					if FullTileList.size() != 0:
 						RandomTile = FullTileList.pick_random()
@@ -256,11 +256,11 @@ func player2_play_random_card():
 										RandomCard.reparent(RandomCardParent, true)
 										P2SelectedTileNumber = i
 										play_card(2, RandomCard, RandomTile)
-										return
+										return RandomCard
 				"Spell":
 					if FullTileList.size() > 0:
-						await play_card(2, RandomCard, null)	#TODO - need to wait for these but I cant figure it out rn
-						return
+						play_card(2, RandomCard, null)
+						return RandomCard
 	else:
 		return
 
@@ -372,18 +372,30 @@ func end_turn():
 		deal_cards_to_player(2, CardGainAmount)
 		await get_tree().create_timer(0.5).timeout
 		
-		player2_play_random_card()		# Player 2 makes moves
+		var PlayedP2Card = await player2_play_random_card()		# Player 2 makes moves
+		if PlayedP2Card != null:
+			if PlayedP2Card.CardType == "Spell":
+				await get_tree().create_timer(PlayedP2Card.SpellDuration).timeout
 		if 0.75 > randf():
 			await get_tree().create_timer(0.1).timeout
-			player2_play_random_card()
+			PlayedP2Card = await player2_play_random_card()
+			if PlayedP2Card != null:
+				if PlayedP2Card.CardType == "Spell":
+					await get_tree().create_timer(PlayedP2Card.SpellDuration).timeout
 			if 0.5 > randf():
 				await get_tree().create_timer(0.1).timeout
-				player2_play_random_card()
+				PlayedP2Card = await player2_play_random_card()
+				if PlayedP2Card != null:
+					if PlayedP2Card.CardType == "Spell":
+						await get_tree().create_timer(PlayedP2Card.SpellDuration).timeout
 				if 0.25 > randf():
 					await get_tree().create_timer(0.1).timeout
-					player2_play_random_card()
+					PlayedP2Card = await player2_play_random_card()
+					if PlayedP2Card != null:
+						if PlayedP2Card.CardType == "Spell":
+							await get_tree().create_timer(PlayedP2Card.SpellDuration).timeout
 		await get_tree().create_timer(0.25).timeout
-	
+		
 		for CardPosition in 4:			# Player 2 cards activate
 			if Player2Table.get_child(CardPosition).get_child(0).get_child_count() != 0:
 				SelectedCard = Player2Table.get_child(CardPosition).get_child(0).get_child(0)
