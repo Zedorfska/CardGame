@@ -2,8 +2,6 @@ extends "res://Cards/card_functions.gd"
 
 var SpawnDelayCanAttack = true
 
-var MaxHealth: int = 1
-var HealthAmount: int = MaxHealth
 var DamageAmount: int = 2
 var DamageType: String = "Basic"
 var CardType: String = "Unit"

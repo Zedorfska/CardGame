@@ -53,6 +53,8 @@ var SCP049 = preload("res://Cards/049/049/049.tscn")
 var SCP173 = preload("res://Cards/173/173.tscn")
 var SCP205 = preload("res://Cards/205/205/205.tscn")
 var SCP207 = preload("res://Cards/207/207.tscn")
+var SCP500 = preload("res://Cards/500/500.tscn")
+var SCP682 = preload("res://Cards/682/682.tscn")
 
 var ListOfCards = [
 	SCP018.instantiate(),
@@ -60,8 +62,10 @@ var ListOfCards = [
 	SCP173.instantiate(),
 	SCP205.instantiate(),
 	SCP207.instantiate(),
+	SCP500.instantiate(),
+	SCP682.instantiate(),
+	SCP500.instantiate(),
 	TestCard.instantiate(),
-	SCP018.instantiate(),
 ]
 
 func _ready():
@@ -354,6 +358,7 @@ func update_player_health():
 func end_turn():
 	if AbleToPlay == true:
 		AbleToPlay = false
+		await get_tree().create_timer(0.25).timeout
 		
 		Turn += 1
 		

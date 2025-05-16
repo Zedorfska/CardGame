@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://dj7wr4fmnd4a8"]
+
+[ext_resource type="Texture2D" uid="uid://0epq3euk3org" path="res://Cards/Background.svg" id="1_jvhns"]
+[ext_resource type="Script" uid="uid://bc5vcdd11t55p" path="res://Cards/682/682.gd" id="2_0h7mt"]
+[ext_resource type="Texture2D" uid="uid://d2kfb3yslehpj" path="res://Cards/682/682.svg" id="2_jh1vb"]
+[ext_resource type="PackedScene" uid="uid://be8uxh4gnb7iw" path="res://Cards/Effects/effects.tscn" id="3_0h7mt"]
+
+[node name="682" type="Sprite2D"]
+texture = ExtResource("1_jvhns")
+script = ExtResource("2_0h7mt")
+
+[node name="682Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_jh1vb")
+
+[node name="Effects" parent="." instance=ExtResource("3_0h7mt")]
+anchors_preset = 0

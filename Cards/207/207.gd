@@ -29,10 +29,11 @@ func activate():
 		ParentCard.take_damage(1, "Basic")
 	if "DamageAmount" in ParentCard:
 		ParentCard.DamageAmount += 1
-		ParentCard.DamageLabel.update_label(ParentCard.DamageAmount, ParentCard.ContainmentClass)
+		ParentCard.DamageLabel.update_label()
 	AmountOfTimesTriggered += 1
 
 func destroy():
 	if "DamageAmount" in ParentCard:
 		ParentCard.DamageAmount -= AmountOfTimesTriggered
+		ParentCard.DamageLabel.update_label()
 	super.destroy()

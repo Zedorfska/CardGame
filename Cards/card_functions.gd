@@ -106,7 +106,7 @@ func trigger_status_effects(Self):
 	if Self.StatusEffects.get_child_count() != 0:
 		for i in range(Self.StatusEffects.get_child(0).get_child_count()):
 			Self.StatusEffects.get_child(0).get_child(i).get_child(0).activate()
-			await get_tree().create_timer(0.25).timeout
+			await get_tree().create_timer(0.5).timeout
 
 func add_label(Self, LabelToAdd):
 	var AmountOfChildren = Self.get_child_count()
@@ -114,21 +114,28 @@ func add_label(Self, LabelToAdd):
 		"Damage":
 			Self.add_child(DamageLabelScene.instantiate())
 			DamageLabel = Self.get_child(AmountOfChildren)
-			DamageLabel.update_label(Self.DamageAmount, Self.ContainmentClass)
+			DamageLabel.update_label()
 		"Health":
 			Self.add_child(HealthLabelScene.instantiate())
 			HealthLabel = Self.get_child(AmountOfChildren)
-			HealthLabel.update_label(Self.HealthAmount, Self.ContainmentClass)
+			HealthLabel.update_label()
 		"Cost":
 			Self.add_child(CostLabelScene.instantiate())
 			CostLabel = Self.get_child(AmountOfChildren)
-			CostLabel.update_label(Self.CostAmount)
+			CostLabel.update_label()
 
 func update_self_position(GotPosition):
 	SelfPosition = GotPosition
 
 func update_self_owner(GotOwner):
 	SelfOwner = GotOwner
+
+func clear_status_effect(Type):
+	match Type:
+		"All":
+			for i in range(self.StatusEffects.get_child(0).get_child_count()):
+				self.StatusEffects.get_child(0).get_child(0).get_child(0).destroy()
+				await get_tree().create_timer(0.5).timeout
 
 func take_damage_basic(Self, Damage, DamageType):
 	if "HealthAmount" in Self:	# Failsafe in case card doesnt have HealthAmount for some reason
@@ -138,7 +145,7 @@ func take_damage_basic(Self, Damage, DamageType):
 			Self.HealthAmount -= Damage
 			if Self.HealthAmount <= 0:
 				Self.destroy()
-		Self.HealthLabel.update_label(Self.HealthAmount, Self.ContainmentClass)
+		Self.HealthLabel.update_label()
 
 func basic_common_attack(CardPosition, Damage, DamageType, Player, Card):
 	attack_animation(Card, Player)
@@ -171,6 +178,6 @@ func destroy():
 			amount_of_cards_on_table_changed()
 		"Effect":
 			self.get_parent().queue_free()
-			self.get_parent().get_parent().remove_child(self)
+			#self.get_parent().get_parent().remove_child(self)
 		"Spell":
 			self.queue_free()
