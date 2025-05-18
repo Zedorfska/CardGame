@@ -54,7 +54,9 @@ var SCP173 = preload("res://Cards/173/173.tscn")
 var SCP205 = preload("res://Cards/205/205/205.tscn")
 var SCP207 = preload("res://Cards/207/207.tscn")
 var SCP500 = preload("res://Cards/500/500.tscn")
+var SCP502 = preload("res://Cards/502/502.tscn")
 var SCP682 = preload("res://Cards/682/682.tscn")
+var SCP966 = preload("res://Cards/966/966.tscn")
 
 var ListOfCards = [
 	SCP018.instantiate(),
@@ -63,8 +65,9 @@ var ListOfCards = [
 	SCP205.instantiate(),
 	SCP207.instantiate(),
 	SCP500.instantiate(),
+	SCP502.instantiate(),
 	SCP682.instantiate(),
-	SCP500.instantiate(),
+	SCP966.instantiate(),
 	TestCard.instantiate(),
 ]
 

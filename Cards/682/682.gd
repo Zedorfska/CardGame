@@ -39,8 +39,11 @@ func destroy():
 		DamageLabel.update_label()
 		CostAmount += 1
 		CostLabel.update_label()
-		for i in range(MainNode.Player1Hand.get_child_count()):
-			if MainNode.Player1Hand.get_child(i).get_child(0).get_child_count() == 0:
-				self.reparent(MainNode.Player1Hand.get_child(i).get_child(0), true)
+		var Offset = 0
+		if SelfOwner == 1:
+			Offset = 3
+		for i in range(MainNode.Table.get_child(Offset).get_child_count()):
+			if MainNode.Table.get_child(Offset).get_child(i).get_child(0).get_child_count() == 0:
+				self.reparent(MainNode.Table.get_child(Offset).get_child(i).get_child(0), true)
 				var tween = get_tree().create_tween()
 				tween.tween_property(self, "position", Vector2.ZERO, 0.25)

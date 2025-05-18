@@ -23,3 +23,6 @@ func played(Card, GotPosition, GotOwner):
 	ParentCard.clear_status_effect("All")
 	self.scale = Vector2(0.27,  0.27)
 	rotation_shake_animation(self)
+
+func activate():
+	pass

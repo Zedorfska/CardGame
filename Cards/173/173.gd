@@ -66,7 +66,7 @@ func update_turns_to_attack_number():	#TODO: Make attack inevitable when TurnsTo
 			TurnsToAttackLabel.modulate.a = 1
 			if TurnsToAttackLabelOpacity != null:
 				TurnsToAttackLabelOpacity.stop()
-			if get_tree() != null:
+			if get_tree() != null:	#TODO: bullshirt
 				TurnsToAttackLabelOpacity = get_tree().create_tween()
 				TurnsToAttackLabelOpacity.tween_property(TurnsToAttackLabel, "modulate:a", 0, 1)
 		Description = str("SCP-173 can only move while unobserved:\nThis card takes longer to attack the more cards are on the table.\nIt will attack in ", TurnsToAttack, " turns.")
