@@ -158,6 +158,21 @@ func basic_common_attack(CardPosition, Damage, DamageType, Player, Card):
 	else:
 		MainNode.player_take_damage(Player, Damage)
 
+func drain_damage_attack(CardPosition, Damage, _DamageType, Player, Card):
+	cant_activate_animation(Card)
+	
+	var CardToBeAttacked = null
+	if Table.get_child(Player).get_child(CardPosition).get_child(0).get_child_count() != 0:
+		CardToBeAttacked = Table.get_child(Player).get_child(CardPosition).get_child(0).get_child(0)
+		if "DamageAmount" in CardToBeAttacked:
+			if CardToBeAttacked.DamageAmount > 0:
+				CardToBeAttacked.DamageAmount -= 1
+				CardToBeAttacked.DamageLabel.update_label()
+		else:
+			MainNode.player_take_damage(Player, Damage)
+	else:
+		MainNode.player_take_damage(Player, Damage)
+
 # Default card actions
 func played(Card, GotOwner, GotPosition):
 	TurnPlayedOn = MainNode.Turn
