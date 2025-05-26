@@ -487,7 +487,6 @@ mouse_filter = 2
 [node name="Marker2D" type="Marker2D" parent="CanvasLayer/Control/CenterContainer/CenterContainer"]
 
 [node name="Pretty" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Control" type="Control" parent="Pretty"]
 z_index = -1

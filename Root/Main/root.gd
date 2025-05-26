@@ -2,6 +2,7 @@ extends Node
 
 var StartMenu
 var Name
+var PlayerWon
 var StartMenuScene = preload("res://Root/Main/start_screen.tscn")
 var GameScene = preload("res://Root/Main/Main.tscn")
 var GameOverScene = preload("res://Root/Main/game_over.tscn")

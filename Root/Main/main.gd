@@ -136,9 +136,9 @@ func get_amount_of_active_cards():
 	return Amount
 
 func setup_deck():
+	ListOfCards.shuffle()
 	for Card in range(ListOfCards.size()):
 		Deck.add_child(ListOfCards[Card])
-		#TODO: Randomise deck
 
 func deal_cards_to_player(Player, Amount):
 	var ChildToGet = 0
@@ -349,7 +349,13 @@ func player_take_damage(Player, Damage):
 	else:
 		Player2HP -= Damage
 	
-	if Player1HP <= 0 or Player2HP <= 0:
+	if Player1HP <= 0:
+		self.get_parent().PlayerWon = 2
+		await get_tree().create_timer(0.5).timeout
+		self.get_parent().go_to_scene(GameOverScene)
+	elif Player2HP <= 0:
+		self.get_parent().PlayerWon = 1
+		await get_tree().create_timer(0.5).timeout
 		self.get_parent().go_to_scene(GameOverScene)
 	
 	update_player_health()

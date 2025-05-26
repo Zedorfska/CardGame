@@ -1,9 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://id8h0m40vhuh"]
+[gd_scene load_steps=3 format=3 uid="uid://id8h0m40vhuh"]
 
 [ext_resource type="Script" uid="uid://l55f71v6xljn" path="res://Root/Main/start_screen.gd" id="1_r06p8"]
+[ext_resource type="Texture2D" uid="uid://yowhy7psxc6g" path="res://Sprites/Sketch/ScreenTemp.png" id="2_wdvl5"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_r06p8")
+
+[node name="TextureRect" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+scale = Vector2(0.666667, 0.666667)
+texture = ExtResource("2_wdvl5")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
